@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+storybook-static
+coverage
+playwright-report
+test-results
+pnpm-lock.yaml
+*.tsbuildinfo
