@@ -12,7 +12,8 @@
     "test:e2e": "turbo run test:e2e",
     "changeset": "changeset",
     "release": "changeset publish",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check-contrast": "node packages/tailwind-preset/scripts/check-contrast.js"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
