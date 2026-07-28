@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "type": "module",
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
-    "@playwright/test": "^1.61.1"
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^24.13.2"
   }
 }

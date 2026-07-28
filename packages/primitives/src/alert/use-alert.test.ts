@@ -1,33 +1,51 @@
-import { useCallback, useState } from 'react';
+import { describe, expect, it, vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
+import { useAlert } from "./use-alert";
 
-export interface UseAlertOptions {
-    urgency?: 'polite' | 'assertive' | 'off';
-    closable?: boolean;
-    onClose?: () => void;
-}
+describe("useAlert", () => {
+    it("returns default values and accessibility attributes", () => {
+        const { result } = renderHook(() => useAlert());
 
-export function useAlert({
-    urgency = 'assertive',
-    closable = false,
-    onClose,
-}: UseAlertOptions = {}) {
-    const [visible, setVisible] = useState(true);
+        expect(result.current.visible).toBe(true);
+        expect(result.current.closable).toBe(false);
+        expect(result.current.alertProps.role).toBe("alert");
+        expect(result.current.alertProps["aria-live"]).toBe("assertive");
+        expect(result.current.alertProps["aria-atomic"]).toBe(true);
+    });
 
-    const close = useCallback(() => {
-        setVisible(false);
-        onClose?.();
-    }, [onClose]);
+    it("respects polite urgency", () => {
+        const { result } = renderHook(() => useAlert({ urgency: "polite" }));
 
-    const isLiveRegion = urgency !== 'off';
+        expect(result.current.alertProps.role).toBe("alert");
+        expect(result.current.alertProps["aria-live"]).toBe("polite");
+        expect(result.current.alertProps["aria-atomic"]).toBe(true);
+    });
 
-    return {
-        visible,
-        close,
-        closable,
-        alertProps: {
-            role: isLiveRegion ? 'alert' : undefined,
-            'aria-live': isLiveRegion ? urgency : undefined,
-            'aria-atomic': isLiveRegion ? true : undefined,
-        },
-    };
-}
+    it("handles off urgency (no live region attributes)", () => {
+        const { result } = renderHook(() => useAlert({ urgency: "off" }));
+
+        expect(result.current.alertProps.role).toBeUndefined();
+        expect(result.current.alertProps["aria-live"]).toBeUndefined();
+        expect(result.current.alertProps["aria-atomic"]).toBeUndefined();
+    });
+
+    it("supports closable option", () => {
+        const { result } = renderHook(() => useAlert({ closable: true }));
+
+        expect(result.current.closable).toBe(true);
+    });
+
+    it("dismisses the alert and triggers onClose when calling close()", () => {
+        const onClose = vi.fn();
+        const { result } = renderHook(() => useAlert({ onClose }));
+
+        expect(result.current.visible).toBe(true);
+
+        act(() => {
+            result.current.close();
+        });
+
+        expect(result.current.visible).toBe(false);
+        expect(onClose).toHaveBeenCalledTimes(1);
+    });
+});

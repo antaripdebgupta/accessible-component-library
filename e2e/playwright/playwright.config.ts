@@ -7,6 +7,13 @@ export default defineConfig({
     baseURL: 'http://localhost:6006/',
   },
 
+  webServer: {
+    command: 'pnpm --filter @acl/storybook storybook',
+    url: 'http://localhost:6006/',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120000,
+  },
+
   projects: [
     {
       name: 'chromium',
