@@ -175,8 +175,8 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
                             'rounded-md',
                             'text-text-secondary',
                             'transition-colors',
-                            'hover:bg-black/5 hover:text-text-primary',
-                            'active:bg-black/10',
+                            'hover:bg-black/5 dark:hover:bg-white/10 hover:text-text-primary',
+                            'active:bg-black/10 dark:active:bg-white/15',
                             'motion-reduce:transition-none',
                         ].join(' ')}
                     >

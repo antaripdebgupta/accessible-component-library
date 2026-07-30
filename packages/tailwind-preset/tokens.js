@@ -6,31 +6,51 @@ module.exports = {
     surface: "#ffffff",
     "surface-raised": "#f8fafc",
     "surface-inverse": "#0f172a",
+    "surface-dark": "#0f172a",
+    "surface-raised-dark": "#1e293b",
+    "surface-inverse-dark": "#f8fafc",
 
     // Text — verified 4.5:1+ against `surface`
     "text-primary": "#0f172a",   // ~16.1:1 on white
+    "text-primary-dark": "#f8fafc",
     "text-secondary": "#475569", // ~7.5:1 on white
+    "text-secondary-dark": "#cbd5e1",
     "text-disabled": "#94a3b8",  // decorative only — never sole conveyor of meaning
+    "text-disabled-dark": "#94a3b8",
     "text-inverse": "#f8fafc",
+    "text-inverse-dark": "#0f172a",
 
     // Interactive / brand
     "accent-default": "#4f46e5",  // ~6.3:1 on white — safe for text + large UI
+    "accent-default-dark": "#818cf8",
     "accent-hover": "#4338ca",
+    "accent-hover-dark": "#a5b4fc",
     "accent-active": "#3730a3",
+    "accent-active-dark": "#c7d2fe",
     "accent-subtle": "#eef2ff",
+    "accent-subtle-dark": "#1e1b4b",
 
     // Status — always paired with icon/text, never color alone
     "danger-default": "#dc2626",
+    "danger-default-dark": "#f87171",
     "danger-subtle": "#fef2f2",
+    "danger-subtle-dark": "#450a0a",
     "success-default": "#16a34a",
+    "success-default-dark": "#4ade80",
     "success-subtle": "#f0fdf4",
+    "success-subtle-dark": "#064e3b",
     "warning-default": "#ca8a04",
+    "warning-default-dark": "#fbbf24",
     "warning-subtle": "#fefce8",
+    "warning-subtle-dark": "#451a03",
 
     // Borders / focus
     border: "#e2e8f0",
+    "border-dark": "#334155",
     "border-strong": "#cbd5e1",
+    "border-strong-dark": "#475569",
     "focus-ring": "#4f46e5",
+    "focus-ring-dark": "#818cf8",
   },
 
   spacing: {

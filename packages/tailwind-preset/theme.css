@@ -54,6 +54,34 @@
   --ring-width-focus: 2px;
 }
 
+.dark {
+  --color-surface: #0f172a;
+  --color-surface-raised: #1e293b;
+  --color-surface-inverse: #f8fafc;
+
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-inverse: #0f172a;
+
+  --color-border: #334155;
+  --color-border-strong: #475569;
+
+  --color-accent-default: #818cf8;
+  --color-accent-hover: #a5b4fc;
+  --color-accent-active: #c7d2fe;
+  --color-accent-subtle: #1e1b4b;
+  --color-focus-ring: #818cf8;
+
+  --color-danger-default: #f87171;
+  --color-danger-subtle: #450a0a;
+
+  --color-success-default: #4ade80;
+  --color-success-subtle: #064e3b;
+
+  --color-warning-default: #fbbf24;
+  --color-warning-subtle: #451a03;
+}
+
 @utility focus-ring-safe {
   outline: 2px solid transparent;
   outline-offset: 2px;

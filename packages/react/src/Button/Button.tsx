@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 const buttonStyles = cva(
   [
-    "inline-flex items-center justify-center gap-2 rounded-control font-medium",
+    "inline-flex items-center bg-re justify-center gap-2 rounded-control font-medium",
     "transition-colors duration-fast motion-reduce:transition-none",
     "focus-ring-safe",
     "disabled:opacity-50",
@@ -29,7 +29,7 @@ const buttonStyles = cva(
 
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonStyles> {
+  VariantProps<typeof buttonStyles> {
   loading?: boolean;
   /** Visible while loading; accessible name stays stable via aria-busy, not label swap. */
   loadingText?: string;

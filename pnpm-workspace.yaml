@@ -3,6 +3,7 @@ packages:
   - "apps/*"
   - "e2e/playwright"
 allowBuilds:
-  '@swc/core': true
+  '@parcel/watcher': false
+  "@swc/core": true
   esbuild: false
   unrs-resolver: true
