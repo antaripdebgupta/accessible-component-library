@@ -1,16 +1,26 @@
 name: CI
+
 on: [push, pull_request]
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: pnpm/action-setup@v4
+        with:
+          version: 11.18.0
+
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: 'pnpm' }
+        with:
+          node-version: 24
+          cache: pnpm
+
       - run: pnpm install --frozen-lockfile
       - run: pnpm turbo typecheck lint
       - run: pnpm turbo test
       - run: pnpm turbo build
-      - run: pnpm exec playwright install --with-deps
+      - run: pnpm --filter playwright exec playwright install --with-deps
       - run: pnpm turbo test:e2e
