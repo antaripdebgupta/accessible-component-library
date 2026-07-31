@@ -22,5 +22,24 @@ jobs:
       - run: pnpm turbo typecheck lint
       - run: pnpm turbo test
       - run: pnpm turbo build
-      - run: pnpm --filter playwright exec playwright install --with-deps
+
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "version=$(pnpm --filter playwright exec playwright --version)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright browsers (cache miss)
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm --filter playwright exec playwright install --with-deps
+
+      - name: Install Playwright OS dependencies only (cache hit)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm --filter playwright exec playwright install-deps
+
       - run: pnpm turbo test:e2e
