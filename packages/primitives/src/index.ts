@@ -3,3 +3,4 @@ export * from './alert';
 export * from './toast';
 export * from './tabs';
 export * from './accordion';
+export * from './tooltip';
