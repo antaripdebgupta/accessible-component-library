@@ -4,3 +4,4 @@ export * from './toast';
 export * from './tabs';
 export * from './accordion';
 export * from './tooltip';
+export * from './dropdown-menu';
