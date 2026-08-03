@@ -1,27 +1,139 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TURBO_TELEMETRY_DISABLED: 1
 
 jobs:
-  build-test:
+  # Determines which packages actually changed, so PRs only run what's
+  # affected. Pushes to main always run everything (deploy correctness).
+  plan:
     runs-on: ubuntu-latest
-
+    outputs:
+      filter: ${{ steps.set-filter.outputs.filter }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Determine affected-package filter
+        id: set-filter
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.base_ref }}" --depth=100
+            echo "filter=...[origin/${{ github.base_ref }}]" >> "$GITHUB_OUTPUT"
+          else
+            echo "filter=" >> "$GITHUB_OUTPUT"
+          fi
 
+  quality:
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11.18.0
-
+        with: { version: 11.18.0 }
       - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-
+        with: { node-version: 24, cache: pnpm }
       - run: pnpm install --frozen-lockfile
-      - run: pnpm turbo typecheck lint
-      - run: pnpm turbo test
-      - run: pnpm turbo build
+      - name: Restore Turbo cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .turbo
+            packages/*/.turbo
+            apps/*/.turbo
+            e2e/*/.turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+      - run: pnpm turbo run typecheck lint ${{ needs.plan.outputs.filter && format('--filter={0}', needs.plan.outputs.filter) }}
+
+  unit-test:
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.18.0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - name: Restore Turbo cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .turbo
+            packages/*/.turbo
+            apps/*/.turbo
+            e2e/*/.turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+      - run: pnpm turbo run test ${{ needs.plan.outputs.filter && format('--filter={0}', needs.plan.outputs.filter) }}
+
+  build:
+    needs: plan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.18.0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - name: Restore Turbo cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .turbo
+            packages/*/.turbo
+            apps/*/.turbo
+            e2e/*/.turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+      # Full build (not filtered) — e2e needs every package built regardless
+      # of which one triggered this run, since Storybook bundles them all.
+      - run: pnpm turbo run build
+
+  e2e:
+    needs: [plan, build]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.18.0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - name: Restore Turbo cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .turbo
+            packages/*/.turbo
+            apps/*/.turbo
+            e2e/*/.turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
+      - run: pnpm turbo run build
 
       - name: Get installed Playwright version
         id: playwright-version
@@ -42,4 +154,13 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: pnpm --filter playwright exec playwright install-deps
 
-      - run: pnpm turbo test:e2e
+      - name: Run e2e shard ${{ matrix.shard }}/4
+        run: pnpm --filter playwright exec playwright test --shard=${{ matrix.shard }}/4
+
+      - name: Upload test results on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results-shard-${{ matrix.shard }}
+          path: e2e/playwright/test-results
+          retention-days: 7
