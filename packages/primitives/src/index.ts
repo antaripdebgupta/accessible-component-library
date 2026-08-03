@@ -6,3 +6,4 @@ export * from './accordion';
 export * from './tooltip';
 export * from './dropdown-menu';
 export * from './dialog';
+export * from './combobox';
