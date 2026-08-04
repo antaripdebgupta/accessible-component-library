@@ -8,3 +8,4 @@ export * from './dropdown-menu';
 export * from './dialog';
 export * from './combobox';
 export * from './tree-view';
+export * from './command-palette';
