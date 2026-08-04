@@ -1,9 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests',
-  workers: process.env.CI ? 1 : undefined,
-  fullyParallel: false,
+  testDir: './e2e/playwright/tests',
 
   use: {
     baseURL: 'http://localhost:6006/',
