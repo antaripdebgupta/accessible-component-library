@@ -109,6 +109,10 @@ export function CommandPalette({
   const [mounted, setMounted] = useState(command.open);
   const [visible, setVisible] = useState(false);
 
+  if (command.open && !mounted) {
+    setMounted(true);
+  }
+
   const contextValue = useMemo<CommandPaletteContextValue>(
     () => ({ ...command, inputRef, panelRef }),
     [command],

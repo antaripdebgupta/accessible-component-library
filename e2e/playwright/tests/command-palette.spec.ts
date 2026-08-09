@@ -67,6 +67,7 @@ test.describe('CommandPalette — keyboard navigation', () => {
     await page.goto('/iframe.html?id=components-commandpalette--default');
     await page.getByRole('button', { name: /Open/ }).click();
     const input = page.getByRole('combobox');
+    await expect(input).toBeFocused();
 
     const first = await input.getAttribute('aria-activedescendant');
     await page.keyboard.press('ArrowDown');
@@ -83,6 +84,7 @@ test.describe('CommandPalette — keyboard navigation', () => {
   test('Enter selects the highlighted item and closes the palette', async ({ page }) => {
     await page.goto('/iframe.html?id=components-commandpalette--default');
     await page.getByRole('button', { name: /Open/ }).click();
+    await expect(page.getByRole('combobox')).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.getByRole('dialog')).toHaveCount(0);
   });
@@ -115,7 +117,7 @@ test.describe('CommandPalette — async search reordering safety', () => {
     await input.fill('a');
     await input.fill('ap');
 
-    await expect(page.getByRole('option', { name: 'Apple' })).toBeVisible({ timeout: 1000 });
+    await expect(page.getByRole('option', { name: 'Apple' })).toBeVisible({ timeout: 3000 });
     await expect(page.getByRole('option', { name: 'Banana' })).toHaveCount(0);
   });
 

@@ -4,3 +4,5 @@ export * from './Dialog';
 export * from './Combobox';
 export * from './TreeView';
 export * from './CommandPalette';
+export * from './DataTable';
+export * from './Pagination';

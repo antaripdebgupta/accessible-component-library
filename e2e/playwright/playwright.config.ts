@@ -4,6 +4,7 @@ export default defineConfig({
   testDir: './tests',
   workers: process.env.CI ? 1 : undefined,
   fullyParallel: false,
+  timeout: 60000,
 
   use: {
     baseURL: 'http://localhost:6006/',

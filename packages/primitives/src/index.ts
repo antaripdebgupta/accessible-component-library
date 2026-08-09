@@ -9,3 +9,6 @@ export * from './dialog';
 export * from './combobox';
 export * from './tree-view';
 export * from './command-palette';
+export * from './data-table';
+export * from './carousel';
+export * from './pagination';
