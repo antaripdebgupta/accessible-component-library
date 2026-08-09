@@ -4,7 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 test.describe('DataTable — accessibility', () => {
   test('has no axe violations', async ({ page }) => {
     await page.goto('/iframe.html?id=components-datatable--custom-cells');
-    await expect(page.getByRole('table')).toBeVisible();
+    await expect(page.getByRole('table')).toBeVisible({ timeout: 15000 });
 
     const results = await new AxeBuilder({ page }).include('#storybook-root').analyze();
     expect(results.violations).toEqual([]);

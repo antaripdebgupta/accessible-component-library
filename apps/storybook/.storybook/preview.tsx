@@ -89,6 +89,12 @@ const preview: Preview = {
     },
   },
 
+  initialGlobals: {
+    a11y: {
+      manual: true,
+    },
+  },
+
   parameters: {
     controls: {
       matchers: {
