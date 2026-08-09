@@ -12,3 +12,6 @@ export * from './command-palette';
 export * from './data-table';
 export * from './carousel';
 export * from './pagination';
+export * from './switch';
+export * from './checkbox';
+export * from './radio-group';

@@ -6,3 +6,6 @@ export * from './TreeView';
 export * from './CommandPalette';
 export * from './DataTable';
 export * from './Pagination';
+export * from './Switch';
+export * from './Checkbox';
+export * from './RadioGroup';
