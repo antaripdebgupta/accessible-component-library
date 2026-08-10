@@ -15,3 +15,6 @@ export * from './pagination';
 export * from './switch';
 export * from './checkbox';
 export * from './radio-group';
+export * from './textarea';
+export * from './input';
+export * from './breadcrumb';

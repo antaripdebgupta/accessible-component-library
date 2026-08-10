@@ -9,3 +9,6 @@ export * from './Pagination';
 export * from './Switch';
 export * from './Checkbox';
 export * from './RadioGroup';
+export * from './Textarea';
+export * from './Input';
+export * from './Breadcrumb';
