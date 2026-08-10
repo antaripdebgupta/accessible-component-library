@@ -12,3 +12,4 @@ export * from './RadioGroup';
 export * from './Textarea';
 export * from './Input';
 export * from './Breadcrumb';
+export * from './Avatar';

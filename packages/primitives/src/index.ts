@@ -18,3 +18,4 @@ export * from './radio-group';
 export * from './textarea';
 export * from './input';
 export * from './breadcrumb';
+export * from './avatar';
