@@ -19,3 +19,4 @@ export * from './textarea';
 export * from './input';
 export * from './breadcrumb';
 export * from './avatar';
+export * from './skeleton';

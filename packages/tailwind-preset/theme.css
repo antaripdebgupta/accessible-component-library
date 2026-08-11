@@ -50,6 +50,14 @@
   --transition-duration-slow: 320ms;
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
   /* Focus ring width */
   --ring-width-focus: 2px;
 }

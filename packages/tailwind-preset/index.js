@@ -11,6 +11,14 @@ module.exports = {
       transitionDuration: tokens.transitionDuration,
       transitionTimingFunction: tokens.transitionTimingFunction,
       ringWidth: tokens.ringWidth,
+      keyframes: {
+        shimmer: {
+          "100%": { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        shimmer: "shimmer 1.6s ease-in-out infinite",
+      },
     },
   },
   plugins: [

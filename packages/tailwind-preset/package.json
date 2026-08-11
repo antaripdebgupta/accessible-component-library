@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "description": "",
   "main": "./index.js",
-  "files": ["index.js", "tokens.js", "theme.css"],
+  "files": [
+    "index.js",
+    "tokens.js",
+    "theme.css"
+  ],
   "exports": {
     ".": "./index.js",
     "./theme.css": "./theme.css"
