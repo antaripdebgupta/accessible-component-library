@@ -79,7 +79,7 @@ export function Combobox({
 
   return (
     <ComboboxContext.Provider value={contextValue}>
-      <div className={twMerge('relative', className)} {...props}>
+      <div className={twMerge('relative max-w-full', className)} {...props}>
         {children}
       </div>
     </ComboboxContext.Provider>

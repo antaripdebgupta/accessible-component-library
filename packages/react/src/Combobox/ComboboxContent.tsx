@@ -48,7 +48,23 @@ export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
 
       const updatePosition = () => {
         const rect = input.getBoundingClientRect();
-        setStyle({ position: 'fixed', top: rect.bottom + 12, left: rect.left, width: rect.width });
+        const viewportWidth = document.documentElement.clientWidth;
+        const margin = 8;
+
+        let left = rect.left;
+        let width = rect.width;
+
+        const maxLeft = viewportWidth - width - margin;
+        if (left > maxLeft) {
+          left = Math.max(margin, maxLeft);
+        }
+
+        const maxWidth = viewportWidth - margin * 2;
+        if (width > maxWidth) {
+          width = maxWidth;
+        }
+
+        setStyle({ position: 'fixed', top: rect.bottom + 12, left, width });
       };
 
       updatePosition();

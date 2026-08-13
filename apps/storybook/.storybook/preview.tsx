@@ -57,8 +57,22 @@ const withTheme: Decorator = (Story, context) => {
   );
 };
 
+/**
+ * Sets `dir` on a wrapping element based on the toolbar's Direction global.
+ * Applied as a separate, inner decorator so it composes cleanly with
+ * withTheme's light/dark/both layouts above rather than duplicating them.
+ */
+const withDirection: Decorator = (Story, context) => {
+  const direction = context.globals.direction ?? 'ltr';
+  return (
+    <div dir={direction} className="w-full">
+      <Story />
+    </div>
+  );
+};
+
 const preview: Preview = {
-  decorators: [withTheme],
+  decorators: [withTheme, withDirection],
 
   globalTypes: {
     theme: {
@@ -84,6 +98,19 @@ const preview: Preview = {
             title: 'Both',
             icon: 'sidebar',
           },
+        ],
+      },
+    },
+    direction: {
+      name: 'Direction',
+      description: 'Text direction (LTR/RTL)',
+      defaultValue: 'ltr',
+      toolbar: {
+        icon: 'transfer',
+        dynamicTitle: true,
+        items: [
+          { value: 'ltr', title: 'LTR' },
+          { value: 'rtl', title: 'RTL' },
         ],
       },
     },

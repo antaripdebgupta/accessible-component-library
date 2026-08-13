@@ -21,7 +21,11 @@ export const Default: Story = {
   render: function DefaultExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <Combobox value={value} onValueChange={(v) => setValue(v as string)} className="w-72">
+      <Combobox
+        value={value}
+        onValueChange={(v) => setValue(v as string)}
+        className="w-72 max-w-full"
+      >
         <ComboboxInput placeholder="Select a fruit..." />
         <ComboboxContent>
           <ComboboxEmpty />
@@ -40,7 +44,7 @@ export const Multiple: Story = {
   render: function MultipleExample() {
     const [value, setValue] = useState<string[]>(['Apple', 'Cherry']);
     return (
-      <div className="w-80">
+      <div className="w-80 max-w-full">
         <Combobox multiple value={value} onValueChange={(v) => setValue(v as string[])}>
           <ComboboxInput placeholder="Add fruits..." />
           <ComboboxContent>
@@ -61,7 +65,7 @@ export const ClearButton: Story = {
   render: function ClearButtonExample() {
     const [value, setValue] = useState<string | undefined>('Banana');
     return (
-      <div className="w-72">
+      <div className="w-72 max-w-full">
         <Combobox value={value} onValueChange={(v) => setValue(v as string)}>
           <ComboboxInput placeholder="Select a fruit..." showClearButton />
           <ComboboxContent>
@@ -82,7 +86,7 @@ export const Groups: Story = {
   render: function GroupsExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <div className="w-72">
+      <div className="w-72 max-w-full">
         <Combobox value={value} onValueChange={(v) => setValue(v as string)}>
           <ComboboxInput placeholder="Select a timezone..." />
           <ComboboxContent>
@@ -119,7 +123,7 @@ export const CustomItems: Story = {
   render: function CustomItemsExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <div className="w-80">
+      <div className="w-80 max-w-full">
         <Combobox value={value} onValueChange={(v) => setValue(v as string)}>
           <ComboboxInput placeholder="Select a country..." leading={<Globe size={16} />} />
           <ComboboxContent>
@@ -148,7 +152,7 @@ export const Invalid: Story = {
   render: function InvalidExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <div className="w-72 space-y-1">
+      <div className="w-72 max-w-full space-y-1">
         <Combobox value={value} onValueChange={(v) => setValue(v as string)} invalid>
           <ComboboxInput placeholder="Select a fruit..." />
           <ComboboxContent>
@@ -168,7 +172,7 @@ export const Invalid: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <div className="w-72">
+    <div className="w-72 max-w-full">
       <Combobox disabled value="Apple">
         <ComboboxInput placeholder="Select a fruit..." />
         <ComboboxContent>
@@ -187,7 +191,7 @@ export const AutoHighlight: Story = {
   render: function AutoHighlightExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <div className="w-72 space-y-2">
+      <div className="w-72 max-w-full space-y-2">
         <p className="text-text-secondary text-sm">
           The first matching item is automatically highlighted as you type — press Enter to select
           it immediately.
@@ -212,7 +216,7 @@ export const Popup: Story = {
   render: function PopupExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <div className="flex h-64 w-72 items-end">
+      <div className="flex h-64 w-72 max-w-full items-end">
         <Combobox value={value} onValueChange={(v) => setValue(v as string)} className="w-full">
           <ComboboxInput placeholder="Popup positions above/below..." />
           <ComboboxContent>
@@ -233,7 +237,7 @@ export const InputGroup: Story = {
   render: function InputGroupExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <div className="w-72">
+      <div className="w-72 max-w-full">
         <Combobox value={value} onValueChange={(v) => setValue(v as string)}>
           <ComboboxInput placeholder="Search fruits..." leading={<Search size={16} />} />
           <ComboboxContent>
@@ -256,7 +260,7 @@ export const RTL: Story = {
   render: function RTLExample() {
     const [value, setValue] = useState<string | undefined>(undefined);
     return (
-      <div dir="rtl" className="w-72">
+      <div dir="rtl" className="w-72 max-w-full">
         <Combobox value={value} onValueChange={(v) => setValue(v as string)}>
           <ComboboxInput placeholder="اختر فاكهة..." leading={<Flag size={16} />} />
           <ComboboxContent>
