@@ -18,6 +18,15 @@ Implements the WAI-ARIA APG Menu Button pattern. Trigger has
 | `Escape`                                         | Closes the menu, returns focus to the trigger                             |
 | `Tab`                                            | Closes the menu, lets focus move naturally                                |
 
+## Screen reader behavior
+
+Verified with NVDA + Firefox and VoiceOver + Safari:
+
+- **Trigger**: Focus on trigger announces "button, popup menu, expanded/collapsed".
+- **Menu opening**: Opening menu announces "menu, N items", and reads the first focused `menuitem` label.
+- **Roving focus**: ArrowUp / ArrowDown navigation announces each `menuitem`, `menuitemcheckbox` (with checked/unchecked state), or `menuitemradio` (with selected state).
+- **Submenus**: Moving onto a `menuitem` subtrigger announces "has popup menu" / "has submenu". `ArrowRight` opens the submenu and announces "menu, N items". `ArrowLeft` returns focus to parent trigger.
+
 ## Known limitations
 
 - **Escape closes all open levels at once**, not just the innermost

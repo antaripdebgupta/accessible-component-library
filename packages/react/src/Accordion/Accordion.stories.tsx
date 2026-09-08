@@ -58,6 +58,18 @@ export const Default: Story = {
     </Accordion>
   ),
 };
+
+export const Interaction: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: 'What is this library?' });
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await userEvent.click(trigger);
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  },
+};
+
 export const Multiple: Story = {
   render: () => (
     <Accordion type="multiple" defaultValue={['a', 'b']} className="w-96">

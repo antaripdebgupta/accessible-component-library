@@ -10,6 +10,9 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from './index';
 
 expect.extend(toHaveNoViolations);
@@ -154,4 +157,41 @@ test('has no axe violations while open', async () => {
   await user.click(screen.getByRole('button', { name: 'Open menu' }));
   await screen.findByRole('menu');
   expect(await axe(container)).toHaveNoViolations();
+});
+
+test('opens submenu on ArrowRight and returns focus on ArrowLeft', async () => {
+  const user = userEvent.setup();
+  render(
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <button type="button">Open menu</button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Preferences</DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem>Theme</DropdownMenuItem>
+            <DropdownMenuItem>Notifications</DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+      </DropdownMenuContent>
+    </DropdownMenu>,
+  );
+
+  await user.click(screen.getByRole('button', { name: 'Open menu' }));
+  await user.keyboard('{ArrowDown}'); // Focus Preferences subtrigger
+
+  const subTrigger = screen.getByRole('menuitem', { name: 'Preferences' });
+  expect(subTrigger).toHaveFocus();
+
+  await user.keyboard('{ArrowRight}'); // Open submenu
+  const menus = await screen.findAllByRole('menu');
+  expect(menus.length).toBe(2);
+
+  const themeItem = screen.getByRole('menuitem', { name: 'Theme' });
+  expect(themeItem).toHaveFocus();
+
+  await user.keyboard('{ArrowLeft}'); // Close submenu
+  expect(subTrigger).toHaveFocus();
 });

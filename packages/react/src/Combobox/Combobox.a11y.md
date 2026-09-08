@@ -18,6 +18,15 @@ input, per the "manages active descendant" APG variant).
 | `Escape`                                 | Closes the popup                                                                            |
 | `Backspace` (multiple mode, empty input) | Removes the last selected tag                                                               |
 
+## Screen reader behavior
+
+Verified with NVDA + Firefox and VoiceOver + Safari:
+
+- **Combobox role**: Focus on input announces "combo box, edit, has auto-complete, expanded/collapsed".
+- **Active descendant**: Navigating option list with Arrow keys updates `aria-activedescendant`, announcing the highlighted option's label and position (e.g. "Option 2 of 5").
+- **Selection announcement**: Pressing Enter commits selection and announces the selected item value.
+- **Tag management**: In multi-select mode, Backspace on empty input removes and announces the removed tag label.
+
 ## Known limitations
 
 - **No collision/flip detection** — same manual-positioning caveat as

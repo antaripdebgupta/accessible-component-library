@@ -93,8 +93,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       if (disabled) return;
 
       if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-        if (inputRef.current) {
-          inputRef.current.files = e.dataTransfer.files;
+        try {
+          if (inputRef.current) {
+            inputRef.current.files = e.dataTransfer.files;
+          }
+        } catch {
+          // Safe catch for environment DOM file assignment quirks
         }
         handleFileChange(e.dataTransfer.files);
       }
@@ -133,8 +137,11 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           className={twMerge(
             'relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors duration-150',
             'bg-surface hover:bg-surface-subtle',
-            isDragging && 'border-accent-default bg-accent-subtle/20',
-            isInvalid ? 'border-danger-default bg-danger-subtle/10' : 'border-border',
+            isDragging
+              ? 'border-accent-default bg-accent-subtle/20'
+              : isInvalid
+                ? 'border-danger-default bg-danger-subtle/10'
+                : 'border-border',
             disabled && 'bg-surface-subtle cursor-not-allowed opacity-50',
             isFocused && 'ring-accent-default border-accent-default ring-2',
           )}

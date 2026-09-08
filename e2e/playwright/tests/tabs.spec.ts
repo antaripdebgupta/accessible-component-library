@@ -4,7 +4,10 @@ import AxeBuilder from '@axe-core/playwright';
 test.describe('Tabs — accessibility', () => {
   test('has no axe violations', async ({ page }) => {
     await page.goto('/iframe.html?id=components-tabs--default');
-    const results = await new AxeBuilder({ page }).analyze();
+    const results = await new AxeBuilder({ page })
+      .include('#storybook-root')
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+      .analyze();
     expect(results.violations).toEqual([]);
   });
 

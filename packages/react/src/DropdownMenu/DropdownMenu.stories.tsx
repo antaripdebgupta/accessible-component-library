@@ -33,6 +33,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from './index';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof DropdownMenu> = {
   title: 'Components/DropdownMenu',
@@ -78,6 +79,17 @@ export const Basic: Story = {
       </DropdownMenuContent>
     </DropdownMenu>
   ),
+};
+
+export const Interaction: Story = {
+  ...Basic,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: 'Open menu' });
+    await userEvent.click(trigger);
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('{Enter}');
+  },
 };
 
 export const Submenu: Story = {

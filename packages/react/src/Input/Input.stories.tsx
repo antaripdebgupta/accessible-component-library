@@ -134,6 +134,12 @@ export const ButtonGroupVariant: Story = {
       </div>
     );
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const copyBtn = canvas.getByRole('button', { name: /Copy/ });
+    await expect(copyBtn).toBeInTheDocument();
+    await userEvent.click(copyBtn);
+  },
 };
 
 export const FormComposition: Story = {

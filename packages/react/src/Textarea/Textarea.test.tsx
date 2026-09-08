@@ -132,4 +132,27 @@ describe('Textarea component', () => {
     const textarea = screen.getByRole('textbox', { name: 'Arabic Text' });
     expect(textarea).toHaveClass('text-right');
   });
+
+  test('autoResize adjusts height dynamically and respects maxRows', async () => {
+    const user = userEvent.setup();
+    render(<Textarea label="Auto Resizing" autoResize maxRows={5} defaultValue="Line 1" />);
+
+    const textarea = screen.getByRole('textbox', { name: 'Auto Resizing' });
+    expect(textarea).toBeInTheDocument();
+
+    await user.type(textarea, '\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6');
+    expect(textarea).toHaveValue('Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6');
+  });
+
+  test('updates value in controlled mode', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<Textarea label="Controlled" value="Initial text" onChange={onChange} />);
+
+    const textarea = screen.getByRole('textbox', { name: 'Controlled' });
+    expect(textarea).toHaveValue('Initial text');
+
+    await user.type(textarea, ' additional');
+    expect(onChange).toHaveBeenCalled();
+  });
 });

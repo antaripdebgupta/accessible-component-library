@@ -10,6 +10,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:e2e": "turbo run test:e2e",
+    "test:storybook": "pnpm --filter @acl/storybook test:storybook",
     "changeset": "changeset",
     "release": "changeset publish",
     "prepare": "husky",

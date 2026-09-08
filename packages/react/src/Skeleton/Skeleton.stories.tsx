@@ -7,6 +7,7 @@ import { SkeletonText } from './presets/SkeletonText';
 import { SkeletonCard } from './presets/SkeletonCard';
 import { SkeletonForm } from './presets/SkeletonForm';
 import { SkeletonTable } from './presets/SkeletonTable';
+import { expect, within, waitFor } from '@storybook/test';
 
 const meta: Meta<typeof Skeleton> = { title: 'Components/Skeleton', component: Skeleton };
 export default meta;
@@ -73,6 +74,15 @@ export const LoadingToLoadedTransition: Story = {
           </div>
         </div>
       </SkeletonGroup>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('status', { name: 'Loading profile' })).toBeInTheDocument();
+    await waitFor(
+      () =>
+        expect(canvas.queryByRole('status', { name: 'Loading profile' })).not.toBeInTheDocument(),
+      { timeout: 3000 },
     );
   },
 };

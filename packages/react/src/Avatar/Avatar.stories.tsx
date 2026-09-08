@@ -5,6 +5,7 @@ import { AvatarStatusBadge } from './AvatarBadge';
 import { AvatarGroup } from './AvatarGroup';
 import { DropdownMenuItem } from '../DropdownMenu';
 import { AvatarDropdown } from './AvatarDropdown';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof Avatar> = { title: 'Components/Avatar', component: Avatar };
 export default meta;
@@ -124,6 +125,14 @@ export const Dropdown: Story = {
       <DropdownMenuItem>Sign out</DropdownMenuItem>
     </AvatarDropdown>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: /Open account menu/ });
+    await userEvent.click(trigger);
+    await expect(canvas.getByRole('menu')).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+    await expect(trigger).toHaveFocus();
+  },
 };
 
 export const RTL: Story = {

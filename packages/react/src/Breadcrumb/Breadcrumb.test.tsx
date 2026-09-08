@@ -102,4 +102,25 @@ describe('Breadcrumb component', () => {
     expect(screen.getByText('/')).toBeInTheDocument();
     expect(screen.getByText('Current Page')).toHaveAttribute('aria-current', 'page');
   });
+
+  test('returns null when items array is empty', () => {
+    const { container } = render(<Breadcrumb items={[]} />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  test('supports custom itemsBeforeCollapse and itemsAfterCollapse values', () => {
+    render(
+      <Breadcrumb
+        items={sampleItems}
+        maxItems={3}
+        itemsBeforeCollapse={2}
+        itemsAfterCollapse={1}
+      />,
+    );
+
+    // First two items visible, middle collapsed, last item visible
+    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Components' })).toBeInTheDocument();
+    expect(screen.getByText('Breadcrumb')).toBeInTheDocument();
+  });
 });

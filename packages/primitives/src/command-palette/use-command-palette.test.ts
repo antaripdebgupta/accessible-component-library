@@ -168,3 +168,76 @@ describe('useCommandPalette — aria wiring', () => {
     expect(result.current.getInputProps()['aria-expanded']).toBe(true);
   });
 });
+
+describe('useCommandPalette — getListProps', () => {
+  test('exposes role=listbox with the correct id', () => {
+    const { result } = renderHook(() => useCommandPalette());
+    const props = result.current.getListProps();
+    expect(props.role).toBe('listbox');
+    expect(props.id).toBe(result.current.listId);
+  });
+});
+
+describe('useCommandPalette — getItemProps', () => {
+  test('aria-selected reflects the highlighted item, aria-disabled reflects the disabled flag', () => {
+    const { result } = renderHook(() => useCommandPalette());
+    setupItems(result.current, [{ value: 'a' }, { value: 'b', disabled: true }]);
+    expect(result.current.getItemProps('a', false)['aria-selected']).toBe(true);
+    expect(result.current.getItemProps('b', true)['aria-disabled']).toBe(true);
+  });
+
+  test('onClick calls selectItem for the given value', () => {
+    const onSelect = vi.fn();
+    const { result } = renderHook(() => useCommandPalette());
+    setupItems(result.current, [{ value: 'a', onSelect }]);
+    act(() => result.current.getItemProps('a', false).onClick());
+    expect(onSelect).toHaveBeenCalledTimes(1);
+  });
+
+  test('onMouseEnter highlights an enabled item, ignores a disabled one', () => {
+    const { result } = renderHook(() => useCommandPalette());
+    setupItems(result.current, [{ value: 'a' }, { value: 'b', disabled: true }]);
+    act(() => result.current.getItemProps('b', true).onMouseEnter());
+    expect(result.current.highlightedValue).not.toBe('b');
+    act(() => result.current.getItemProps('a', false).onMouseEnter());
+    expect(result.current.highlightedValue).toBe('a');
+  });
+});
+
+describe('useCommandPalette — enabledOrder excludes disabled items', () => {
+  test('enabledOrder filters out disabled entries', () => {
+    const { result } = renderHook(() => useCommandPalette());
+    setupItems(result.current, [{ value: 'a' }, { value: 'b', disabled: true }, { value: 'c' }]);
+    expect(result.current.enabledOrder()).toEqual(['a', 'c']);
+  });
+});
+
+describe('useCommandPalette — ArrowDown/ArrowUp with zero enabled items', () => {
+  test('keyboard navigation is a no-op with no items registered', () => {
+    const { result } = renderHook(() => useCommandPalette());
+    expect(() =>
+      act(() =>
+        result.current
+          .getInputProps()
+          .onKeyDown({ key: 'ArrowDown', preventDefault: () => {} } as any),
+      ),
+    ).not.toThrow();
+  });
+});
+
+describe('useCommandPalette — inputValue changes reset highlight to a valid item', () => {
+  test('typing narrows the item set and highlight snaps to the new first item if the old one is gone', () => {
+    const { result } = renderHook(() => useCommandPalette());
+    setupItems(result.current, [{ value: 'apple' }, { value: 'banana' }]);
+    expect(result.current.highlightedValue).toBe('apple');
+
+    let unregisterApple: () => void = () => {};
+    act(() => {
+      unregisterApple = result.current.registerItem('apple', {
+        current: document.createElement('div'),
+      });
+    });
+    act(() => unregisterApple());
+    expect(result.current.highlightedValue).toBe('banana');
+  });
+});

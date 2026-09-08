@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Folder, File } from 'lucide-react';
 import { TreeView, TreeItem } from './index';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof TreeView> = { title: 'Components/TreeView', component: TreeView };
 export default meta;
@@ -37,7 +38,20 @@ function FileTree() {
   );
 }
 
-export const Default: Story = { render: () => <FileTree /> };
+export const Default: Story = {
+  render: () => <FileTree />,
+};
+
+export const Interaction: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const src = canvas.getByRole('treeitem', { name: 'src' });
+    src.focus();
+    await userEvent.keyboard('{ArrowDown}');
+    await expect(canvas.getByRole('treeitem', { name: 'components' })).toHaveFocus();
+  },
+};
 
 export const MultiSelect: Story = {
   render: () => (

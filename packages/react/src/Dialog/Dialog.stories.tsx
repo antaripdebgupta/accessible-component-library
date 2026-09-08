@@ -11,6 +11,7 @@ import {
   DialogFooter,
   DialogClose,
 } from './index';
+import { expect, userEvent, within, waitFor } from '@storybook/test';
 
 const meta: Meta<typeof Dialog> = { title: 'Components/Dialog', component: Dialog };
 export default meta;
@@ -77,6 +78,21 @@ export const Default: Story = {
       </DialogContent>
     </Dialog>
   ),
+};
+
+export const Interaction: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole('button', { name: 'Open dialog' });
+    await userEvent.click(trigger);
+    // Dialog renders in a portal outside storybook-root (which also becomes inert), so query document.body
+    const dialog = await within(document.body).findByRole('dialog');
+    await expect(dialog).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+    // Wait for the close animation to finish and focus to be restored to the trigger
+    await waitFor(() => expect(trigger).toHaveFocus(), { timeout: 1500 });
+  },
 };
 
 export const CloseButton: Story = {

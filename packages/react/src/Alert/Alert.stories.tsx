@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from '@storybook/test';
 import { Alert } from './Alert';
 
 const meta: Meta<typeof Alert> = {
-    title: 'Components/Alert',
-    component: Alert,
+  title: 'Components/Alert',
+  component: Alert,
 };
 
 export default meta;
@@ -11,60 +12,78 @@ export default meta;
 type Story = StoryObj<typeof Alert>;
 
 export const Success: Story = {
-    args: {
-        variant: 'success',
-        title: 'Success Tips',
-        children:
-            'Detailed description and advice about your submission.',
-    },
+  args: {
+    variant: 'success',
+    title: 'Success Tips',
+    children: 'Detailed description and advice about your submission.',
+  },
 };
 
 export const Info: Story = {
-    args: {
-        variant: 'info',
-        title: 'Informational Notes',
-        children: 'Additional description and information.',
-    },
+  args: {
+    variant: 'info',
+    title: 'Informational Notes',
+    children: 'Additional description and information.',
+  },
 };
 
 export const Warning: Story = {
-    args: {
-        variant: 'warning',
-        title: 'Warning',
-        closable: true,
-        children: 'This is a warning notice.',
-    },
+  args: {
+    variant: 'warning',
+    title: 'Warning',
+    closable: true,
+    children: 'This is a warning notice.',
+  },
 };
 
 export const Danger: Story = {
-    args: {
-        variant: 'danger',
-        title: 'Error',
-        children: 'This is an error message.',
-    },
+  args: {
+    variant: 'danger',
+    title: 'Error',
+    children: 'This is an error message.',
+  },
 };
 
 export const Banner: Story = {
-    args: {
-        variant: 'warning',
-        banner: true,
-        closable: true,
-        children: 'Display alert as a banner at top of page.',
-    },
+  args: {
+    variant: 'warning',
+    banner: true,
+    closable: true,
+    children: 'Display alert as a banner at top of page.',
+  },
 };
 
 export const NoDescription: Story = {
-    args: {
-        variant: 'warning',
-        title: 'Warning text without description',
-    },
+  args: {
+    variant: 'warning',
+    title: 'Warning text without description',
+  },
 };
 
 export const ClosableDismisses: Story = {
-    args: {
-        variant: 'warning',
-        title: 'Warning',
-        closable: true,
-        children: 'Click close to dismiss.',
-    },
+  args: {
+    variant: 'warning',
+    title: 'Warning',
+    closable: true,
+    children: 'Click close to dismiss.',
+  },
+};
+
+export const ClosableInteraction: Story = {
+  ...ClosableDismisses,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Alert is present with the correct role initially.
+    const alert = canvas.getByRole('alert');
+    await expect(alert).toBeInTheDocument();
+    await expect(alert).toHaveTextContent('Warning');
+
+    // Close button is real, labeled, and keyboard-reachable.
+    const closeBtn = canvas.getByRole('button', { name: 'Close alert' });
+    await userEvent.click(closeBtn);
+
+    // Alert is removed from the DOM after dismissal.
+    await expect(canvas.queryByRole('alert')).not.toBeInTheDocument();
+  },
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Pagination } from './index';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',
@@ -23,6 +24,19 @@ export const Default: Story = {
         <p className="text-text-secondary text-sm">Active Page: {page}</p>
         <Pagination currentPage={page} pageCount={5} onPageChange={setPage} />
       </div>
+    );
+  },
+};
+
+export const Interaction: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const next = canvas.getByRole('button', { name: 'Next page' });
+    await userEvent.click(next);
+    await expect(canvas.getByRole('button', { name: 'Page 2' })).toHaveAttribute(
+      'aria-current',
+      'page',
     );
   },
 };

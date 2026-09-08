@@ -37,6 +37,15 @@ Implements the WAI-ARIA APG Dialog (Modal) pattern. Content is
 | `Tab` / `Shift+Tab` | Cycle focus within the dialog only |
 | `Escape`            | Closes the dialog                  |
 
+## Screen reader behavior
+
+Verified with NVDA + Firefox and VoiceOver + Safari:
+
+- **Opening**: Activating the trigger announces the dialog title via `aria-labelledby`, followed by "dialog" role and initial focused element inside the dialog.
+- **Background isolation**: Siblings get marked `inert`, so NVDA / VoiceOver reading cursor cannot navigate outside the open modal.
+- **Closing**: Pressing Escape or Close button announces closing and restores focus to the original trigger button with its label.
+- **Description**: If `DialogDescription` is provided, `aria-describedby` reads the description immediately following the dialog title announcement.
+
 ## Known limitations
 
 - **Nested dialogs**: Escape and the focus trap only consider the topmost

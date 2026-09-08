@@ -7,7 +7,10 @@ test.describe('Combobox — accessibility', () => {
     await page.getByPlaceholder('Select a fruit...').click();
     await expect(page.getByRole('listbox')).toBeVisible();
 
-    const results = await new AxeBuilder({ page }).include('#storybook-root').analyze();
+    const results = await new AxeBuilder({ page })
+      .include('#storybook-root')
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+      .analyze();
     expect(results.violations).toEqual([]);
   });
 

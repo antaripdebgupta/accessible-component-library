@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import jestAxe from 'jest-axe';
 import { describe, expect, test, vi } from 'vitest';
@@ -109,5 +109,77 @@ describe('Input component', () => {
 
     expect(onFilesSelected).toHaveBeenCalled();
     expect(screen.getByText('avatar.png')).toBeInTheDocument();
+  });
+
+  test('FileInput handles drag over, drag leave, and drop events', async () => {
+    const onFilesSelected = vi.fn();
+    const { container } = render(
+      <FileInput label="Drop target" onFilesSelected={onFilesSelected} />,
+    );
+
+    const dropzone = container.querySelector('.border-dashed') as HTMLDivElement;
+    expect(dropzone).toBeInTheDocument();
+
+    const file = new File(['content'], 'test.txt', { type: 'text/plain' });
+    const filesList = Object.assign([file], { item: (i: number) => file }) as unknown as FileList;
+    const dragEvent = {
+      preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
+      dataTransfer: { files: filesList },
+    };
+
+    // Drag over
+    fireEvent.dragOver(dropzone, dragEvent);
+    expect(dropzone.className).toContain('border-accent-default');
+
+    // Drag leave
+    fireEvent.dragLeave(dropzone, dragEvent);
+    expect(dropzone.className).not.toContain('border-accent-default');
+
+    // Drop
+    fireEvent.drop(dropzone, dragEvent);
+    expect(onFilesSelected).toHaveBeenCalled();
+  });
+
+  test('FileInput clear button resets selected files', async () => {
+    const user = userEvent.setup();
+    const onFilesSelected = vi.fn();
+    const { container } = render(
+      <FileInput label="Upload Avatar" onFilesSelected={onFilesSelected} />,
+    );
+
+    const file = new File(['hello'], 'doc.pdf', { type: 'application/pdf' });
+    const input = container.querySelector('input[type="file"]') as HTMLInputElement;
+
+    await user.upload(input, file);
+    expect(screen.getByText('doc.pdf')).toBeInTheDocument();
+
+    const removeButton = screen.getByRole('button', { name: 'Remove file doc.pdf' });
+    await user.click(removeButton);
+
+    expect(screen.queryByText('doc.pdf')).not.toBeInTheDocument();
+    expect(onFilesSelected).toHaveBeenLastCalledWith(null);
+  });
+
+  test('FileInput respects disabled state on drop and click', async () => {
+    const onFilesSelected = vi.fn();
+    const { container } = render(
+      <FileInput label="Disabled Upload" disabled onFilesSelected={onFilesSelected} />,
+    );
+
+    const dropzone = container.querySelector('.border-dashed') as HTMLDivElement;
+    const file = new File(['content'], 'test.txt', { type: 'text/plain' });
+    const dragEvent = {
+      preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
+      dataTransfer: { files: [file] },
+    };
+
+    fireEvent.dragOver(dropzone, dragEvent);
+    fireEvent.drop(dropzone, dragEvent);
+    expect(onFilesSelected).not.toHaveBeenCalled();
+
+    fireEvent.click(dropzone);
+    expect(onFilesSelected).not.toHaveBeenCalled();
   });
 });

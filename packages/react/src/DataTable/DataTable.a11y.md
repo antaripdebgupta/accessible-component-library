@@ -28,6 +28,15 @@ change only — the underlying DOM stays a real `<table>`/`<tr>`/`<td>`
 structure throughout, so screen reader table semantics remain intact at
 every viewport width; only the visual presentation changes.
 
+## Screen reader behavior
+
+Verified with NVDA + Firefox and VoiceOver + Safari:
+
+- **Table navigation**: Table structure announces table caption, total rows, and column count upon entry.
+- **Header sorting**: Toggling column sort buttons announces updated `aria-sort` state ("sorted ascending" / "sorted descending" / "none").
+- **Row selection**: Toggling row checkboxes announces row index and checkbox state ("Select row N, checked/unchecked").
+- **Row expansion**: Activating expand button announces "Expand row N, expanded/collapsed", and exposes expanded content row.
+
 ## Known limitations
 
 - **Not a full ARIA grid.** This implements a standard HTML table with

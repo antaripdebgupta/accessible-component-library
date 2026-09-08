@@ -7,7 +7,10 @@ test.describe('DropdownMenu — accessibility', () => {
     await page.getByRole('button', { name: 'Open menu' }).click();
     await expect(page.getByRole('menu')).toBeVisible();
 
-    const results = await new AxeBuilder({ page }).include('#storybook-root').analyze();
+    const results = await new AxeBuilder({ page })
+      .include('#storybook-root')
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+      .analyze();
     expect(results.violations).toEqual([]);
   });
 

@@ -12,6 +12,7 @@ import {
   CommandShortcut,
 } from './index';
 import { useAsyncSearch } from '@acl/primitives';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof CommandPalette> = {
   title: 'Components/CommandPalette',
@@ -71,6 +72,19 @@ export const Default: Story = {
         </CommandPalette>
       </>
     );
+  },
+};
+
+export const Interaction: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const openBtn = canvas.getByRole('button', { name: /Open/ });
+    await userEvent.click(openBtn);
+    // CommandPalette renders in a portal; query document.body
+    const dialog = await within(document.body).findByRole('dialog');
+    await expect(dialog).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
   },
 };
 

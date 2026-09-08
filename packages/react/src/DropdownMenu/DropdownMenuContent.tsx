@@ -2,6 +2,7 @@ import {
   forwardRef,
   useEffect,
   useLayoutEffect,
+  useRef,
   useState,
   type CSSProperties,
   type HTMLAttributes,
@@ -22,9 +23,17 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
     const [style, setStyle] = useState<CSSProperties>({});
     const [mounted, setMounted] = useState(open);
     const [visible, setVisible] = useState(false);
+    const hasFocusedRef = useRef(false);
 
     useEffect(() => {
-      if (mounted) focusFirst();
+      if (mounted && !hasFocusedRef.current) {
+        hasFocusedRef.current = true;
+        const timer = setTimeout(() => focusFirst(), 0);
+        return () => clearTimeout(timer);
+      }
+      if (!mounted) {
+        hasFocusedRef.current = false;
+      }
     }, [mounted, focusFirst]);
 
     useEffect(() => {
@@ -61,12 +70,10 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
       };
 
       updatePosition();
-      const raf = requestAnimationFrame(updatePosition);
 
       window.addEventListener('scroll', updatePosition, true);
       window.addEventListener('resize', updatePosition);
       return () => {
-        cancelAnimationFrame(raf);
         window.removeEventListener('scroll', updatePosition, true);
         window.removeEventListener('resize', updatePosition);
       };

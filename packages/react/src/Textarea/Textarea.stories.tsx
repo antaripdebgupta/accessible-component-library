@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Textarea } from './Textarea';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof Textarea> = {
   title: 'Components/Textarea',
@@ -107,6 +108,19 @@ export const ButtonVariant: Story = {
         />
       </div>
     );
+  },
+};
+
+export const ButtonVariantInteraction: Story = {
+  ...ButtonVariant,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const textarea = canvas.getByRole('textbox', { name: 'Chat Input' });
+    await userEvent.type(textarea, 'Hello world{Enter}');
+    // Multiple elements may contain "Hello world" (textarea, mirror div, and the message bubble)
+    // Assert that at least one visible message element is present in the messages list
+    const messages = canvas.getAllByText('Hello world');
+    await expect(messages.length).toBeGreaterThanOrEqual(1);
   },
 };
 

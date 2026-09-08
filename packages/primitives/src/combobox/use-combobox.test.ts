@@ -279,3 +279,121 @@ describe('useCombobox — auto-highlight', () => {
     expect(result.current.highlightedValue).toBeUndefined();
   });
 });
+
+describe('useCombobox — getListboxProps / getClearButtonProps', () => {
+  test('getListboxProps sets aria-multiselectable only in multiple mode', () => {
+    const { result: single } = renderHook(() => useCombobox());
+    expect(single.current.getListboxProps()['aria-multiselectable']).toBeUndefined();
+
+    const { result: multi } = renderHook(() => useCombobox({ multiple: true }));
+    expect(multi.current.getListboxProps()['aria-multiselectable']).toBe(true);
+  });
+
+  test('getClearButtonProps exposes a labeled, non-tabbable clear button that calls clear()', () => {
+    const onValueChange = vi.fn();
+    const { result } = renderHook(() => useCombobox({ value: 'apple', onValueChange }));
+    const props = result.current.getClearButtonProps();
+    expect(props['aria-label']).toBe('Clear');
+    expect(props.tabIndex).toBe(-1);
+    act(() => props.onClick());
+    expect(onValueChange).toHaveBeenCalledWith(undefined);
+  });
+});
+
+describe('useCombobox — getInputProps wiring', () => {
+  test('aria-invalid and aria-disabled reflect their respective options', () => {
+    const { result } = renderHook(() => useCombobox({ invalid: true, disabled: true }));
+    const props = result.current.getInputProps();
+    expect(props['aria-invalid']).toBe(true);
+    expect(props['aria-disabled']).toBe(true);
+    expect(props.disabled).toBe(true);
+  });
+
+  test('aria-activedescendant is undefined when nothing is highlighted', () => {
+    const { result } = renderHook(() => useCombobox({ autoHighlight: false }));
+    expect(result.current.getInputProps()['aria-activedescendant']).toBeUndefined();
+  });
+
+  test('onChange updates inputValue and opens the popup if closed', () => {
+    const { result } = renderHook(() => useCombobox());
+    act(() => result.current.getInputProps().onChange({ target: { value: 'ap' } }));
+    expect(result.current.inputValue).toBe('ap');
+    expect(result.current.open).toBe(true);
+  });
+});
+
+describe('useCombobox — ArrowUp before any highlight exists', () => {
+  test('ArrowUp with no prior highlight and open=false does nothing (guarded by !openRef)', () => {
+    const { result } = renderHook(() => useCombobox({ autoHighlight: false }));
+    setupItems(result.current, [{ value: 'a' }, { value: 'b' }]);
+    act(() =>
+      result.current.getInputProps().onKeyDown({ key: 'ArrowUp', preventDefault: () => {} } as any),
+    );
+    expect(result.current.highlightedValue).toBeUndefined();
+  });
+
+  test('ArrowUp when open with no highlight starts from the last item', () => {
+    const { result } = renderHook(() => useCombobox({ autoHighlight: false }));
+    setupItems(result.current, [{ value: 'a' }, { value: 'b' }, { value: 'c' }]);
+    act(() => result.current.show());
+    act(() =>
+      result.current.getInputProps().onKeyDown({ key: 'ArrowUp', preventDefault: () => {} } as any),
+    );
+    expect(result.current.highlightedValue).toBe('c');
+  });
+});
+
+describe('useCombobox — Home/End/Enter with an empty visible list', () => {
+  test('Home/End do nothing when there are no visible items', () => {
+    const { result } = renderHook(() => useCombobox());
+    act(() => result.current.show());
+    expect(() =>
+      act(() =>
+        result.current.getInputProps().onKeyDown({ key: 'End', preventDefault: () => {} } as any),
+      ),
+    ).not.toThrow();
+    expect(result.current.highlightedValue).toBeUndefined();
+  });
+
+  test('Enter with nothing highlighted and closed popup does nothing', () => {
+    const onValueChange = vi.fn();
+    const { result } = renderHook(() => useCombobox({ onValueChange }));
+    act(() =>
+      result.current.getInputProps().onKeyDown({ key: 'Enter', preventDefault: () => {} } as any),
+    );
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+});
+
+describe('useCombobox — getItemProps hover behavior', () => {
+  test('onMouseEnter highlights an enabled item', () => {
+    const { result } = renderHook(() => useCombobox({ autoHighlight: false }));
+    setupItems(result.current, [{ value: 'apple' }]);
+    act(() => result.current.getItemProps('apple', false).onMouseEnter());
+    expect(result.current.highlightedValue).toBe('apple');
+  });
+
+  test('onMouseEnter does nothing for a disabled item', () => {
+    const { result } = renderHook(() => useCombobox({ autoHighlight: false }));
+    setupItems(result.current, [{ value: 'apple', disabled: true }]);
+    act(() => result.current.getItemProps('apple', true).onMouseEnter());
+    expect(result.current.highlightedValue).toBeUndefined();
+  });
+
+  test('getItemProps onClick selects the item', () => {
+    const onValueChange = vi.fn();
+    const { result } = renderHook(() => useCombobox({ onValueChange }));
+    setupItems(result.current, [{ value: 'apple' }]);
+    act(() => result.current.getItemProps('apple', false).onClick());
+    expect(onValueChange).toHaveBeenCalledWith('apple');
+  });
+});
+
+describe('useCombobox — removeValue in single mode is a no-op', () => {
+  test('removeValue does nothing when multiple=false', () => {
+    const onValueChange = vi.fn();
+    const { result } = renderHook(() => useCombobox({ value: 'apple', onValueChange }));
+    act(() => result.current.removeValue('apple'));
+    expect(onValueChange).not.toHaveBeenCalled();
+  });
+});

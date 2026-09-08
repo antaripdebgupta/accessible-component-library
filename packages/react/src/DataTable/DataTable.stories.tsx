@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CheckCircle2, XCircle, Clock } from 'lucide-react';
 import { DataTable, DataTableHeader, DataTableBody, type DataTableColumn } from './index';
 import { useDataTableContext } from './DataTable';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof DataTable> = { title: 'Components/DataTable', component: DataTable };
 export default meta;
@@ -136,6 +137,17 @@ export const Sortable: Story = {
   ),
 };
 
+export const Interaction: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const nameHeader = canvas.getByRole('columnheader', { name: /Name/ });
+    const sortBtn = within(nameHeader).getByRole('button');
+    await userEvent.click(sortBtn);
+    await expect(nameHeader).toHaveAttribute('aria-sort', 'ascending');
+  },
+};
+
 function RowSelectionExample() {
   const [data] = useState(USERS);
   return <RowSelectionInner data={data} />;
@@ -163,14 +175,6 @@ function SelectionCount() {
 }
 
 export const RowSelection: Story = { render: () => <RowSelectionExample /> };
-
-function SelectionWatcher({ onCount }: { onCount: (n: number) => void }) {
-  const { useDataTableContext } = require('./DataTable');
-  const { selectedIds } = useDataTableContext();
-  onCount(selectedIds.size);
-  const { DataTableBody } = require('./DataTableBody');
-  return <DataTableBody />;
-}
 
 export const Pagination: Story = {
   render: () => (

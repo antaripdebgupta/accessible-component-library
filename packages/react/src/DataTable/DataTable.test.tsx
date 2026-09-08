@@ -2,7 +2,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { describe, test, expect } from 'vitest';
-import { DataTable, DataTableHeader, DataTableBody, type DataTableColumn } from './index';
+import {
+  DataTable,
+  DataTableHeader,
+  DataTableBody,
+  DataTableSkeleton,
+  type DataTableColumn,
+} from './index';
 
 expect.extend(toHaveNoViolations);
 
@@ -160,4 +166,23 @@ test('ArrowDown moves focus to the same column control in the next row', async (
 test('has no axe violations', async () => {
   const { container } = render(<Basic selectable expandable pageSize={2} />);
   expect(await axe(container)).toHaveNoViolations();
+});
+
+test('DataTableSkeleton renders placeholder rows', () => {
+  const { container } = render(
+    <DataTable
+      data={[]}
+      columns={columns}
+      getRowId={(r: Row) => r.id}
+      caption="Loading users"
+      selectable
+      expandable
+    >
+      <DataTableHeader />
+      <DataTableSkeleton rows={3} />
+    </DataTable>,
+  );
+
+  const rows = container.querySelectorAll('tbody tr');
+  expect(rows.length).toBe(3);
 });

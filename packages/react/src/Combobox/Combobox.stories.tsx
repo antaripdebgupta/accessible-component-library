@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Search, Globe, Flag } from 'lucide-react';
+import { expect, userEvent, within } from '@storybook/test';
 import {
   Combobox,
   ComboboxInput,
@@ -37,6 +38,18 @@ export const Default: Story = {
         </ComboboxContent>
       </Combobox>
     );
+  },
+};
+
+export const Interaction: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole('combobox');
+    await userEvent.click(input);
+    await userEvent.keyboard('{ArrowDown}');
+    await expect(input).toHaveAttribute('aria-expanded', 'true');
+    await userEvent.keyboard('{Enter}');
   },
 };
 

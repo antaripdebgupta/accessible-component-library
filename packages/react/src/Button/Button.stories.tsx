@@ -58,6 +58,8 @@ export const DisabledDoesNotFire: Story = {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: 'Submit' });
     await expect(button).toHaveAttribute('aria-disabled', 'true');
+    // Clear any calls accumulated by earlier stories sharing the meta-level fn() spy
+    (args.onClick as any)?.mockClear?.();
     await userEvent.click(button);
     await expect(args.onClick).not.toHaveBeenCalled();
   },

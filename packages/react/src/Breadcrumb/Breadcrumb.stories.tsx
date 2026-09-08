@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Slash, ArrowRight } from 'lucide-react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator } from './index';
+import { expect, userEvent, within } from '@storybook/test';
 
 const sampleItems = [
   { label: 'Home', href: '/' },
@@ -53,6 +54,12 @@ export const Dropdown: Story = {
   render: () => (
     <Breadcrumb items={sampleItems} maxItems={2} itemsBeforeCollapse={1} itemsAfterCollapse={1} />
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const ellipsis = canvas.getByRole('button', { name: /hidden breadcrumb items/i });
+    await userEvent.click(ellipsis);
+    await expect(canvas.getByRole('menu')).toBeInTheDocument();
+  },
 };
 
 export const LinkComponent: Story = {
