@@ -44,7 +44,6 @@ See `ACCESSIBILITY.md` for how to file one.
 
 pnpm --filter @acl/storybook storybook
 
- pnpm exec playwright test \
-  -c e2e/playwright/playwright.config.ts \
-  e2e/playwright/tests/button.spec.ts
-
+pnpm exec playwright test \
+-c e2e/playwright/playwright.config.ts \
+e2e/playwright/tests/button.spec.ts

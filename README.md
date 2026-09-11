@@ -6,6 +6,23 @@ would build one: headless accessibility primitives, a styled consumer
 layer, and a testing pipeline that combines automated and manual
 verification.
 
+## Components (22)
+
+| Component  | Component | Component      |
+| ---------- | --------- | -------------- |
+| Accordion  | Alert     | Avatar         |
+| Breadcrumb | Button    | Carousel       |
+| Checkbox   | Combobox  | CommandPalette |
+| DataTable  | Dialog    | DropdownMenu   |
+| Input      | Menu      | Pagination     |
+| RadioGroup | Skeleton  | Switch         |
+| Tabs       | Textarea  | Toast          |
+| Tooltip    | TreeView  |                |
+
+Every component ships with headless primitives, styled React bindings,
+Storybook stories with executable keyboard `play` tests, unit + Playwright
+e2e coverage, and a colocated `.a11y.md` accessibility contract.
+
 ## Packages
 
 - `packages/utils` — shared hooks (focus trap, roving tabindex, controllable state)
@@ -19,28 +36,30 @@ verification.
 
 \`\`\`bash
 pnpm install
-pnpm dev          # starts Storybook
+pnpm dev # starts Storybook
 \`\`\`
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Run Storybook locally |
-| `pnpm build` | Build all packages |
-| `pnpm lint` | ESLint (incl. jsx-a11y) |
+| Command          | Description                         |
+| ---------------- | ----------------------------------- |
+| `pnpm dev`       | Run Storybook locally               |
+| `pnpm build`     | Build all packages                  |
+| `pnpm lint`      | ESLint (incl. jsx-a11y)             |
 | `pnpm typecheck` | TypeScript project references check |
-| `pnpm test` | Unit tests (Vitest + jest-axe) |
-| `pnpm test:e2e` | Playwright E2E + axe-core audits |
-| `pnpm changeset` | Record a changeset for release |
+| `pnpm test`      | Unit tests (Vitest + jest-axe)      |
+| `pnpm test:e2e`  | Playwright E2E + axe-core audits    |
+| `pnpm changeset` | Record a changeset for release      |
 
 ## Accessibility conformance
 
 Every component targets WCAG 2.2 AA and is verified with axe-core
 (automated), Playwright keyboard-navigation tests, and manual screen reader
-testing (NVDA, VoiceOver) for core components. See each component's
-`.a11y.md` file for its specific accessibility contract, keyboard shortcuts,
-and known limitations.
+testing (NVDA, VoiceOver) for core components (Dialog, Menu, Combobox,
+Tabs, DataTable). See each component's `.a11y.md` file for its specific
+accessibility contract, keyboard shortcuts, and known limitations, and
+`docs/patterns/` for the shared focus-management and testing philosophy
+that applies across the whole library.
 
 ## Contributing
 

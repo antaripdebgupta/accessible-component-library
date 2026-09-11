@@ -148,7 +148,29 @@ jobs:
 
       - name: Install Playwright browsers (cache miss)
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpm --filter playwright exec playwright install --with-deps
+        run: |
+          set -euxo pipefail
+          # Clean apt lists to avoid stale index / hash-sum mismatch issues
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+          # Retry apt-get update a few times in case of transient mirror issues
+          for i in 1 2 3; do
+            if sudo apt-get update -y; then
+              break
+            else
+              echo "apt-get update failed, retrying ($i)" >&2
+              sleep 5
+            fi
+          done
+          # Retry Playwright browser install on transient failures
+          for i in 1 2 3; do
+            if pnpm --filter playwright exec playwright install --with-deps; then
+              break
+            else
+              echo "playwright install failed, retrying ($i)" >&2
+              sleep 5
+            fi
+          done
 
       - name: Install Playwright OS dependencies only (cache hit)
         if: steps.playwright-cache.outputs.cache-hit == 'true'

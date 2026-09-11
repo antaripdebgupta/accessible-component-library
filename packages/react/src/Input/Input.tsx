@@ -170,6 +170,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             aria-pressed={showPassword}
+            onMouseDown={(e) => {
+              // Prevent mouse down from moving focus to the button so
+              // the input keeps focus and the selection/caret is preserved.
+              e.preventDefault();
+            }}
             onClick={(e) => {
               e.preventDefault();
               togglePasswordVisibility();
