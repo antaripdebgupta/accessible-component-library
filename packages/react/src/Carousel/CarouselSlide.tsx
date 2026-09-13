@@ -26,9 +26,7 @@ export const CarouselSlide = forwardRef<HTMLDivElement, CarouselSlideProps>(
         ref={ref}
         {...slideProps}
         className={twMerge('shrink-0 grow-0', className)}
-        style={{
-          [orientation === 'horizontal' ? 'width' : 'height']: basis,
-        }}
+        style={orientation === 'horizontal' ? { width: basis } : { height: basis, width: '100%' }}
         {...props}
       >
         {children}

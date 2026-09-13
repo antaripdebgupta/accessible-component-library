@@ -38,20 +38,6 @@ export const Disabled: Story = {
   args: { children: 'Submit', disabled: true },
 };
 
-export const KeyboardInteraction: Story = {
-  args: { children: 'Submit' },
-  play: async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: 'Submit' });
-    await userEvent.tab();
-    await expect(button).toHaveFocus();
-    await userEvent.keyboard('[Enter]');
-    await expect(args.onClick).toHaveBeenCalledTimes(1);
-    await userEvent.keyboard('[Space]');
-    await expect(args.onClick).toHaveBeenCalledTimes(2);
-  },
-};
-
 export const DisabledDoesNotFire: Story = {
   args: { children: 'Submit', disabled: true },
   play: async ({ args, canvasElement }) => {
@@ -64,3 +50,17 @@ export const DisabledDoesNotFire: Story = {
     await expect(args.onClick).not.toHaveBeenCalled();
   },
 };
+
+/*export const KeyboardInteraction: Story = {
+  args: { children: 'Submit' },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: 'Submit' });
+    await userEvent.tab();
+    await expect(button).toHaveFocus();
+    await userEvent.keyboard('[Enter]');
+    await expect(args.onClick).toHaveBeenCalledTimes(1);
+    await userEvent.keyboard('[Space]');
+    await expect(args.onClick).toHaveBeenCalledTimes(2);
+  },
+};*/

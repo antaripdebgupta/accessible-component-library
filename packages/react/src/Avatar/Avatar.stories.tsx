@@ -37,25 +37,15 @@ export const Badge: Story = {
       <Avatar
         name="Ada Lovelace"
         src="https://i.pravatar.cc/150?img=1"
-        badge={
-          <AvatarStatusBadge
-            status="online"
-            label="Online"
-            className="h-full w-full bg-green-500"
-          />
-        }
+        badge={<AvatarStatusBadge status="online" label="Online" className="h-full w-full" />}
       />
       <Avatar
         name="Grace Hopper"
-        badge={
-          <AvatarStatusBadge status="away" label="Away" className="h-full w-full bg-yellow-600" />
-        }
+        badge={<AvatarStatusBadge status="away" label="Away" className="h-full w-full" />}
       />
       <Avatar
         name="Alan Turing"
-        badge={
-          <AvatarStatusBadge status="busy" label="Busy" className="h-full w-full bg-red-500" />
-        }
+        badge={<AvatarStatusBadge status="busy" label="Busy" className="h-full w-full" />}
       />
     </div>
   ),

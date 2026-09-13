@@ -74,9 +74,9 @@ export const ButtonVariant: Story = {
 
     return (
       <div className="flex w-full max-w-md flex-col gap-4">
-        <div className="bg-surface-subtle border-border flex min-h-[100px] flex-col gap-2 rounded-md border p-3">
+        <div className="bg-surface-raised border-border flex min-h-[100px] flex-col gap-2 rounded-md border p-3">
           {messages.length === 0 ? (
-            <span className="text-text-muted text-xs">No messages sent yet.</span>
+            <span className="text-text-secondary text-xs">No messages sent yet.</span>
           ) : (
             messages.map((msg, i) => (
               <div key={i} className="bg-surface border-border rounded border p-2 text-xs">

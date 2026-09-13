@@ -35,8 +35,8 @@ function DemoSlide({
 }) {
   return (
     <div
-      className={`rounded-popover border-border text-text-primary flex items-center justify-center border text-lg font-medium ${COLORS[i % COLORS.length]}`}
-      style={{ height: orientation === 'horizontal' ? 240 : 100 }}
+      className={`rounded-popover border-border text-text-primary flex h-full w-full items-center justify-center border text-lg font-medium ${COLORS[i % COLORS.length]}`}
+      style={{ height: orientation === 'horizontal' ? 240 : undefined }}
     >
       Slide {i + 1}
     </div>
@@ -158,18 +158,15 @@ export const VerticalOrientation: Story = {
   render: () => (
     <div className="flex justify-center">
       <Carousel aria-label="Vertical carousel" orientation="vertical" className="max-w-xs">
-        <div className="flex items-center gap-4">
-          <div className="flex flex-col items-center gap-4"></div>
-          <CarouselViewport className="h-72">
-            <CarouselTrack>
-              {Array.from({ length: 4 }, (_, i) => (
-                <CarouselSlide key={i}>
-                  <DemoSlide i={i} orientation="vertical" />
-                </CarouselSlide>
-              ))}
-            </CarouselTrack>
-          </CarouselViewport>
-        </div>
+        <CarouselViewport className="h-72">
+          <CarouselTrack className="h-full">
+            {Array.from({ length: 6 }, (_, i) => (
+              <CarouselSlide key={i} style={{ height: '288px' }}>
+                <DemoSlide i={i} orientation="vertical" />
+              </CarouselSlide>
+            ))}
+          </CarouselTrack>
+        </CarouselViewport>
         <div className="mt-3 flex justify-center gap-3">
           <CarouselPrevButton />
           <CarouselNextButton />

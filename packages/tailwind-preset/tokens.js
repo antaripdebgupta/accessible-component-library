@@ -20,15 +20,15 @@ module.exports = {
     "text-inverse": "#f8fafc",
     "text-inverse-dark": "#0f172a",
 
-    // Interactive / brand
-    "accent-default": "#4f46e5",  // ~6.3:1 on white — safe for text + large UI
-    "accent-default-dark": "#818cf8",
-    "accent-hover": "#4338ca",
-    "accent-hover-dark": "#a5b4fc",
-    "accent-active": "#3730a3",
-    "accent-active-dark": "#c7d2fe",
-    "accent-subtle": "#eef2ff",
-    "accent-subtle-dark": "#1e1b4b",
+    // Interactive / brand — blue (previously violet/indigo)
+    "accent-default": "#2563eb",       // ~5.2:1 on white — safe for text + large UI
+    "accent-default-dark": "#60a5fa",
+    "accent-hover": "#1d4ed8",
+    "accent-hover-dark": "#93c5fd",
+    "accent-active": "#1e40af",
+    "accent-active-dark": "#bfdbfe",
+    "accent-subtle": "#eff6ff",
+    "accent-subtle-dark": "#172554",
 
     // Status — always paired with icon/text, never color alone
     "danger-default": "#dc2626",
@@ -49,8 +49,8 @@ module.exports = {
     "border-dark": "#334155",
     "border-strong": "#cbd5e1",
     "border-strong-dark": "#475569",
-    "focus-ring": "#4f46e5",
-    "focus-ring-dark": "#818cf8",
+    "focus-ring": "#2563eb",
+    "focus-ring-dark": "#60a5fa",
   },
 
   spacing: {

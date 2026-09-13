@@ -6,9 +6,9 @@ import { Eye, EyeOff } from 'lucide-react';
 
 const inputVariants = cva(
   [
-    'w-full h-10 rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-muted',
+    'w-full h-10 rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
     'outline-none focus:border-2  focus:border-accent-default transition-colors duration-150',
-    'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-surface-subtle',
+    'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-surface-raised',
     'autofill:shadow-[0_0_0_30px_var(--color-surface,#fff)_inset] autofill:[-webkit-text-fill-color:var(--color-text-primary,#000)]',
   ],
   {
@@ -113,7 +113,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {prefix && (
           <div
             className={twMerge(
-              'text-text-muted pointer-events-none absolute flex items-center text-sm',
+              'text-text-secondary pointer-events-none absolute flex items-center text-sm',
               dir === 'rtl' ? 'right-3' : 'left-3',
             )}
           >
@@ -126,7 +126,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <span
             aria-hidden="true"
             className={twMerge(
-              'bg-surface-subtle text-text-muted border-border pointer-events-none absolute flex items-center rounded border px-2 py-0.5 text-xs font-semibold select-none',
+              'bg-surface-raised text-text-secondary border-border pointer-events-none absolute flex items-center rounded border px-2 py-0.5 text-xs font-semibold select-none',
               dir === 'rtl' ? 'right-2' : 'left-2',
             )}
           >
@@ -154,7 +154,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {suffix && !isPasswordType && !actionButton && (
           <div
             className={twMerge(
-              'text-text-muted pointer-events-none absolute flex items-center text-sm',
+              'text-text-secondary pointer-events-none absolute flex items-center text-sm',
               dir === 'rtl' ? 'left-3' : 'right-3',
             )}
           >
@@ -180,7 +180,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               togglePasswordVisibility();
             }}
             className={twMerge(
-              'text-text-muted hover:text-text-primary focus-ring-safe absolute flex items-center justify-center rounded p-1',
+              'text-text-secondary hover:text-text-primary focus-ring-safe absolute flex items-center justify-center rounded p-1',
               dir === 'rtl' ? 'left-2' : 'right-2',
               disabled && 'cursor-not-allowed opacity-50',
             )}

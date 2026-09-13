@@ -11,10 +11,10 @@
   --color-text-inverse: #f8fafc;
 
   /* Interactive / brand */
-  --color-accent-default: #4f46e5;
-  --color-accent-hover: #4338ca;
-  --color-accent-active: #3730a3;
-  --color-accent-subtle: #eef2ff;
+  --color-accent-default: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-active: #1e40af;
+  --color-accent-subtle: #eff6ff;
 
   /* Status */
   --color-danger-default: #dc2626;
@@ -27,7 +27,7 @@
   /* Borders / focus */
   --color-border: #e2e8f0;
   --color-border-strong: #cbd5e1;
-  --color-focus-ring: #4f46e5;
+  --color-focus-ring: #2563eb;
 
   /* Spacing */
   --spacing-control-sm: 0.5rem;
@@ -74,11 +74,11 @@
   --color-border: #334155;
   --color-border-strong: #475569;
 
-  --color-accent-default: #818cf8;
-  --color-accent-hover: #a5b4fc;
-  --color-accent-active: #c7d2fe;
-  --color-accent-subtle: #1e1b4b;
-  --color-focus-ring: #818cf8;
+  --color-accent-default: #60a5fa;
+  --color-accent-hover: #93c5fd;
+  --color-accent-active: #bfdbfe;
+  --color-accent-subtle: #172554;
+  --color-focus-ring: #60a5fa;
 
   --color-danger-default: #f87171;
   --color-danger-subtle: #450a0a;

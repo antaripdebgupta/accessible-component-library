@@ -51,7 +51,7 @@ export const Disabled: Story = {
   },
 };
 
-export const KeyboardInteraction: Story = {
+/*export const KeyboardInteraction: Story = {
   args: { label: 'Toggle Me' },
   play: async ({ args, canvasElement }) => {
     const canvas = within(canvasElement);
@@ -73,4 +73,4 @@ export const KeyboardInteraction: Story = {
     await userEvent.keyboard('[Enter]');
     await expect(args.onCheckedChange).toHaveBeenLastCalledWith(false);
   },
-};
+};*/

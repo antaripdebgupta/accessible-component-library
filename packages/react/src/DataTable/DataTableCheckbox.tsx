@@ -40,7 +40,7 @@ export const DataTableCheckbox = forwardRef<HTMLInputElement, DataTableCheckboxP
           className={twMerge(
             'duration-fast pointer-events-none absolute inset-0 flex items-center justify-center rounded border transition-colors motion-reduce:transition-none',
             checked || indeterminate
-              ? 'border-accent-default bg-accent-default text-white'
+              ? 'border-accent-default bg-accent-default text-text-inverse'
               : 'border-border bg-surface',
           )}
         >

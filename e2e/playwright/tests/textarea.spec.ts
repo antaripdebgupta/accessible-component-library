@@ -49,8 +49,8 @@ test.describe('Textarea — Submit on Enter', () => {
     await textarea.fill('Hello world');
     await textarea.press('Enter');
 
-    // Check message appeared in container
-    const message = page.locator('.bg-surface-subtle').getByText('Hello world');
+    // Check the submitted message appeared in the chat feed, not the textarea value itself.
+    const message = page.locator('div.bg-surface').getByText('Hello world', { exact: true });
     await expect(message).toBeVisible();
   });
 });

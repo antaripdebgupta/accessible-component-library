@@ -136,13 +136,13 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           }}
           className={twMerge(
             'relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors duration-150',
-            'bg-surface hover:bg-surface-subtle',
+            'bg-surface hover:bg-surface-raised',
             isDragging
               ? 'border-accent-default bg-accent-subtle/20'
               : isInvalid
                 ? 'border-danger-default bg-danger-subtle/10'
                 : 'border-border',
-            disabled && 'bg-surface-subtle cursor-not-allowed opacity-50',
+            disabled && 'bg-surface-raised cursor-not-allowed opacity-50',
             isFocused && 'ring-accent-default border-accent-default ring-2',
           )}
         >
@@ -163,9 +163,9 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             {...props}
           />
 
-          <UploadCloud className="text-text-muted mb-2 h-8 w-8" />
+          <UploadCloud className="text-text-secondary mb-2 h-8 w-8" />
           <p className="text-text-primary text-center text-sm font-medium">{dropzoneText}</p>
-          {accept && <p className="text-text-muted mt-1 text-xs">Accepted types: {accept}</p>}
+          {accept && <p className="text-text-secondary mt-1 text-xs">Accepted types: {accept}</p>}
         </div>
 
         {/* Selected file(s) list display */}
@@ -174,12 +174,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             {selectedFiles.map((file, idx) => (
               <div
                 key={`${file.name}-${idx}`}
-                className="bg-surface-subtle border-border text-text-primary flex items-center justify-between rounded border p-2 text-xs"
+                className="bg-surface-raised border-border text-text-primary flex items-center justify-between rounded border p-2 text-xs"
               >
                 <div className="flex items-center gap-2 truncate">
-                  <File className="text-text-muted h-4 w-4 shrink-0" />
+                  <File className="text-text-secondary h-4 w-4 shrink-0" />
                   <span className="truncate font-medium">{file.name}</span>
-                  <span className="text-text-muted">({(file.size / 1024).toFixed(1)} KB)</span>
+                  <span className="text-text-secondary">({(file.size / 1024).toFixed(1)} KB)</span>
                 </div>
                 <button
                   type="button"
@@ -188,7 +188,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                     clearFiles();
                   }}
                   aria-label={`Remove file ${file.name}`}
-                  className="text-text-muted hover:text-danger-default focus-ring-safe rounded p-1"
+                  className="text-text-secondary hover:text-danger-default focus-ring-safe rounded p-1"
                 >
                   <X className="h-4 w-4" />
                 </button>
