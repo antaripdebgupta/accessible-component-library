@@ -104,7 +104,6 @@ export function useDropdownMenu({
 
   const focusItem = useCallback(
     (value: string) => {
-      //console.log("focusItem:", value, "ref:", registry.current.get(value)?.ref.current);
       flushSync(() => setActive(value));
       registry.current.get(value)?.ref.current?.focus();
     },
@@ -113,13 +112,11 @@ export function useDropdownMenu({
 
   const focusFirst = useCallback(() => {
     const enabled = enabledOrder();
-    // console.log("focusFirst called, enabled:", enabled);
     if (enabled[0]) focusItem(enabled[0]);
   }, [enabledOrder, focusItem]);
 
   const focusLast = useCallback(() => {
     const enabled = enabledOrder();
-    // console.log("focusLast called, enabled:", enabled);
     const last = enabled[enabled.length - 1];
     if (last) focusItem(last);
   }, [enabledOrder, focusItem]);
@@ -140,7 +137,6 @@ export function useDropdownMenu({
   const selectItem = useCallback(
     (value: string) => {
       const entry = registry.current.get(value);
-      console.log('selectItem:', value, 'entry:', entry, 'closeOnSelect:', entry?.closeOnSelect);
       if (!entry || entry.disabled) return;
       entry.onSelect();
       if (entry.closeOnSelect) close();
@@ -150,7 +146,6 @@ export function useDropdownMenu({
 
   const handleContentKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      console.log('handleContentKeyDown, key:', e.key, 'activeValueRef:', activeValueRef.current);
       const enabled = enabledOrder();
       if (enabled.length === 0) return;
       // Read from ref to avoid stale closure when activeValue was set

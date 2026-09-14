@@ -58,17 +58,15 @@ export const DropdownMenuSubTrigger = forwardRef<HTMLDivElement, DropdownMenuSub
         aria-expanded={sub.open}
         data-active={itemProps.tabIndex === 0 || undefined}
         className={twMerge(
-          'rounded-control relative flex cursor-pointer items-center gap-2 px-2 py-1.5 text-sm outline-none select-none',
-          'text-text-primary duration-fast transition-colors motion-reduce:transition-none',
+          'relative flex cursor-pointer select-none items-center gap-2 rounded-control px-2 py-1.5 text-sm outline-none',
+          'text-text-primary transition-colors duration-fast motion-reduce:transition-none',
           'hover:bg-surface-raised focus-visible:bg-surface-raised data-[active=true]:bg-surface-raised',
           'aria-disabled:pointer-events-none aria-disabled:opacity-50',
           className,
         )}
         onClick={(e: MouseEvent) => {
-          //console.log("SubTrigger onClick, disabled:", disabled, "sub.open before:", sub.open);
           itemProps.onClick();
           sub.setOpen(true);
-          //console.log("SubTrigger onClick, sub.open after setOpen call:", sub.open);
         }}
         onKeyDown={(e: KeyboardEvent) => {
           itemProps.onKeyDown(e);

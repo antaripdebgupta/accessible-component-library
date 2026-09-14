@@ -4,7 +4,7 @@ export interface BreadcrumbItemData {
   id?: string | number;
   label: string;
   href?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface UseBreadcrumbOptions {
