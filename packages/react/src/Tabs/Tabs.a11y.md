@@ -1,11 +1,13 @@
 # Tabs — Accessibility Contract
 
 ## Overview
+
 Implements the [WAI-ARIA APG Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
 exactly: a `tablist` of `tab` elements controlling associated `tabpanel`
 elements, with roving tabindex and automatic/manual activation modes.
 
 ## Accessibility features
+
 - Correct role triad: `tablist` / `tab` / `tabpanel`, wired via
   `aria-controls` (tab → panel) and `aria-labelledby` (panel → tab).
 - Roving tabindex: only the currently focused tab has `tabIndex={0}`; all
@@ -24,32 +26,49 @@ elements, with roving tabindex and automatic/manual activation modes.
   for SSR/hydration, no `Math.random()`.
 
 ## Keyboard shortcuts
-| Key | Action |
-|---|---|
-| `Tab` | Move focus into/out of the tablist (single stop) |
-| `Shift+Tab` | Move focus backward out of the tablist |
+
+| Key                        | Action                                                  |
+| -------------------------- | ------------------------------------------------------- |
+| `Tab`                      | Move focus into/out of the tablist (single stop)        |
+| `Shift+Tab`                | Move focus backward out of the tablist                  |
 | `ArrowRight` / `ArrowLeft` | Move focus (horizontal orientation, mirrored under RTL) |
-| `ArrowDown` / `ArrowUp` | Move focus (vertical orientation) |
-| `Home` | Move focus to first enabled tab |
-| `End` | Move focus to last enabled tab |
-| `Enter` / `Space` | Activate the focused tab (manual activation mode only) |
+| `ArrowDown` / `ArrowUp`    | Move focus (vertical orientation)                       |
+| `Home`                     | Move focus to first enabled tab                         |
+| `End`                      | Move focus to last enabled tab                          |
+| `Enter` / `Space`          | Activate the focused tab (manual activation mode only)  |
 
 In automatic activation mode (default), arrow keys both move focus **and**
 select — there is no separate activation step.
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Entering the tablist announces "tab list, [N] tabs", followed by the
+  focused tab's name and selected state.
+- Arrow-key navigation announces each tab's name and selected state as
+  focus moves.
+- In manual activation mode, moving focus without activating does not
+  announce a false "selected" state until Enter/Space is pressed —
+  confirmed no premature announcement.
+- Disabled tabs announce "dimmed"/"unavailable" and are skipped silently
+  during arrow navigation with no announcement stutter.
+
 ## ARIA attributes used
-| Attribute | Element | Purpose |
-|---|---|---|
-| `role="tablist"` | `TabsList` container | Groups the tabs |
-| `role="tab"` | `TabsTrigger` | Identifies each tab control |
-| `role="tabpanel"` | `TabsContent` | Identifies each associated panel |
-| `aria-selected` | tab | Whether this tab's panel is currently shown |
-| `aria-controls` | tab | Points at its panel's `id` |
-| `aria-labelledby` | panel | Points back at its tab's `id` |
-| `aria-orientation` | tablist | `horizontal` or `vertical` |
-| `aria-disabled` | tab | Marks a tab non-interactive while excluded from arrow navigation |
+
+| Attribute          | Element              | Purpose                                                          |
+| ------------------ | -------------------- | ---------------------------------------------------------------- |
+| `role="tablist"`   | `TabsList` container | Groups the tabs                                                  |
+| `role="tab"`       | `TabsTrigger`        | Identifies each tab control                                      |
+| `role="tabpanel"`  | `TabsContent`        | Identifies each associated panel                                 |
+| `aria-selected`    | tab                  | Whether this tab's panel is currently shown                      |
+| `aria-controls`    | tab                  | Points at its panel's `id`                                       |
+| `aria-labelledby`  | panel                | Points back at its tab's `id`                                    |
+| `aria-orientation` | tablist              | `horizontal` or `vertical`                                       |
+| `aria-disabled`    | tab                  | Marks a tab non-interactive while excluded from arrow navigation |
 
 ## WCAG 2.2 mapping
+
 - **2.1.1 Keyboard (A)** — full operability via the shortcuts table above.
 - **2.4.3 Focus Order (A)** — roving tabindex keeps tab order logical and
   never traps focus.
@@ -64,19 +83,8 @@ select — there is no separate activation step.
 - **1.4.13 Content on Hover or Focus (AA)** — not applicable (no
   hover-triggered content), included here for completeness of audit trail.
 
-## Screen reader behavior
-Verified with NVDA + Firefox and VoiceOver + Safari:
-- Entering the tablist announces "tablist, N tabs" (VoiceOver) / tab count
-  context (NVDA), followed by the focused tab's name and selected state.
-- Arrow-key navigation announces each tab's name and selected state as
-  focus moves.
-- In manual mode, moving focus without activating does **not** announce a
-  selection change until Enter/Space is pressed — verified this doesn't
-  produce a false "activated" announcement.
-- Disabled tabs are announced as "dimmed"/"unavailable" and are skipped
-  silently during arrow navigation (no announcement stutter).
-
 ## Focus management
+
 - Focus is never trapped inside the tablist — `Tab` always exits to the
   next document focus stop (typically into the active panel or the next
   focusable element after it).
@@ -87,6 +95,7 @@ Verified with NVDA + Firefox and VoiceOver + Safari:
   an overlay, so there's no "trigger" to return focus to.
 
 ## Testing strategy
+
 - **Unit** (Vitest + RTL + jest-axe): role/state assertions, keyboard
   navigation in both activation modes, controlled/uncontrolled parity,
   disabled-tab skipping, orientation, RTL, lazy/force mount, nested tabs,
@@ -99,6 +108,7 @@ Verified with NVDA + Firefox and VoiceOver + Safari:
   announcements described above.
 
 ## Manual testing checklist
+
 - [ ] Tab into the tablist — only one stop, lands on the previously
       selected/focused tab.
 - [ ] Arrow keys cycle through enabled tabs only, wrapping per `loop`.
@@ -114,16 +124,19 @@ Verified with NVDA + Firefox and VoiceOver + Safari:
 - [ ] RTL — Arrow key directions mirror correctly.
 
 ## Playwright command
+
 ```bash
 pnpm exec playwright test tabs.spec.ts
 ```
 
 ## Browser support
+
 Verified in Chromium, Firefox, and WebKit via Playwright's cross-engine
 test matrix. No engine-specific ARIA workarounds were required for this
 component.
 
 ## Known limitations
+
 - Scrollable tab lists do not yet expose fade-edge overflow indicators to
   assistive technology (visual-only affordance) — sighted keyboard users
   relying solely on the scroll fade for "more tabs exist" context get no

@@ -20,6 +20,16 @@ Renders as a native `<button role="switch">` following the WAI-ARIA APG Switch p
 | `Enter`             | Toggle the checked state      |
 | `Space`             | Toggle the checked state      |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Tabbing onto a switch announces "[Label], switch, off" (or "on") — NVDA
+  correctly reads the `role="switch"` distinctly from a checkbox.
+- Toggling announces the new state immediately.
+- Pending/loading state announces "[Label], switch, busy" without
+  prematurely announcing a state change before the async action confirms.
+
 ## ARIA attributes used
 
 | Attribute       | Element    | Purpose                                                       |

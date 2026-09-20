@@ -1,11 +1,13 @@
 # Alert — Accessibility Contract
 
 ## Overview
+
 Static, always-visible alert for information the user must know immediately
 (e.g. form submission errors). Not for transient notifications — use Toast
 for those.
 
 ## Accessibility features
+
 - `role="alert"` is an implicit assertive live region — the browser
   announces it as soon as it's added to the DOM, with no extra wiring.
 - `urgency` prop lets you downgrade to `aria-live="polite"` for less urgent
@@ -19,20 +21,38 @@ for those.
   glyph alone for its accessible name.
 
 ## Keyboard shortcuts
+
 None — this is not an interactive widget.
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- On mount (assertive urgency, default), NVDA interrupts whatever it was
+  reading and immediately announces the alert's full text content —
+  confirmed no truncation of long messages.
+- With `urgency="polite"`, the alert waits for the current speech to
+  finish before announcing, and does not interrupt.
+- With `urgency="off"`, nothing is announced automatically; the alert is
+  only encountered if the user navigates to it manually (confirmed via
+  browse-mode arrow keys).
+- The icon is correctly skipped (never announced as "image" or similar).
+
 ## ARIA attributes used
-| Attribute | Element | Purpose |
-|---|---|---|
-| `role="alert"` | container | Implicit assertive live region |
-| `aria-live` | container | Overridable urgency (polite/assertive/off) |
+
+| Attribute            | Element   | Purpose                                        |
+| -------------------- | --------- | ---------------------------------------------- |
+| `role="alert"`       | container | Implicit assertive live region                 |
+| `aria-live`          | container | Overridable urgency (polite/assertive/off)     |
 | `aria-atomic="true"` | container | Announces the whole message, not just the diff |
 
 ## WCAG criteria satisfied
+
 - **4.1.3 Status Messages (AA)** — announced without requiring focus to move.
 - **1.4.1 Use of Color (A)** — icon + text convey meaning, not color alone.
 
 ## Known limitations
+
 - Overusing `role="alert"` for non-urgent info is a common misuse — this
   component does not stop a consumer from doing that; it's a documented
   usage guideline, not an enforced one.
@@ -40,6 +60,7 @@ None — this is not an interactive widget.
   closeable; it isn't auto-focus-managed on dismiss.
 
 ### E2E
+
 pnpm exec playwright test \
-  -c e2e/playwright/playwright.config.ts \
-  e2e/playwright/tests/alert.spec.ts
+-c e2e/playwright/playwright.config.ts \
+e2e/playwright/tests/alert.spec.ts

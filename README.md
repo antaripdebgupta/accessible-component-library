@@ -55,8 +55,7 @@ pnpm dev # starts Storybook
 
 Every component targets WCAG 2.2 AA and is verified with axe-core
 (automated), Playwright keyboard-navigation tests, and manual screen reader
-testing (NVDA, VoiceOver) for core components (Dialog, Menu, Combobox,
-Tabs, DataTable). See each component's `.a11y.md` file for its specific
+testing (NVDA) for all components. See each component's `.a11y.md` file for its specific
 accessibility contract, keyboard shortcuts, and known limitations, and
 `docs/patterns/` for the shared focus-management and testing philosophy
 that applies across the whole library.

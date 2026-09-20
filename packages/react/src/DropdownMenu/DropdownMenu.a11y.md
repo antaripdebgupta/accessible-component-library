@@ -20,12 +20,18 @@ Implements the WAI-ARIA APG Menu Button pattern. Trigger has
 
 ## Screen reader behavior
 
-Verified with NVDA + Firefox and VoiceOver + Safari:
+Tested with NVDA + Firefox.
 
-- **Trigger**: Focus on trigger announces "button, popup menu, expanded/collapsed".
-- **Menu opening**: Opening menu announces "menu, N items", and reads the first focused `menuitem` label.
-- **Roving focus**: ArrowUp / ArrowDown navigation announces each `menuitem`, `menuitemcheckbox` (with checked/unchecked state), or `menuitemradio` (with selected state).
-- **Submenus**: Moving onto a `menuitem` subtrigger announces "has popup menu" / "has submenu". `ArrowRight` opens the submenu and announces "menu, N items". `ArrowLeft` returns focus to parent trigger.
+- Trigger announces "[Label], button, menu, collapsed" (or "expanded").
+- Opening moves focus to the first item, announced as "[Item], menu item,
+  1 of 5".
+- Arrow-key navigation announces each item and position as focus moves;
+  disabled items announce "[Item], menu item, dimmed" and are skipped by
+  arrow navigation but still discoverable if browsed manually.
+- Checkbox/radio-style items announce their checked state: "[Item], menu
+  item checkbox, checked".
+- Submenu triggers announce "[Item], submenu, collapsed"; opening one
+  moves focus into it and announces the first submenu item.
 
 ## Known limitations
 

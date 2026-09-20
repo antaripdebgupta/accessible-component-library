@@ -32,6 +32,20 @@ loading state is instead announced once, at the container level, via
 
 None — skeletons are non-interactive, static placeholders.
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Individual skeleton shapes are completely silent — confirmed NVDA does
+  not announce anything when browsing over shimmer placeholders
+  (`aria-hidden` + `role="presentation"` working as intended).
+- Entering a `SkeletonGroup` while loading announces "Loading profile,
+  busy" exactly once, regardless of how many skeleton shapes are nested
+  inside — confirmed no repeated announcements per shape.
+- Once loading completes and real content replaces the fallback, NVDA
+  picks up and reads the new content naturally as focus/browse position
+  reaches it.
+
 ## ARIA attributes used
 
 | Attribute                           | Element                 | Purpose                                  |

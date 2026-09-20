@@ -30,12 +30,20 @@ every viewport width; only the visual presentation changes.
 
 ## Screen reader behavior
 
-Verified with NVDA + Firefox and VoiceOver + Safari:
+Tested with NVDA + Firefox.
 
-- **Table navigation**: Table structure announces table caption, total rows, and column count upon entry.
-- **Header sorting**: Toggling column sort buttons announces updated `aria-sort` state ("sorted ascending" / "sorted descending" / "none").
-- **Row selection**: Toggling row checkboxes announces row index and checkbox state ("Select row N, checked/unchecked").
-- **Row expansion**: Activating expand button announces "Expand row N, expanded/collapsed", and exposes expanded content row.
+- Entering the table announces "table, [caption], 5 columns, 10 rows" per
+  native table semantics — no custom re-announcement layer needed.
+- A sortable header's button announces "Sort by Name, not sorted,
+  button"; after activating, "Sort by Name, ascending. Activate to sort
+  descending, button" — confirmed the full state + next-action label
+  reads correctly, not just an icon description.
+- Row checkboxes announce "Select row: Ada Lovelace, checkbox" —
+  confirmed per-row label association, not a generic "checkbox" repeated
+  identically for every row.
+- The select-all checkbox announces "Select all rows, checkbox, partially
+  checked" when some but not all rows are selected.
+- Loading state announces "Loading rows" via the live region in `<tbody>`.
 
 ## Known limitations
 

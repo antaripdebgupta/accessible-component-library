@@ -48,6 +48,23 @@ navigation — never icon-only unlabeled affordances.
 | `Home`                     | Jump to first slide                                                                                        |
 | `End`                      | Jump to last slide                                                                                         |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Entering the carousel announces "region, [aria-label], carousel" via
+  `aria-roledescription`.
+- Tabbing into the viewport, then arrowing, triggers the hidden live
+  region announcement "Slide 2 of 5" — confirmed this reads immediately
+  after the arrow key press, not delayed.
+- Prev/Next buttons announce "Previous slide, button" / "Next slide,
+  button" — never just "button" alone.
+- Dots announce "Go to slide 3, current" for the active dot (via
+  `aria-current`) and "Go to slide 4, button" for inactive ones.
+- Play/pause button announces its current action clearly: "Pause
+  autoplay, button" while playing, flipping to "Play autoplay, button"
+  once paused.
+
 ## ARIA attributes used
 
 | Attribute                                           | Element                          | Purpose                                          |

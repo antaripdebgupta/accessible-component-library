@@ -32,6 +32,19 @@ Implements the WAI-ARIA APG Tooltip pattern: a trigger element with
 | `Shift+Tab` / any blur | Moves focus away — tooltip hides                       |
 | `Escape`               | Dismisses the open tooltip only                        |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Focusing the trigger (keyboard) announces the trigger's own name
+  followed immediately by the tooltip content via `aria-describedby` —
+  confirmed it supplements rather than replaces the trigger's accessible
+  name.
+- Hover-only (mouse, no keyboard focus) does not trigger any NVDA
+  announcement, as expected, since focus never moved.
+- Escape dismisses the tooltip without dismissing/blurring the underlying
+  trigger element.
+
 ## ARIA attributes used
 
 | Attribute          | Element | Purpose                                             |

@@ -25,6 +25,19 @@ Renders as a native `<fieldset role="radiogroup">` with `<legend>` for labeling,
 | `Home`                     | Move focus and selection to the first enabled radio item    |
 | `End`                      | Move focus and selection to the last enabled radio item     |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Entering announces "[Group legend], radio group".
+- Tabbing lands on the checked item (or the first item if none checked)
+  and announces "[Option], radio button, checked, 1 of 3".
+- Arrow keys move both selection and focus together, each stop announced
+  with updated position; disabled options are correctly skipped.
+- No initial selection state (`defaultValue` omitted) correctly announces
+  "not checked" on all options rather than forcing a false first-item
+  selection.
+
 ## Rationale: Avoid Auto-selecting First Item
 
 Unlike tabs (where one panel is always active and shown), a RadioGroup represents a form control selection. Auto-selecting the first option by default forces an implicit choice on the user and prevents mandatory fields from detecting if the user skipped the field. Therefore, if no `defaultValue` or `value` is provided, the RadioGroup remains unselected, but focus is still correctly directed to the first enabled option upon tabbing.

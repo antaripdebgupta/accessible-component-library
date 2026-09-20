@@ -20,6 +20,21 @@ Wraps a native `<input type="checkbox">` for accessible interaction and consiste
 | `Tab` / `Shift+Tab` | Move focus to/from the checkbox    |
 | `Space`             | Toggle the checked/unchecked state |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Tabbing onto a checkbox with an associated `<label>` announces "[Label
+  text], checkbox, not checked" (or "checked").
+- Indeterminate state announces "[Label], checkbox, partially checked" —
+  confirmed NVDA has a distinct announcement for the native
+  `indeterminate` property, not just "not checked".
+- Clicking the label text (not the box itself) correctly toggles the
+  checkbox and re-announces state — confirmed no double-fire/double
+  announcement.
+- Error state announces "[Label], checkbox, invalid, [error message]" via
+  `aria-invalid` + `aria-describedby`.
+
 ## ARIA attributes used
 
 | Attribute          | Element   | Purpose                                          |

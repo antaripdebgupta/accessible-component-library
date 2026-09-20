@@ -19,6 +19,17 @@ Implements the WAI-ARIA APG Pagination pattern: a `<nav>` container containing p
 | `Tab` / `Shift+Tab` | Move focus to/from pagination control buttons |
 | `Enter` / `Space`   | Trigger the focused page button               |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Entering announces "navigation, Pagination" (landmark).
+- The current page button announces "Page 3, current page, button" via
+  `aria-current="page"` — confirmed distinct from other page buttons.
+- Prev/Next buttons at the boundary announce "Previous page, button,
+  dimmed" when disabled, confirmed reachable but correctly marked
+  non-actionable.
+
 ## ARIA attributes used
 
 | Attribute           | Element          | Purpose                                               |

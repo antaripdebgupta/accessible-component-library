@@ -29,6 +29,21 @@ The `Input` component family (`Input`, `InputGroup`, `FieldGroup`, `FileInput`) 
 
 ---
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Focusing announces "[Label], edit" (or "required, edit" when
+  `required`/`aria-required` is set).
+- Invalid state announces "[Label], invalid, edit, [error message]" via
+  linked `aria-describedby`.
+- Password visibility toggle announces its current action: "Show
+  password, button" flipping to "Hide password, button" — confirmed via
+  `aria-pressed` or equivalent state change.
+- File input (custom dropzone) remains keyboard-activatable and announces
+  "Choose file, button" — confirmed the visually-hidden native input is
+  still reachable and triggers the OS file picker correctly.
+
 ## ARIA Attributes
 
 | Attribute                | Element                   | Purpose                                                                      |

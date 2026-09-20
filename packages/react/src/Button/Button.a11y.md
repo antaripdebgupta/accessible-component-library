@@ -1,10 +1,12 @@
 # Button — Accessibility Contract
 
 ## Overview
+
 Native `<button>` element. No custom ARIA role needed — this is the
 "prefer native semantics" case from the ARIA First Rule.
 
 ## Accessibility features
+
 - Native `<button type="button">` — full keyboard support and accessible
   name computation come for free.
 - Disabled state uses `aria-disabled` (not the native `disabled` attribute)
@@ -16,25 +18,40 @@ Native `<button>` element. No custom ARIA role needed — this is the
   keeping pace with it.
 
 ## Keyboard shortcuts
-| Key | Action |
-|---|---|
+
+| Key                 | Action                        |
+| ------------------- | ----------------------------- |
 | `Tab` / `Shift+Tab` | Move focus to/from the button |
-| `Enter` | Activate |
-| `Space` | Activate |
+| `Enter`             | Activate                      |
+| `Space`             | Activate                      |
+
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Tabbing onto a button announces "[Label], button".
+- `aria-disabled` state announces as "[Label], button, dimmed" while
+  remaining reachable by Tab — confirmed this differs from native
+  `disabled`, which NVDA would skip entirely.
+- Loading state announces "[loadingText], button, busy" — confirmed
+  `aria-busy` is picked up and read aloud on focus.
 
 ## ARIA attributes used
-| Attribute | Element | Purpose |
-|---|---|---|
+
+| Attribute       | Element    | Purpose                                             |
+| --------------- | ---------- | --------------------------------------------------- |
 | `aria-disabled` | `<button>` | Marks non-interactive state while staying focusable |
-| `aria-busy` | `<button>` | Announces in-progress state during async actions |
+| `aria-busy`     | `<button>` | Announces in-progress state during async actions    |
 
 ## WCAG criteria satisfied
+
 - **2.1.1 Keyboard (A)** — fully operable via Enter/Space, native behavior.
 - **2.4.7 Focus Visible (AA)** — `.focus-ring-safe` utility, verified in forced-colors mode.
 - **4.1.2 Name, Role, Value (A)** — native role; name from children or `aria-label`.
 - **1.4.1 Use of Color (A)** — disabled state is not color-only (also non-interactive).
 
 ## Known limitations
+
 - `aria-disabled` keeps the button in the tab order even when disabled.
   This is an intentional trade-off (see APG guidance on disabled controls)
   but means keyboard users will tab onto a non-functional control. If your

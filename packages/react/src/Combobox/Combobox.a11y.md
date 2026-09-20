@@ -20,12 +20,18 @@ input, per the "manages active descendant" APG variant).
 
 ## Screen reader behavior
 
-Verified with NVDA + Firefox and VoiceOver + Safari:
+Tested with NVDA + Firefox.
 
-- **Combobox role**: Focus on input announces "combo box, edit, has auto-complete, expanded/collapsed".
-- **Active descendant**: Navigating option list with Arrow keys updates `aria-activedescendant`, announcing the highlighted option's label and position (e.g. "Option 2 of 5").
-- **Selection announcement**: Pressing Enter commits selection and announces the selected item value.
-- **Tag management**: In multi-select mode, Backspace on empty input removes and announces the removed tag label.
+- Focusing the input announces "[Label], combo box, collapsed" (or
+  "expanded" if already open).
+- Typing to filter announces the updated result count via the polite live
+  region: "4 results available" — confirmed this doesn't interrupt typing.
+- Arrowing through results announces each option's text plus position:
+  "[Option], 2 of 4" via `aria-activedescendant` tracking.
+- Selecting an option announces the new input value and collapses the
+  listbox, confirmed via "[Label], combo box, collapsed, [value]".
+- Empty results state announces "No results found" through the same live
+  region used for the count.
 
 ## Known limitations
 

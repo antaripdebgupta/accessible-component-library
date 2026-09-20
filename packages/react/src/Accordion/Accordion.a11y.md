@@ -35,6 +35,22 @@ wrapped in an `<h3>`, controlling an adjacent `role="region"` panel.
 | `Home`              | Move focus to first trigger                          |
 | `End`               | Move focus to last trigger                           |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Tabbing onto a trigger announces: "[Label], button, collapsed" (or
+  "expanded"), plus heading level ("heading level 3") since triggers are
+  wrapped in `<h3>`.
+- Activating a trigger announces the new state immediately: "expanded" or
+  "collapsed" — no separate live-region needed since `aria-expanded` change
+  is announced natively by NVDA on the focused element.
+- Moving into the panel content (via Tab) announces "region, [trigger
+  label]" once, then reads panel content normally.
+- A disabled item is announced as "[Label], button, dimmed" and is
+  correctly skipped by NVDA's own Tab navigation as well as the
+  component's arrow-key handling.
+
 ## ARIA attributes used
 
 | Attribute         | Element        | Purpose                                                         |

@@ -1,11 +1,13 @@
 # Toast — Accessibility Contract
 
 ## Overview
+
 Transient notification system: `ToastProvider` (wrap your app once) +
 `useToast()` hook + internal queue. For persistent, must-see-on-load
 messaging, use Alert instead.
 
 ## Accessibility features
+
 - Each toast uses `role="status"` (implicit polite live region) — doesn't
   interrupt whatever the user is currently doing, unlike `role="alert"`.
 - Auto-dismiss timer pauses on hover **and** keyboard focus (`onFocus`),
@@ -22,20 +24,36 @@ messaging, use Alert instead.
   not color alone.
 
 ## Keyboard shortcuts
-| Key | Action |
-|---|---|
-| `Tab` | Move focus to the dismiss button (pauses the timer) |
-| `Enter` / `Space` | Dismiss (when dismiss button focused) |
+
+| Key               | Action                                              |
+| ----------------- | --------------------------------------------------- |
+| `Tab`             | Move focus to the dismiss button (pauses the timer) |
+| `Enter` / `Space` | Dismiss (when dismiss button focused)               |
+
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- On appearance, the polite live region announces the toast's title and
+  description without interrupting current speech or stealing focus.
+- Tabbing onto the toast's dismiss button (pausing the auto-timer)
+  announces "Dismiss notification, button".
+- Multiple toasts appearing in quick succession are each announced in
+  sequence — confirmed some overlap/queuing occurs with 3+ rapid toasts
+  (documented as a known limitation), but no announcement is silently
+  dropped.
 
 ## ARIA attributes used
-| Attribute | Element | Purpose |
-|---|---|---|
-| `role="status"` | toast container | Polite live-region announcement |
-| `aria-atomic="true"` | toast container | Announces full message, not partial diffs |
-| `aria-label` | viewport container | Landmark label for the notification region |
-| `aria-label="Dismiss notification"` | close button | Programmatic name for icon-only button |
+
+| Attribute                           | Element            | Purpose                                    |
+| ----------------------------------- | ------------------ | ------------------------------------------ |
+| `role="status"`                     | toast container    | Polite live-region announcement            |
+| `aria-atomic="true"`                | toast container    | Announces full message, not partial diffs  |
+| `aria-label`                        | viewport container | Landmark label for the notification region |
+| `aria-label="Dismiss notification"` | close button       | Programmatic name for icon-only button     |
 
 ## WCAG criteria satisfied
+
 - **4.1.3 Status Messages (AA)** — announced without moving focus.
 - **2.2.1 Timing Adjustable (A)** — timer pauses on hover/focus; always
   dismissible manually; `duration: 0` opts out of timing entirely.
@@ -44,6 +62,7 @@ messaging, use Alert instead.
 - **1.4.1 Use of Color (A)** — variant conveyed via icon + text, not color alone.
 
 ## Known limitations
+
 - Multiple toasts pushed in rapid succession are not yet throttled at the
   announcement level — concurrent polite announcements may overlap or get
   cut off by some screen readers.

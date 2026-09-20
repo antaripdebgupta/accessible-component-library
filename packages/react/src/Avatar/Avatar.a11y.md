@@ -36,6 +36,23 @@ name — its image content is always decorative to avoid double-announcing.
 | `Tab`             | Move focus to the overflow button or dropdown trigger (plain avatars are not focusable — they're static images) |
 | `Enter` / `Space` | Activate the overflow button or open the dropdown trigger                                                       |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Focusing or browsing to an avatar (image loaded) announces: "[Name],
+  graphic" — the inner `<img alt="">` is correctly silent, only the outer
+  `role="img"` label is read once.
+- Fallback-initials avatar announces identically ("[Name], graphic") —
+  NVDA does not additionally read the visible initials text, confirming no
+  duplicate announcement.
+- Status badge announces the visually-hidden label right after the
+  avatar's own name, e.g. "Ada Lovelace, graphic. Online." — confirmed the
+  color-only dot itself is silent.
+- AvatarGroup announces "group, Project collaborators" on entry, then each
+  avatar in sequence; the overflow avatar announces "3 more, 6 total,
+  graphic" (or "button" if clickable).
+
 ## ARIA attributes used
 
 | Attribute                     | Element                   | Purpose                                     |

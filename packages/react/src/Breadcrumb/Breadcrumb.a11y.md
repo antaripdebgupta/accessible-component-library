@@ -30,6 +30,20 @@ The `Breadcrumb` component hierarchy provides a semantic navigation trail adheri
 
 ---
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Entering the breadcrumb announces "navigation, Breadcrumb" (landmark),
+  then "list, 4 items" for the `<ol>`.
+- Each link announces "[Label], link"; the separator glyph between items
+  is correctly silent (never announced as "slash" or "graphic").
+- The final/current item announces as plain text with no "link" role —
+  confirmed NVDA does not offer it as an activatable link.
+- The collapsed ellipsis trigger announces "Show hidden breadcrumb items,
+  button"; activating it announces the opened menu and moves focus to the
+  first hidden item.
+
 ## ARIA Attributes
 
 | Attribute                                   | Element               | Purpose                                                                     |

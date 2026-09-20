@@ -29,6 +29,20 @@ The `Textarea` component provides a fully accessible multi-line text input adher
 
 ---
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Focusing announces "[Label], edit, multi-line".
+- Character counter near the limit announces via the throttled live
+  region: "20 characters remaining" — confirmed this doesn't fire on
+  every keystroke, only near the threshold.
+- Invalid state announces "[Label], invalid, edit, multi-line, [error
+  message]".
+- Integrated submit button (button variant) remains independently
+  announced as "Send, button" without disrupting the textarea's own Tab
+  order.
+
 ## ARIA Attributes
 
 | Attribute                | Element                          | Purpose                                                                           |

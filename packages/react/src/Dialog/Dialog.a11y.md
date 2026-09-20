@@ -39,12 +39,18 @@ Implements the WAI-ARIA APG Dialog (Modal) pattern. Content is
 
 ## Screen reader behavior
 
-Verified with NVDA + Firefox and VoiceOver + Safari:
+Tested with NVDA + Firefox.
 
-- **Opening**: Activating the trigger announces the dialog title via `aria-labelledby`, followed by "dialog" role and initial focused element inside the dialog.
-- **Background isolation**: Siblings get marked `inert`, so NVDA / VoiceOver reading cursor cannot navigate outside the open modal.
-- **Closing**: Pressing Escape or Close button announces closing and restores focus to the original trigger button with its label.
-- **Description**: If `DialogDescription` is provided, `aria-describedby` reads the description immediately following the dialog title announcement.
+- Opening the dialog announces "dialog, [title]" and NVDA switches to
+  focus mode automatically on the first focusable element.
+- Background content is correctly unreachable via NVDA's browse-mode arrow
+  keys while the dialog is open — confirmed the `inert`/`aria-hidden`
+  background exclusion works, not just visual overlay.
+- Tabbing through wraps correctly at both ends without ever exiting into
+  background content.
+- Closing (Escape, close button, or backdrop) returns focus to the
+  trigger, and NVDA correctly re-announces the trigger's own label on
+  refocus.
 
 ## Known limitations
 

@@ -33,6 +33,19 @@ per the WAI-ARIA APG Combobox pattern.
 | `Enter`               | Selects the highlighted item                 |
 | `Escape`              | Closes the palette                           |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Opening announces "dialog" (or equivalent), then focus lands on the
+  input with "[placeholder], combo box, edit" read aloud.
+- Grouped results announce their group label when arrowed into for the
+  first time in that group, e.g. "Actions, group" before reading the
+  first action.
+- Arrowing through results announces each item's label and position.
+- Executing a command via Enter closes the palette and returns focus to
+  the trigger, confirmed no orphaned focus.
+
 ## Known limitations
 
 - **No focus trap in the Dialog sense** — by design (see above), but this

@@ -36,6 +36,21 @@ children.
 | `*` (asterisk)      | Expand all sibling branches at the current level                                  |
 | Character keys      | Typeahead — jump to next node whose label matches                                 |
 
+## Screen reader behavior
+
+Tested with NVDA + Firefox.
+
+- Entering the tree announces "tree, [aria-label]", then the focused
+  item's name, level, and position: "[Item], level 1, 1 of 4".
+- Expanding/collapsing a branch announces the new state immediately:
+  "expanded" or "collapsed" — confirmed no positional jump is announced
+  since the item's own row never moves (matches the visual
+  layout-stability contract).
+- ArrowRight into a newly-expanded branch announces the first child with
+  updated level: "[Child], level 2, 1 of 2".
+- Disabled nodes announce "[Item], dimmed" and remain visible/navigable
+  but are correctly excluded from selection.
+
 ## ARIA attributes used
 
 | Attribute              | Element          | Purpose                                              |
