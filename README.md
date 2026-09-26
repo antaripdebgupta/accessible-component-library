@@ -8,16 +8,16 @@ verification.
 
 ## Components (22)
 
-| Component  | Component | Component      |
-| ---------- | --------- | -------------- |
-| Accordion  | Alert     | Avatar         |
-| Breadcrumb | Button    | Carousel       |
-| Checkbox   | Combobox  | CommandPalette |
-| DataTable  | Dialog    | DropdownMenu   |
-| Input      | Menu      | Pagination     |
-| RadioGroup | Skeleton  | Switch         |
-| Tabs       | Textarea  | Toast          |
-| Tooltip    | TreeView  |                |
+| Component  | Component  | Component      |
+| ---------- | ---------- | -------------- |
+| Accordion  | Alert      | Avatar         |
+| Breadcrumb | Button     | Carousel       |
+| Checkbox   | Combobox   | CommandPalette |
+| DataTable  | Dialog     | DropdownMenu   |
+| Input      | Pagination | Switch         |
+| RadioGroup | Skeleton   | Toast          |
+| Tabs       | Textarea   |                |
+| Tooltip    | TreeView   |                |
 
 Every component ships with headless primitives, styled React bindings,
 Storybook stories with executable keyboard `play` tests, unit + Playwright

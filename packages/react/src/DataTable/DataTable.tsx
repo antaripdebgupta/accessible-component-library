@@ -47,7 +47,11 @@ export function DataTable<T>({
   return (
     <DataTableContext.Provider value={contextValue}>
       <div className={twMerge('w-full', className)} {...props}>
-        <div className="rounded-popover border-border w-full overflow-x-auto border">
+        <div
+          role="region"
+          aria-label={caption}
+          className="w-full overflow-x-auto rounded-popover border border-border"
+        >
           <table className="block w-full border-collapse text-sm md:table">
             <caption className="sr-only">{caption}</caption>
             {children}

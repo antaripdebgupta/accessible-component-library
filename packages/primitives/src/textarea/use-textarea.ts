@@ -63,11 +63,16 @@ export function useTextarea({
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
-      const newValue = e.target.value;
+      // maxLength is a hard limit: clamp in controlled mode because React-controlled
+      // textareas bypass the browser's native maxlength enforcement.
+      // maxCount is intentionally soft — no clamping.
+      const raw = e.target.value;
+      const newValue =
+        maxLength !== undefined && raw.length > maxLength ? raw.slice(0, maxLength) : raw;
       setValue(newValue);
       onChange?.(newValue, e);
     },
-    [setValue, onChange],
+    [setValue, onChange, maxLength],
   );
 
   const handleKeyDown = useCallback(
