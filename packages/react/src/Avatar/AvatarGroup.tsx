@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useAvatarGroup } from '@acl/primitives';
+import { useAvatarGroup } from '@antarip/primitives';
 import { Avatar, type AvatarProps } from './Avatar';
 
 export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
@@ -58,8 +58,8 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               aria-label={`Show ${overflowCount} more, ${total} total`}
               className={twMerge(
                 'relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full',
-                'bg-surface-raised text-text-secondary ring-surface font-medium ring-2',
-                'focus-ring-safe hover:bg-border duration-fast transition-colors outline-none motion-reduce:transition-none',
+                'bg-surface-raised font-medium text-text-secondary ring-2 ring-surface',
+                'outline-none transition-colors duration-fast focus-ring-safe hover:bg-border motion-reduce:transition-none',
                 sizeClass(size),
               )}
             >
@@ -71,7 +71,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               aria-label={`${overflowCount} more, ${total} total`}
               className={twMerge(
                 'relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full',
-                'bg-surface-raised text-text-secondary ring-surface font-medium ring-2',
+                'bg-surface-raised font-medium text-text-secondary ring-2 ring-surface',
                 sizeClass(size),
               )}
             >

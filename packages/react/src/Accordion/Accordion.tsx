@@ -1,8 +1,8 @@
 import { createContext, forwardRef, useContext, useMemo, type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
-import { useAccordion, type UseAccordionReturn, type AccordionType } from '@acl/primitives';
-import { useDirection } from '@acl/utils';
+import { useAccordion, type UseAccordionReturn, type AccordionType } from '@antarip/primitives';
+import { useDirection } from '@antarip/utils';
 
 const AccordionContext = createContext<UseAccordionReturn | null>(null);
 export function useAccordionContext(): UseAccordionReturn {

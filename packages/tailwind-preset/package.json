@@ -1,5 +1,5 @@
 {
-  "name": "@acl/tailwind-preset",
+  "name": "@antarip/tailwind-preset",
   "version": "1.0.0",
   "description": "",
   "main": "./index.js",

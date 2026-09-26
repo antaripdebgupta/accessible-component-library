@@ -1,4 +1,4 @@
-import { useReducedMotion } from '@acl/utils';
+import { useReducedMotion } from '@antarip/utils';
 
 export interface UseSkeletonOptions {
   loading?: boolean;

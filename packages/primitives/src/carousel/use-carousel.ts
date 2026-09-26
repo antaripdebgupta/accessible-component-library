@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useControllableState, useStableId, useReducedMotion, useDirection } from '@acl/utils';
+import { useControllableState, useStableId, useReducedMotion, useDirection } from '@antarip/utils';
 
 export type CarouselOrientation = 'horizontal' | 'vertical';
 

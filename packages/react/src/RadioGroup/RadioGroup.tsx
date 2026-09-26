@@ -5,7 +5,7 @@ import {
   type FieldsetHTMLAttributes,
   type ReactNode,
 } from 'react';
-import { useRadioGroup, type UseRadioGroupReturn } from '@acl/primitives';
+import { useRadioGroup, type UseRadioGroupReturn } from '@antarip/primitives';
 import { twMerge } from 'tailwind-merge';
 
 interface RadioGroupContextValue extends UseRadioGroupReturn {}
@@ -77,7 +77,7 @@ export function RadioGroup({
         )}
       >
         {label && (
-          <legend className="text-text-primary mb-2 text-sm font-semibold select-none">
+          <legend className="mb-2 select-none text-sm font-semibold text-text-primary">
             {label}
           </legend>
         )}

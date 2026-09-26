@@ -2,7 +2,7 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 import { User } from 'lucide-react';
-import { useAvatar } from '@acl/primitives';
+import { useAvatar } from '@antarip/primitives';
 
 const avatarStyles = cva(
   'relative inline-flex shrink-0 items-center justify-center overflow-visible rounded-full bg-surface-raised text-text-secondary font-medium select-none',
@@ -49,17 +49,17 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
           )}
           {showInitials && <span aria-hidden="true">{initials}</span>}
           {showIconFallback && (
-            <User aria-hidden="true" className="text-text-secondary h-1/2 w-1/2" />
+            <User aria-hidden="true" className="h-1/2 w-1/2 text-text-secondary" />
           )}
         </span>
 
         {(badge || badgeIcon) && (
           <span
             className={twMerge(
-              'ring-surface absolute flex items-center justify-center rounded-full ring-[3px]',
-              'end-[-6%] bottom-[-6%]',
+              'absolute flex items-center justify-center rounded-full ring-[3px] ring-surface',
+              'bottom-[-6%] end-[-6%]',
               badgeIcon
-                ? 'bg-surface-inverse text-text-inverse h-[36%] w-[36%]'
+                ? 'h-[36%] w-[36%] bg-surface-inverse text-text-inverse'
                 : 'h-[26%] w-[26%]',
             )}
           >

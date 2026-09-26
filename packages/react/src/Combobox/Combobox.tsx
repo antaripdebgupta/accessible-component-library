@@ -8,7 +8,7 @@ import {
   type RefObject,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useCombobox, type UseComboboxReturn } from '@acl/primitives';
+import { useCombobox, type UseComboboxReturn } from '@antarip/primitives';
 
 interface ComboboxContextValue extends UseComboboxReturn {
   inputRef: RefObject<HTMLInputElement | null>;

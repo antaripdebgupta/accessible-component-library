@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, type ChangeEvent } from 'react';
-import { useControllableState, useStableId } from '@acl/utils';
+import { useControllableState, useStableId } from '@antarip/utils';
 
 export interface UseInputOptions {
   value?: string;

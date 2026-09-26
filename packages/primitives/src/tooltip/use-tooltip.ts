@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, type FocusEvent, type MouseEvent } from 'react';
-import { useControllableState, useStableId, useEscapeKey } from '@acl/utils';
+import { useControllableState, useStableId, useEscapeKey } from '@antarip/utils';
 
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 

@@ -1,5 +1,5 @@
 import { useCallback, useRef, type ChangeEvent, type KeyboardEvent } from 'react';
-import { useControllableState, useStableId } from '@acl/utils';
+import { useControllableState, useStableId } from '@antarip/utils';
 
 export function getGraphemeCount(str: string): number {
   if (!str) return 0;

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, type KeyboardEvent } from 'react';
-import { useControllableState, useStableId } from '@acl/utils';
+import { useControllableState, useStableId } from '@antarip/utils';
 
 export interface UseRadioGroupOptions {
   value?: string;

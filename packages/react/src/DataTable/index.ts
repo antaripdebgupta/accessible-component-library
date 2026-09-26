@@ -9,4 +9,4 @@ export type { DataTableProps } from './DataTable';
 export type { DataTableBodyProps } from './DataTableBody';
 export type { DataTableRowProps } from './DataTableRow';
 export type { DataTableCheckboxProps } from './DataTableCheckbox';
-export type { DataTableColumn, SortDirection } from '@acl/primitives';
+export type { DataTableColumn, SortDirection } from '@antarip/primitives';

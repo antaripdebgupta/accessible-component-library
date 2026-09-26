@@ -9,7 +9,7 @@ import {
   type RefObject,
 } from 'react';
 import { flushSync } from 'react-dom';
-import { useControllableState, useStableId, useEscapeKey } from '@acl/utils';
+import { useControllableState, useStableId, useEscapeKey } from '@antarip/utils';
 
 export interface UseDropdownMenuOptions {
   open?: boolean;

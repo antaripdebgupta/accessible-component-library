@@ -1,5 +1,5 @@
 import { forwardRef, Fragment, type ElementType, type HTMLAttributes, type ReactNode } from 'react';
-import { useBreadcrumb, type BreadcrumbItemData } from '@acl/primitives';
+import { useBreadcrumb, type BreadcrumbItemData } from '@antarip/primitives';
 import { twMerge } from 'tailwind-merge';
 import { BreadcrumbItem } from './BreadcrumbItem';
 import { BreadcrumbSeparator } from './BreadcrumbSeparator';

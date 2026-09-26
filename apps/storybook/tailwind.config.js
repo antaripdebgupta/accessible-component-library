@@ -1,5 +1,5 @@
 module.exports = {
-    presets: [require("@acl/tailwind-preset")],
+    presets: [require("@antarip/tailwind-preset")],
     content: [
         "../../packages/react/src/**/*.{ts,tsx}",
         "./src/**/*.{ts,tsx}",

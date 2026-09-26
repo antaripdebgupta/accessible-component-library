@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useInput, type UseInputOptions } from '@acl/primitives';
+import { useInput, type UseInputOptions } from '@antarip/primitives';
 import { twMerge } from 'tailwind-merge';
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -113,7 +113,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {prefix && (
           <div
             className={twMerge(
-              'text-text-secondary pointer-events-none absolute flex items-center text-sm',
+              'pointer-events-none absolute flex items-center text-sm text-text-secondary',
               dir === 'rtl' ? 'right-3' : 'left-3',
             )}
           >
@@ -126,7 +126,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <span
             aria-hidden="true"
             className={twMerge(
-              'bg-surface-raised text-text-secondary border-border pointer-events-none absolute flex items-center rounded border px-2 py-0.5 text-xs font-semibold select-none',
+              'pointer-events-none absolute flex select-none items-center rounded border border-border bg-surface-raised px-2 py-0.5 text-xs font-semibold text-text-secondary',
               dir === 'rtl' ? 'right-2' : 'left-2',
             )}
           >
@@ -154,7 +154,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {suffix && !isPasswordType && !actionButton && (
           <div
             className={twMerge(
-              'text-text-secondary pointer-events-none absolute flex items-center text-sm',
+              'pointer-events-none absolute flex items-center text-sm text-text-secondary',
               dir === 'rtl' ? 'left-3' : 'right-3',
             )}
           >
@@ -180,7 +180,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               togglePasswordVisibility();
             }}
             className={twMerge(
-              'text-text-secondary hover:text-text-primary focus-ring-safe absolute flex items-center justify-center rounded p-1',
+              'absolute flex items-center justify-center rounded p-1 text-text-secondary focus-ring-safe hover:text-text-primary',
               dir === 'rtl' ? 'left-2' : 'right-2',
               disabled && 'cursor-not-allowed opacity-50',
             )}
@@ -213,13 +213,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={inputId}
             className={twMerge(
-              'text-text-primary text-sm font-medium select-none',
+              'select-none text-sm font-medium text-text-primary',
               layout === 'inline' && 'min-w-[100px] shrink-0',
             )}
           >
             {label}
             {showRequiredIndicator && (
-              <span className="text-danger-default ms-1" aria-hidden="true">
+              <span className="ms-1 text-danger-default" aria-hidden="true">
                 *<span className="sr-only"> (required)</span>
               </span>
             )}
@@ -230,13 +230,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {renderInputContent()}
 
           {description && (
-            <span id={descriptionId} className="text-text-secondary text-xs">
+            <span id={descriptionId} className="text-xs text-text-secondary">
               {description}
             </span>
           )}
 
           {error && (
-            <span id={errorId} className="text-danger-default text-xs font-medium">
+            <span id={errorId} className="text-xs font-medium text-danger-default">
               {error}
             </span>
           )}

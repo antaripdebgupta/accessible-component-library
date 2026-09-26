@@ -11,7 +11,7 @@ import {
   CommandLoading,
   CommandShortcut,
 } from './index';
-import { useAsyncSearch } from '@acl/primitives';
+import { useAsyncSearch } from '@antarip/primitives';
 import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof CommandPalette> = {
@@ -32,7 +32,7 @@ function OpenButton({
     <button
       type="button"
       onClick={onClick}
-      className="rounded-control bg-surface-raised border-border px-control-md py-control-sm border text-sm"
+      className="rounded-control border border-border bg-surface-raised px-control-md py-control-sm text-sm"
     >
       {children}
     </button>
@@ -175,7 +175,7 @@ export const AsyncSearch: Story = {
     return (
       <>
         <OpenButton onClick={() => setOpen(true)}>Open async search palette</OpenButton>
-        <p className="text-text-secondary mt-2 max-w-sm text-xs">
+        <p className="mt-2 max-w-sm text-xs text-text-secondary">
           Try typing quickly (e.g. "a" then immediately "ap") — shorter queries are deliberately
           made to resolve slower here, on purpose, to demonstrate that the final displayed list
           always matches your LATEST query, never a stale slower response landing after it.

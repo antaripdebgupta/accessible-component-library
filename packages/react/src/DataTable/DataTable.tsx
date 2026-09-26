@@ -1,6 +1,10 @@
 import { createContext, useContext, useMemo, type HTMLAttributes, type ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useDataTable, type UseDataTableOptions, type UseDataTableReturn } from '@acl/primitives';
+import {
+  useDataTable,
+  type UseDataTableOptions,
+  type UseDataTableReturn,
+} from '@antarip/primitives';
 import { Pagination } from '../Pagination';
 
 const DataTableContext = createContext<UseDataTableReturn<any> | null>(null);

@@ -1,5 +1,5 @@
 import { useCallback, useRef, type KeyboardEvent, type MouseEvent } from 'react';
-import { useControllableState, useStableId } from '@acl/utils';
+import { useControllableState, useStableId } from '@antarip/utils';
 
 export interface UseSwitchOptions {
   checked?: boolean;

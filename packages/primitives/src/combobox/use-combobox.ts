@@ -8,7 +8,7 @@ import {
   type KeyboardEvent,
   type RefObject,
 } from 'react';
-import { useControllableState, useStableId, useEscapeKey } from '@acl/utils';
+import { useControllableState, useStableId, useEscapeKey } from '@antarip/utils';
 
 export interface ComboboxItemData {
   disabled: boolean;

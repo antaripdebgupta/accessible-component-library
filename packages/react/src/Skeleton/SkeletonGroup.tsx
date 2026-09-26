@@ -1,5 +1,5 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { useSkeleton } from '@acl/primitives';
+import { useSkeleton } from '@antarip/primitives';
 
 export interface SkeletonGroupProps extends HTMLAttributes<HTMLDivElement> {
   loading: boolean;

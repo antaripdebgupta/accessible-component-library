@@ -11,7 +11,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { twMerge } from 'tailwind-merge';
-import { useCommandPalette, type UseCommandPaletteReturn } from '@acl/primitives';
+import { useCommandPalette, type UseCommandPaletteReturn } from '@antarip/primitives';
 
 interface CommandPaletteContextValue extends UseCommandPaletteReturn {
   inputRef: RefObject<HTMLInputElement | null>;
@@ -178,7 +178,7 @@ export function CommandPalette({
             onClick={() => command.close()}
             className={twMerge(
               'fixed inset-0 z-40 bg-black/10 backdrop-blur-[2px]',
-              'duration-fast ease-out-soft transition-opacity motion-reduce:transition-none',
+              'transition-opacity duration-fast ease-out-soft motion-reduce:transition-none',
               visible ? 'opacity-100' : 'opacity-0',
             )}
           />
@@ -195,8 +195,8 @@ export function CommandPalette({
               aria-label="Command palette"
               data-state={visible ? 'open' : 'closed'}
               className={twMerge(
-                'rounded-popover bg-surface flex max-h-[70vh] w-full max-w-lg flex-col overflow-hidden shadow-lg',
-                'duration-fast ease-out-soft transition-[opacity,transform] motion-reduce:transition-none',
+                'flex max-h-[70vh] w-full max-w-lg flex-col overflow-hidden rounded-popover bg-surface shadow-lg',
+                'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
                 visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
                 className,
               )}

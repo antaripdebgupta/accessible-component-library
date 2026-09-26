@@ -1,5 +1,5 @@
 {
-  "name": "@acl/react",
+  "name": "@antarip/react",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -23,8 +23,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@acl/primitives": "workspace:*",
-    "@acl/utils": "workspace:*",
+    "@antarip/primitives": "workspace:*",
+    "@antarip/utils": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "lucide-react": "^1.26.0",
     "tailwind-merge": "^3.6.0"
@@ -34,7 +34,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
-    "@acl/tailwind-preset": "workspace:*",
+    "@antarip/tailwind-preset": "workspace:*",
     "@storybook/react": "^10.5.3",
     "@storybook/test": "^8.6.15",
     "@testing-library/jest-dom": "^7.0.0",

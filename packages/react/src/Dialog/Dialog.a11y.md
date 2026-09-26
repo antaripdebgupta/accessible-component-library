@@ -12,7 +12,7 @@ Implements the WAI-ARIA APG Dialog (Modal) pattern. Content is
   focusable descendants on every Tab keypress) rather than via a shared
   hook, since this needed to be correct without an unverified API
   assumption — see "Known limitations" if you'd rather swap to
-  `@acl/utils`'s `use-focus-trap`.
+  `@antarip/utils`'s `use-focus-trap`.
 - **Initial focus**: moves to the dialog panel itself on open. Autofocus a
   specific element inside your content (e.g. a form's first input) if a
   different initial focus target is needed.

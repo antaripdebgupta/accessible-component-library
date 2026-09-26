@@ -1,6 +1,6 @@
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useCheckbox } from '@acl/primitives';
+import { useCheckbox } from '@antarip/primitives';
 import { twMerge } from 'tailwind-merge';
 import { Check, Minus } from 'lucide-react';
 
@@ -80,7 +80,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         <label
           htmlFor={inputProps.id}
           className={twMerge(
-            'inline-flex cursor-pointer items-start gap-3 select-none',
+            'inline-flex cursor-pointer select-none items-start gap-3',
             'min-h-[44px] py-3.5', // Touch target expansion
             disabled && 'cursor-not-allowed opacity-50',
             className,
@@ -104,7 +104,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             <span
               aria-hidden="true"
               className={twMerge(
-                'duration-fast pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded border transition-colors motion-reduce:transition-none',
+                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded border transition-colors duration-fast motion-reduce:transition-none',
                 isChecked || isIndeterminate
                   ? error
                     ? 'border-danger-default bg-danger-default text-text-inverse'
@@ -123,18 +123,18 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           </div>
 
           {label && (
-            <span className="text-text-primary mt-1 text-sm leading-none font-medium">{label}</span>
+            <span className="mt-1 text-sm font-medium leading-none text-text-primary">{label}</span>
           )}
         </label>
 
         {description && (
-          <span id={descriptionId} className="text-text-secondary -mt-2 pl-8 text-xs">
+          <span id={descriptionId} className="-mt-2 pl-8 text-xs text-text-secondary">
             {description}
           </span>
         )}
 
         {error && (
-          <span id={errorId} className="text-danger-default pl-8 text-xs font-medium">
+          <span id={errorId} className="pl-8 text-xs font-medium text-danger-default">
             {error}
           </span>
         )}

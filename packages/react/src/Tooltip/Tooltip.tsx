@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useRef, type ReactNode, type RefObject } from 'react';
-import { useTooltip, type UseTooltipReturn, type TooltipPlacement } from '@acl/primitives';
+import { useTooltip, type UseTooltipReturn, type TooltipPlacement } from '@antarip/primitives';
 
 interface TooltipContextValue extends UseTooltipReturn {
   triggerRef: RefObject<HTMLElement | null>;

@@ -1,6 +1,6 @@
 import { createContext, forwardRef, useContext, useMemo, type HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useTree, type UseTreeReturn, type TreeSelectionMode } from '@acl/primitives';
+import { useTree, type UseTreeReturn, type TreeSelectionMode } from '@antarip/primitives';
 
 const TreeContext = createContext<UseTreeReturn | null>(null);
 export function useTreeContext(): UseTreeReturn {
@@ -60,7 +60,7 @@ export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
         <div
           ref={ref}
           {...tree.getTreeProps()}
-          className={twMerge('text-text-primary self-start text-sm select-none', className)}
+          className={twMerge('select-none self-start text-sm text-text-primary', className)}
           {...props}
         >
           <ParentContext.Provider value={{ parentValue: null, level: 1 }}>

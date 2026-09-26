@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '../DropdownMenu';
-import type { BreadcrumbItemData } from '@acl/primitives';
+import type { BreadcrumbItemData } from '@antarip/primitives';
 
 export interface BreadcrumbEllipsisProps extends HTMLAttributes<HTMLLIElement> {
   items?: BreadcrumbItemData[];
@@ -34,7 +34,7 @@ export const BreadcrumbEllipsis = forwardRef<HTMLLIElement, BreadcrumbEllipsisPr
             <button
               type="button"
               aria-label={ariaLabel}
-              className="hover:bg-surface-raised text-text-secondary hover:text-text-primary focus-ring-safe inline-flex items-center justify-center rounded p-1 transition-colors"
+              className="inline-flex items-center justify-center rounded p-1 text-text-secondary transition-colors focus-ring-safe hover:bg-surface-raised hover:text-text-primary"
             >
               <MoreHorizontal size={16} />
             </button>
@@ -54,12 +54,12 @@ export const BreadcrumbEllipsis = forwardRef<HTMLLIElement, BreadcrumbEllipsisPr
                   {item.href ? (
                     <Component
                       href={item.href}
-                      className="text-text-primary w-full text-xs font-medium no-underline"
+                      className="w-full text-xs font-medium text-text-primary no-underline"
                     >
                       {item.label}
                     </Component>
                   ) : (
-                    <span className="text-text-primary text-xs">{item.label}</span>
+                    <span className="text-xs text-text-primary">{item.label}</span>
                   )}
                 </DropdownMenuItem>
               ))}

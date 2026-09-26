@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
-import { usePagination } from '@acl/primitives';
+import { usePagination } from '@antarip/primitives';
 
 export interface PaginationProps {
   currentPage?: number;
@@ -42,7 +42,7 @@ export function Pagination({
       <button
         type="button"
         {...getPrevButtonProps()}
-        className="rounded-control focus-ring-safe hover:bg-surface-raised duration-fast flex h-8 w-8 items-center justify-center transition-all outline-none active:scale-90 disabled:pointer-events-none disabled:opacity-30 motion-reduce:transition-none"
+        className="flex h-8 w-8 items-center justify-center rounded-control outline-none transition-all duration-fast focus-ring-safe hover:bg-surface-raised active:scale-90 disabled:pointer-events-none disabled:opacity-30 motion-reduce:transition-none"
       >
         <ChevronLeft aria-hidden="true" size={16} />
       </button>
@@ -52,7 +52,7 @@ export function Pagination({
           return (
             <span
               key={`ellipsis-${index}`}
-              className="text-text-disabled flex h-8 w-8 items-center justify-center text-sm"
+              className="flex h-8 w-8 items-center justify-center text-sm text-text-disabled"
               aria-hidden="true"
             >
               &hellip;
@@ -68,10 +68,10 @@ export function Pagination({
             type="button"
             {...getPageButtonProps(p)}
             className={twMerge(
-              'rounded-control focus-ring-safe duration-fast flex h-8 w-8 items-center justify-center text-sm transition-all outline-none active:scale-90 motion-reduce:transition-none',
+              'flex h-8 w-8 items-center justify-center rounded-control text-sm outline-none transition-all duration-fast focus-ring-safe active:scale-90 motion-reduce:transition-none',
               isCurrent
-                ? 'bg-accent-default text-text-inverse scale-105 font-medium shadow-sm'
-                : 'text-text-secondary hover:bg-surface-raised hover:text-text-primary hover:scale-105',
+                ? 'scale-105 bg-accent-default font-medium text-text-inverse shadow-sm'
+                : 'text-text-secondary hover:scale-105 hover:bg-surface-raised hover:text-text-primary',
             )}
           >
             {p}
@@ -82,7 +82,7 @@ export function Pagination({
       <button
         type="button"
         {...getNextButtonProps()}
-        className="rounded-control focus-ring-safe hover:bg-surface-raised duration-fast flex h-8 w-8 items-center justify-center transition-all outline-none active:scale-90 disabled:pointer-events-none disabled:opacity-30 motion-reduce:transition-none"
+        className="flex h-8 w-8 items-center justify-center rounded-control outline-none transition-all duration-fast focus-ring-safe hover:bg-surface-raised active:scale-90 disabled:pointer-events-none disabled:opacity-30 motion-reduce:transition-none"
       >
         <ChevronRight aria-hidden="true" size={16} />
       </button>

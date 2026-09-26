@@ -1,6 +1,6 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useSwitch } from '@acl/primitives';
+import { useSwitch } from '@antarip/primitives';
 import { twMerge } from 'tailwind-merge';
 
 const switchTrackStyles = cva(
@@ -97,7 +97,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
           {pending && (
             <span
               aria-hidden="true"
-              className="border-accent-default block h-2 w-2 animate-spin rounded-full border border-t-transparent"
+              className="block h-2 w-2 animate-spin rounded-full border border-accent-default border-t-transparent"
             />
           )}
         </span>
@@ -110,7 +110,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
           {content}
           <label
             htmlFor={switchProps.id}
-            className="text-text-primary cursor-pointer text-sm font-medium select-none"
+            className="cursor-pointer select-none text-sm font-medium text-text-primary"
           >
             {label}
           </label>

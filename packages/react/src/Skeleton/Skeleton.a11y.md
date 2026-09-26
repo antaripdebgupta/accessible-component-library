@@ -73,7 +73,7 @@ Tested with NVDA + Firefox.
   typically pick up the new content naturally since it replaces the busy
   region, but no explicit "content loaded" announcement is added. For
   critical flows where an explicit completion announcement matters, wire
-  a separate `LiveRegionProvider.announce()` call (from `@acl/utils`)
+  a separate `LiveRegionProvider.announce()` call (from `@antarip/utils`)
   alongside your data-fetch completion.
 - Shimmer sweep direction does not adapt for RTL — this is intentional
   (the animation carries no directional/semantic meaning, unlike icons or

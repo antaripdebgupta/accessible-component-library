@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, type ChangeEvent } from 'react';
-import { useControllableState, useStableId } from '@acl/utils';
+import { useControllableState, useStableId } from '@antarip/utils';
 
 export interface UseCheckboxOptions {
   checked?: boolean | 'indeterminate';

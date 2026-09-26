@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useControllableState } from '@acl/utils';
+import { useControllableState } from '@antarip/utils';
 
 export interface UsePaginationOptions {
   pageCount: number;

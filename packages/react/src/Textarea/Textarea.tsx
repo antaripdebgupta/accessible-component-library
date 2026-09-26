@@ -10,7 +10,7 @@ import {
   type KeyboardEvent,
 } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useTextarea, type UseTextareaOptions } from '@acl/primitives';
+import { useTextarea, type UseTextareaOptions } from '@antarip/primitives';
 import { twMerge } from 'tailwind-merge';
 
 const textareaVariants = cva(
@@ -211,10 +211,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className={twMerge('flex w-full flex-col gap-1.5', wrapperClassName)} dir={dir}>
         {label && (
-          <label htmlFor={textareaId} className="text-text-primary text-sm font-medium select-none">
+          <label htmlFor={textareaId} className="select-none text-sm font-medium text-text-primary">
             {label}
             {required && (
-              <span className="text-danger-default ms-1" aria-hidden="true">
+              <span className="ms-1 text-danger-default" aria-hidden="true">
                 *
               </span>
             )}
@@ -255,7 +255,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <div
               ref={mirrorRef}
               aria-hidden="true"
-              className="pointer-events-none invisible absolute top-0 left-0 -z-50 overflow-hidden break-words whitespace-pre-wrap"
+              className="pointer-events-none invisible absolute left-0 top-0 -z-50 overflow-hidden whitespace-pre-wrap break-words"
             />
           )}
 
@@ -281,7 +281,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               </span>
             )}
             {error && (
-              <span id={errorId} className="text-danger-default font-medium">
+              <span id={errorId} className="font-medium text-danger-default">
                 {error}
               </span>
             )}
@@ -292,8 +292,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               id={counterId}
               aria-live={isNearLimit || isOverCount ? 'polite' : 'off'}
               className={twMerge(
-                'ms-auto shrink-0 font-mono text-xs select-none',
-                isOverCount ? 'text-danger-default font-semibold' : 'text-text-secondary',
+                'ms-auto shrink-0 select-none font-mono text-xs',
+                isOverCount ? 'font-semibold text-danger-default' : 'text-text-secondary',
               )}
             >
               {characterCount}/{limit}

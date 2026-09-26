@@ -8,7 +8,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
-import { useStableId } from '@acl/utils';
+import { useStableId } from '@antarip/utils';
 import { twMerge } from 'tailwind-merge';
 import { UploadCloud, File, X } from 'lucide-react';
 
@@ -115,10 +115,10 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     return (
       <div className={twMerge('flex w-full flex-col gap-1.5', className)} dir={dir}>
         {label && (
-          <label htmlFor={stableId} className="text-text-primary text-sm font-medium select-none">
+          <label htmlFor={stableId} className="select-none text-sm font-medium text-text-primary">
             {label}
             {required && (
-              <span className="text-danger-default ms-1" aria-hidden="true">
+              <span className="ms-1 text-danger-default" aria-hidden="true">
                 *
               </span>
             )}
@@ -142,8 +142,8 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
               : isInvalid
                 ? 'border-danger-default bg-danger-subtle/10'
                 : 'border-border',
-            disabled && 'bg-surface-raised cursor-not-allowed opacity-50',
-            isFocused && 'ring-accent-default border-accent-default ring-2',
+            disabled && 'cursor-not-allowed bg-surface-raised opacity-50',
+            isFocused && 'border-accent-default ring-2 ring-accent-default',
           )}
         >
           <input
@@ -163,9 +163,9 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             {...props}
           />
 
-          <UploadCloud className="text-text-secondary mb-2 h-8 w-8" />
-          <p className="text-text-primary text-center text-sm font-medium">{dropzoneText}</p>
-          {accept && <p className="text-text-secondary mt-1 text-xs">Accepted types: {accept}</p>}
+          <UploadCloud className="mb-2 h-8 w-8 text-text-secondary" />
+          <p className="text-center text-sm font-medium text-text-primary">{dropzoneText}</p>
+          {accept && <p className="mt-1 text-xs text-text-secondary">Accepted types: {accept}</p>}
         </div>
 
         {/* Selected file(s) list display */}
@@ -174,10 +174,10 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             {selectedFiles.map((file, idx) => (
               <div
                 key={`${file.name}-${idx}`}
-                className="bg-surface-raised border-border text-text-primary flex items-center justify-between rounded border p-2 text-xs"
+                className="flex items-center justify-between rounded border border-border bg-surface-raised p-2 text-xs text-text-primary"
               >
                 <div className="flex items-center gap-2 truncate">
-                  <File className="text-text-secondary h-4 w-4 shrink-0" />
+                  <File className="h-4 w-4 shrink-0 text-text-secondary" />
                   <span className="truncate font-medium">{file.name}</span>
                   <span className="text-text-secondary">({(file.size / 1024).toFixed(1)} KB)</span>
                 </div>
@@ -188,7 +188,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                     clearFiles();
                   }}
                   aria-label={`Remove file ${file.name}`}
-                  className="text-text-secondary hover:text-danger-default focus-ring-safe rounded p-1"
+                  className="rounded p-1 text-text-secondary focus-ring-safe hover:text-danger-default"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -198,13 +198,13 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         )}
 
         {description && (
-          <span id={descriptionId} className="text-text-secondary text-xs">
+          <span id={descriptionId} className="text-xs text-text-secondary">
             {description}
           </span>
         )}
 
         {error && (
-          <span id={errorId} className="text-danger-default text-xs font-medium">
+          <span id={errorId} className="text-xs font-medium text-danger-default">
             {error}
           </span>
         )}

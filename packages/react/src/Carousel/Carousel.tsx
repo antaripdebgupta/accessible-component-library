@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useCarousel, type UseCarouselReturn, type CarouselOrientation } from '@acl/primitives';
+import { useCarousel, type UseCarouselReturn, type CarouselOrientation } from '@antarip/primitives';
 
 const CarouselContext = createContext<UseCarouselReturn | null>(null);
 export function useCarouselContext(): UseCarouselReturn {

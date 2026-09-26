@@ -364,7 +364,7 @@ importers:
 
   packages/primitives:
     dependencies:
-      '@acl/utils':
+      '@antarip/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:
@@ -398,10 +398,10 @@ importers:
 
   packages/react:
     dependencies:
-      '@acl/primitives':
+      '@antarip/primitives':
         specifier: workspace:*
         version: link:../primitives
-      '@acl/utils':
+      '@antarip/utils':
         specifier: workspace:*
         version: link:../utils
       class-variance-authority:
@@ -414,7 +414,7 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
     devDependencies:
-      '@acl/tailwind-preset':
+      '@antarip/tailwind-preset':
         specifier: workspace:*
         version: link:../tailwind-preset
       '@storybook/react':
