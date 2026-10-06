@@ -39,10 +39,7 @@ export const CommandItem = forwardRef<HTMLDivElement, CommandItemProps>(
         {...itemProps}
         data-highlighted={highlighted || undefined}
         className={twMerge(
-          'rounded-control flex cursor-pointer items-center gap-2 px-2 py-1.5 text-sm outline-none select-none',
-          'text-text-primary duration-fast transition-colors motion-reduce:transition-none',
-          'hover:bg-surface-raised data-[highlighted=true]:bg-surface-raised',
-          'aria-disabled:pointer-events-none aria-disabled:opacity-50',
+          'menu-item flex select-none items-center gap-2 text-text-primary outline-none',
           className,
         )}
         {...props}

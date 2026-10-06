@@ -187,9 +187,9 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
             {...contentProps}
             data-state={visible ? 'open' : 'closed'}
             className={twMerge(
-              'rounded-popover bg-surface relative flex max-h-[85vh] w-full flex-col overflow-hidden shadow-lg',
+              'relative flex max-h-[85vh] w-full flex-col overflow-hidden rounded-popover bg-surface shadow-lg',
               'outline-none',
-              'duration-fast ease-out-soft transition-[opacity,transform] motion-reduce:transition-none',
+              'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
               visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
               sizeClasses[size],
               className,
@@ -199,7 +199,7 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
             {showCloseButton && (
               <button
                 {...closeButtonProps}
-                className="rounded-control text-text-secondary hover:bg-surface-raised hover:text-text-primary focus-ring-safe absolute top-3 right-3 z-10 p-1 transition-colors outline-none"
+                className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-control text-text-secondary outline-none transition-colors focus-ring-safe hover:bg-surface-raised hover:text-text-primary"
               >
                 <CloseIcon />
               </button>

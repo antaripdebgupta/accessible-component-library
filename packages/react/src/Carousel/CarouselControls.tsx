@@ -10,8 +10,8 @@ export function CarouselPrevButton({ className }: { className?: string }) {
       type="button"
       {...getPrevButtonProps()}
       className={twMerge(
-        'border-border bg-surface text-text-primary flex h-9 w-9 items-center justify-center rounded-full border',
-        'focus-ring-safe hover:bg-surface-raised duration-fast transition-colors outline-none motion-reduce:transition-none',
+        'shadow-xs flex h-ctl-md w-ctl-md items-center justify-center rounded-full border border-border-strong bg-surface text-text-primary',
+        'outline-none transition-colors duration-fast focus-ring-safe hover:bg-surface-raised motion-reduce:transition-none',
         'disabled:pointer-events-none disabled:opacity-40',
         className,
       )}
@@ -29,8 +29,8 @@ export function CarouselNextButton({ className }: { className?: string }) {
       type="button"
       {...getNextButtonProps()}
       className={twMerge(
-        'border-border bg-surface text-text-primary flex h-9 w-9 items-center justify-center rounded-full border',
-        'focus-ring-safe hover:bg-surface-raised duration-fast transition-colors outline-none motion-reduce:transition-none',
+        'shadow-xs flex h-ctl-md w-ctl-md items-center justify-center rounded-full border border-border-strong bg-surface text-text-primary',
+        'outline-none transition-colors duration-fast focus-ring-safe hover:bg-surface-raised motion-reduce:transition-none',
         'disabled:pointer-events-none disabled:opacity-40',
         className,
       )}
@@ -50,7 +50,7 @@ export function CarouselDots({
   const { getDotProps, activeIndex } = useCarouselContext();
   return (
     <div
-      className={twMerge('flex items-center justify-center gap-1.5', className)}
+      className={twMerge('flex items-center justify-center gap-1', className)}
       role="tablist"
       aria-label="Slide navigation"
     >
@@ -59,13 +59,17 @@ export function CarouselDots({
           key={i}
           type="button"
           {...getDotProps(i)}
-          className={twMerge(
-            'focus-ring-safe duration-fast h-2 w-2 rounded-full transition-all outline-none motion-reduce:transition-none',
-            i === activeIndex
-              ? 'bg-accent-default w-5'
-              : 'bg-border-strong hover:bg-text-secondary',
-          )}
-        />
+          className="flex h-6 w-6 items-center justify-center rounded-full outline-none focus-ring-safe"
+        >
+          <span
+            className={twMerge(
+              'block h-2 rounded-full transition-all duration-fast motion-reduce:transition-none',
+              i === activeIndex
+                ? 'w-5 bg-accent-default'
+                : 'w-2 bg-border-control hover:bg-text-secondary',
+            )}
+          />
+        </button>
       ))}
     </div>
   );
@@ -82,8 +86,8 @@ export function CarouselPlayPauseButton({ className }: { className?: string }) {
       type="button"
       {...getPlayPauseButtonProps()}
       className={twMerge(
-        'border-border bg-surface text-text-primary flex h-9 w-9 items-center justify-center rounded-full border',
-        'focus-ring-safe hover:bg-surface-raised duration-fast transition-colors outline-none motion-reduce:transition-none',
+        'shadow-xs flex h-ctl-md w-ctl-md items-center justify-center rounded-full border border-border-strong bg-surface text-text-primary',
+        'outline-none transition-colors duration-fast focus-ring-safe hover:bg-surface-raised motion-reduce:transition-none',
         className,
       )}
     >

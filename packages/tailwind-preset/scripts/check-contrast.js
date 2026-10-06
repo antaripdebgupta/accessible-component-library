@@ -1,6 +1,5 @@
 const tokens = require("../tokens");
 
-// Minimal relative-luminance contrast checker (WCAG formula)
 function luminance(hex) {
     const [r, g, b] = hex.match(/\w\w/g).map((c) => {
         const v = parseInt(c, 16) / 255;
@@ -17,8 +16,25 @@ function contrast(hex1, hex2) {
 const pairs = [
     ["text-primary", "surface", 4.5],
     ["text-secondary", "surface", 4.5],
+    ["text-primary", "surface-raised", 4.5],
+    ["text-secondary", "surface-raised", 4.5],
+    ["text-primary", "canvas", 4.5],
+    ["text-secondary", "canvas", 4.5],
     ["accent-default", "surface", 4.5],
+    ["text-inverse", "accent-default", 4.5],
     ["text-inverse", "surface-inverse", 4.5],
+    ["text-inverse", "danger-default", 4.5],
+    ["danger-default", "surface", 4.5],
+    ["success-default", "surface", 4.5],
+    ["warning-default", "surface", 4.5],
+    ["info-default", "surface", 4.5],
+    ["danger-default", "danger-subtle", 4.5],
+    ["success-default", "success-subtle", 4.5],
+    ["warning-default", "warning-subtle", 4.5],
+    ["info-default", "info-subtle", 4.5],
+    ["border-control", "surface", 3],
+    ["border-control", "canvas", 3],
+    ["focus-ring", "surface", 3],
 ];
 
 let failed = false;

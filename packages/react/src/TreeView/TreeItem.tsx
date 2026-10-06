@@ -56,10 +56,10 @@ export const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>(
           {...itemProps}
           style={{ paddingInlineStart: `${(level - 1) * 1.25 + 0.5}rem` }}
           className={twMerge(
-            'rounded-control flex cursor-pointer items-center gap-1.5 py-1.5 pr-2',
-            'focus-ring-safe outline-none',
-            'hover:bg-surface-raised duration-fast transition-colors motion-reduce:transition-none',
-            'aria-selected:bg-accent-subtle aria-selected:text-accent-default',
+            'flex cursor-pointer items-center gap-1.5 rounded-control py-1.5 pr-2',
+            'outline-none focus-ring-safe',
+            'transition-colors duration-fast hover:bg-surface-raised motion-reduce:transition-none',
+            'aria-selected:bg-accent-subtle aria-selected:font-medium aria-selected:text-text-primary',
             'aria-disabled:pointer-events-none aria-disabled:opacity-50',
             className,
           )}
@@ -69,7 +69,7 @@ export const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>(
               aria-hidden="true"
               size={14}
               className={twMerge(
-                'text-text-secondary duration-base ease-out-soft shrink-0 transition-transform motion-reduce:transition-none',
+                'shrink-0 text-text-secondary transition-transform duration-base ease-out-soft motion-reduce:transition-none',
                 expanded && 'rotate-90',
               )}
             />

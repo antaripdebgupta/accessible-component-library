@@ -4,23 +4,10 @@ import { twMerge } from 'tailwind-merge';
 import { CheckCircle2, Info, AlertTriangle, XCircle, X } from 'lucide-react';
 import type { ToastItem } from '@antarip/primitives';
 
-const toastStyles = cva(
-  [
-    'flex items-start gap-3 rounded-popover border p-control-md shadow-lg w-full',
-    'animate-in fade-in slide-in-from-bottom-2 motion-reduce:animate-none motion-reduce:transition-none',
-  ],
-  {
-    variants: {
-      variant: {
-        info: 'bg-surface border-border',
-        success: 'bg-surface border-success-default/30',
-        warning: 'bg-surface border-warning-default/30',
-        danger: 'bg-surface border-danger-default/30',
-      },
-    },
-    defaultVariants: { variant: 'info' },
-  },
-);
+const toastStyles = cva([
+  'flex items-start gap-3 rounded-popover border border-border bg-surface p-4 shadow-md w-full',
+  'animate-in fade-in slide-in-from-bottom-2 motion-reduce:animate-none motion-reduce:transition-none',
+]);
 
 const ICONS = {
   info: Info,
@@ -30,7 +17,7 @@ const ICONS = {
 } as const;
 
 const ICON_COLOR = {
-  info: 'text-accent-default',
+  info: 'text-info-default',
   success: 'text-success-default',
   warning: 'text-warning-default',
   danger: 'text-danger-default',
@@ -50,14 +37,13 @@ export function Toast({ toast, onDismiss, onScheduleDismiss, onPause }: ToastPro
 
   useEffect(() => {
     onScheduleDismiss(duration);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div
       role="status"
       aria-atomic="true"
-      className={twMerge(toastStyles({ variant }))}
+      className={twMerge(toastStyles())}
       onMouseEnter={onPause}
       onMouseLeave={() => onScheduleDismiss(duration)}
       onFocus={onPause}
@@ -74,12 +60,11 @@ export function Toast({ toast, onDismiss, onScheduleDismiss, onPause }: ToastPro
         <p className="mt-0.5 text-text-secondary">{toast.description}</p>
       </div>
 
-      {/* Always present — auto-dismiss must never be the only way to close it. */}
       <button
         type="button"
         aria-label="Dismiss notification"
         onClick={onDismiss}
-        className="shrink-0 rounded-control p-0.5 text-text-secondary focus-ring-safe hover:text-text-primary"
+        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-control text-text-secondary transition-colors focus-ring-safe hover:bg-surface-raised hover:text-text-primary"
       >
         <X aria-hidden="true" size={16} />
       </button>

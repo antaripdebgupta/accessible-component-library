@@ -51,9 +51,7 @@ export const DropdownMenuCheckboxItem = forwardRef<HTMLDivElement, DropdownMenuC
         aria-checked={checked}
         data-active={itemProps.tabIndex === 0 || undefined}
         className={twMerge(
-          'rounded-control relative flex cursor-pointer items-center gap-2 py-1.5 pr-2 pl-8 text-sm outline-none select-none',
-          'text-text-primary data-[active=true]:bg-surface-raised',
-          'aria-disabled:pointer-events-none aria-disabled:opacity-50',
+          'menu-item relative flex select-none items-center gap-2 py-1.5 pl-8 pr-2 text-text-primary outline-none',
           className,
         )}
         {...props}

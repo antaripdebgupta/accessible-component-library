@@ -68,8 +68,8 @@ export function DataTableBody<T>({ renderExpanded, emptyMessage }: DataTableBody
       ref={bodyRef}
       onKeyDown={handleKeyDown}
       className={twMerge(
-        'block md:table-row-group',
-        'duration-fast ease-out-soft transition-opacity motion-reduce:transition-none',
+        'table-row-group',
+        'transition-opacity duration-fast ease-out-soft motion-reduce:transition-none',
         visible ? 'opacity-100' : 'opacity-0',
       )}
     >

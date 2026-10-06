@@ -43,10 +43,8 @@ export const ComboboxItem = forwardRef<HTMLDivElement, ComboboxItemProps>(
         {...itemProps}
         data-highlighted={highlighted || undefined}
         className={twMerge(
-          'rounded-control relative flex cursor-pointer items-center gap-2 px-2 py-1.5 text-sm outline-none select-none',
-          'text-text-primary duration-fast transition-colors motion-reduce:transition-none',
-          'hover:bg-surface-raised data-[highlighted=true]:bg-surface-raised',
-          'aria-disabled:pointer-events-none aria-disabled:opacity-50',
+          'menu-item relative flex select-none items-center gap-2 outline-none',
+          'text-text-primary',
           className,
         )}
         {...props}
@@ -58,7 +56,7 @@ export const ComboboxItem = forwardRef<HTMLDivElement, ComboboxItemProps>(
         )}
         <span className="flex-1">{children}</span>
         {selected && (
-          <Check aria-hidden="true" size={14} className="text-accent-default shrink-0" />
+          <Check aria-hidden="true" size={14} className="shrink-0 text-accent-default" />
         )}
       </div>
     );

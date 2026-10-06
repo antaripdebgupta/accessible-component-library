@@ -5,7 +5,7 @@ import { useSkeleton } from '@antarip/primitives';
 
 const skeletonStyles = cva(
   [
-    'relative overflow-hidden bg-surface-raised',
+    'relative overflow-hidden bg-surface-sunken',
     "before:content-[''] before:absolute before:inset-0 before:-translate-x-full",
     'before:bg-gradient-to-r before:from-transparent before:via-border/60 before:to-transparent',
     'before:animate-shimmer',

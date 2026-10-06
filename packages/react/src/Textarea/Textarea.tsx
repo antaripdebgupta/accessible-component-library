@@ -15,15 +15,15 @@ import { twMerge } from 'tailwind-merge';
 
 const textareaVariants = cva(
   [
-    'w-full min-h-[80px] rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
-    'outline-none focus:border-2 focus:border-accent-default transition-colors duration-150',
-    'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-surface-raised',
+    'w-full min-h-[88px] field-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
+    'outline-none',
+    'disabled:cursor-not-allowed disabled:opacity-50',
   ],
   {
     variants: {
       variant: {
-        default: 'border-border focus:border-accent-default',
-        invalid: 'border-danger-default text-danger-default focus:border-danger-default',
+        default: '',
+        invalid: 'border-danger-default',
       },
       resize: {
         none: 'resize-none',
@@ -91,7 +91,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ) => {
     const isInvalid = Boolean(error) || variantProp === 'invalid';
     const computedVariant = isInvalid ? 'invalid' : (variantProp ?? 'default');
-    // If autoResize is true, default resize to 'none' unless user explicitly specified resize
     const computedResize = autoResize ? (resizeProp ?? 'none') : (resizeProp ?? 'vertical');
 
     const {
@@ -123,7 +122,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const [isTyping, setIsTyping] = useState(false);
     const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    // Auto-resize height calculation via shadow clone / mirror div technique
     const adjustHeight = useCallback(() => {
       if (!autoResize || !textareaRef.current || !mirrorRef.current) return;
 
@@ -143,10 +141,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       mirror.style.whiteSpace = 'pre-wrap';
       mirror.style.wordBreak = 'break-word';
 
-      // Set mirror content to calculate height (add extra character for newline behavior)
       mirror.textContent = (value ?? '') + '\n';
 
-      // Calculate row height from mirror
       const singleRowMirror = document.createElement('div');
       singleRowMirror.style.position = 'absolute';
       singleRowMirror.style.visibility = 'hidden';
@@ -177,7 +173,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       setCalculatedHeight(targetHeight);
     }, [autoResize, value, maxRows]);
 
-    // Track typing status to gate transition-height (avoiding lag while typing)
     const handleInputOrKeyDown = () => {
       setIsTyping(true);
       if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
@@ -226,6 +221,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             ref={textareaRef}
             {...props}
             {...textareaProps}
+            maxLength={maxLength ?? maxCount}
             aria-invalid={isInvalid ? true : undefined}
             aria-describedby={combinedDescribedBy || undefined}
             onInput={(e) => {
@@ -243,14 +239,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             }}
             className={twMerge(
               textareaVariants({ variant: computedVariant, resize: computedResize }),
-              actionButton && 'pb-10', // Reserve space for embedded action button
+              actionButton && 'pb-10',
               autoResize && !isTyping && 'transition-[height] duration-150',
               dir === 'rtl' && 'text-right',
               className,
             )}
           />
 
-          {/* Hidden Mirror DIV for height measurement */}
           {autoResize && (
             <div
               ref={mirrorRef}
@@ -259,7 +254,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             />
           )}
 
-          {/* Integrated Action Button (e.g. Chat submit button) */}
           {actionButton && (
             <div
               className={twMerge(
@@ -272,7 +266,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           )}
         </div>
 
-        {/* Footer info: Description, Error message, Character Counter */}
         <div className="flex items-center justify-between gap-2 text-xs">
           <div className="flex flex-col gap-0.5">
             {description && (
@@ -292,7 +285,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               id={counterId}
               aria-live={isNearLimit || isOverCount ? 'polite' : 'off'}
               className={twMerge(
-                'ms-auto shrink-0 select-none font-mono text-xs',
+                'ms-auto shrink-0 select-none font-mono text-xs tabular-nums',
                 isOverCount ? 'font-semibold text-danger-default' : 'text-text-secondary',
               )}
             >

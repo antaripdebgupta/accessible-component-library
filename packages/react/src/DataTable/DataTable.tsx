@@ -54,9 +54,10 @@ export function DataTable<T>({
         <div
           role="region"
           aria-label={caption}
-          className="w-full overflow-x-auto rounded-popover border border-border"
+          tabIndex={0}
+          className="shadow-xs w-full overflow-x-auto rounded-popover border border-border bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-inset"
         >
-          <table className="block w-full border-collapse text-sm md:table">
+          <table className="w-full min-w-[36rem] border-collapse text-sm">
             <caption className="sr-only">{caption}</caption>
             {children}
           </table>

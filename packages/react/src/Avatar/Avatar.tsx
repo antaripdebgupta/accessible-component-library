@@ -5,7 +5,7 @@ import { User } from 'lucide-react';
 import { useAvatar } from '@antarip/primitives';
 
 const avatarStyles = cva(
-  'relative inline-flex shrink-0 items-center justify-center overflow-visible rounded-full bg-surface-raised text-text-secondary font-medium select-none',
+  'relative inline-flex shrink-0 items-center justify-center overflow-visible rounded-full bg-surface-sunken border border-border text-text-secondary font-semibold select-none',
   {
     variants: {
       size: {

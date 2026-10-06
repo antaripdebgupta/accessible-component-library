@@ -124,8 +124,8 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
         data-state={visible ? 'open' : 'closed'}
         style={{ ...style, transformOrigin: TRANSFORM_ORIGIN[placement] }}
         className={twMerge(
-          'rounded-control bg-surface-inverse text-text-inverse pointer-events-auto z-50 max-w-xs px-2.5 py-1.5 text-xs shadow-md',
-          'duration-fast ease-out-soft transition-[opacity,transform] motion-reduce:transition-none',
+          'pointer-events-auto z-50 max-w-xs rounded-control bg-surface-inverse px-2.5 py-1.5 text-xs font-medium text-text-inverse shadow-sm',
+          'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
           visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
           translate,
           className,
@@ -137,11 +137,11 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
           <span
             aria-hidden="true"
             className={twMerge(
-              'bg-surface-inverse absolute h-2 w-2 rotate-45',
+              'absolute h-2 w-2 rotate-45 bg-surface-inverse',
               placement === 'top' && '-bottom-1 left-1/2 -translate-x-1/2',
               placement === 'bottom' && '-top-1 left-1/2 -translate-x-1/2',
-              placement === 'left' && 'top-1/2 -right-1 -translate-y-1/2',
-              placement === 'right' && 'top-1/2 -left-1 -translate-y-1/2',
+              placement === 'left' && '-right-1 top-1/2 -translate-y-1/2',
+              placement === 'right' && '-left-1 top-1/2 -translate-y-1/2',
             )}
           />
         )}

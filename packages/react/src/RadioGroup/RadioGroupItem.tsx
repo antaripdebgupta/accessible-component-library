@@ -59,8 +59,8 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
       <div className="flex flex-col gap-1.5">
         <label
           className={twMerge(
-            'inline-flex cursor-pointer items-start gap-3 select-none',
-            'min-h-[44px] py-3.5', // Touch target expansion
+            'inline-flex cursor-pointer select-none items-start gap-3',
+            'min-h-[44px] py-3.5',
             isItemDisabled && 'cursor-not-allowed opacity-50',
             className,
           )}
@@ -81,30 +81,29 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
               onFocus={handleFocus}
               onBlur={handleBlur}
               aria-describedby={descriptionId}
-              className="peer border-border focus-ring-safe bg-surface absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded-full border outline-none"
+              className="peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded-full border border-border-control bg-surface outline-none focus-ring-safe"
               {...props}
             />
-            {/* Custom Visual Radio Indicator */}
             <span
               aria-hidden="true"
               className={twMerge(
-                'duration-fast pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-full border transition-colors motion-reduce:transition-none',
+                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-full border transition-colors duration-fast motion-reduce:transition-none',
                 isChecked
-                  ? 'border-accent-default bg-accent-default text-text-inverse'
-                  : 'border-border bg-surface',
+                  ? 'border-accent-default bg-accent-default'
+                  : 'border-border-control bg-surface',
               )}
             >
-              {isChecked && <span className="bg-surface h-1.5 w-1.5 rounded-full" />}
+              {isChecked && <span className="h-1.5 w-1.5 rounded-full bg-text-inverse" />}
             </span>
           </div>
 
           {label && (
-            <span className="text-text-primary mt-1 text-sm leading-none font-medium">{label}</span>
+            <span className="mt-1 text-sm font-medium leading-none text-text-primary">{label}</span>
           )}
         </label>
 
         {description && (
-          <span id={descriptionId} className="text-text-secondary -mt-2 pl-8 text-xs">
+          <span id={descriptionId} className="-mt-2 pl-8 text-xs text-text-secondary">
             {description}
           </span>
         )}

@@ -25,9 +25,9 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
           type="button"
           disabled={disabled}
           className={twMerge(
-            'py-control-md px-control-md flex w-full items-center justify-between gap-3 text-left text-sm font-medium',
-            'focus-ring-safe rounded-control outline-none',
-            'text-text-primary hover:bg-surface-raised duration-fast transition-colors motion-reduce:transition-none',
+            'flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-medium',
+            'rounded-control outline-none focus-ring-safe',
+            'text-text-primary transition-colors duration-fast hover:bg-surface-raised motion-reduce:transition-none',
             'disabled:pointer-events-none disabled:opacity-50',
             'aria-disabled:pointer-events-none aria-disabled:opacity-50',
             className,
@@ -38,9 +38,9 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
           <span>{children}</span>
           <ChevronDown
             aria-hidden="true"
-            size={18}
+            size={16}
             className={twMerge(
-              'text-text-secondary duration-base ease-out-soft shrink-0 transition-transform motion-reduce:transition-none',
+              'shrink-0 text-text-secondary transition-transform duration-base ease-out-soft motion-reduce:transition-none',
               open && 'rotate-180',
             )}
           />

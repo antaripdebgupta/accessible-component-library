@@ -6,14 +6,14 @@ import { Check, Minus } from 'lucide-react';
 
 const checkboxStyles = cva(
   [
-    'peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded border border-border outline-none focus-ring-safe bg-surface',
+    'peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded-control border border-border-control outline-none focus-ring-safe bg-surface',
     'disabled:cursor-not-allowed disabled:opacity-50',
   ],
   {
     variants: {
       variant: {
-        default: 'border-border focus:border-accent-default',
-        error: 'border-danger-default focus:border-danger-default',
+        default: '',
+        error: 'border-danger-default',
       },
     },
     defaultVariants: {
@@ -81,7 +81,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           htmlFor={inputProps.id}
           className={twMerge(
             'inline-flex cursor-pointer select-none items-start gap-3',
-            'min-h-[44px] py-3.5', // Touch target expansion
+            'min-h-[44px] py-3.5',
             disabled && 'cursor-not-allowed opacity-50',
             className,
           )}
@@ -100,24 +100,31 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               aria-describedby={combinedDescribedBy || undefined}
               className={twMerge(checkboxStyles({ variant: error ? 'error' : variant }))}
             />
-            {/* Visual Custom Box */}
             <span
               aria-hidden="true"
               className={twMerge(
-                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded border transition-colors duration-fast motion-reduce:transition-none',
+                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-control border transition-colors duration-fast motion-reduce:transition-none',
                 isChecked || isIndeterminate
                   ? error
                     ? 'border-danger-default bg-danger-default text-text-inverse'
                     : 'border-accent-default bg-accent-default text-text-inverse'
                   : error
                     ? 'border-danger-default bg-surface'
-                    : 'border-border bg-surface',
+                    : 'border-border-control bg-surface',
               )}
             >
               {isIndeterminate ? (
-                <Minus size={11} strokeWidth={3} className="shrink-0" />
+                <Minus
+                  size={11}
+                  strokeWidth={3}
+                  className="shrink-0 motion-safe:animate-scale-in motion-reduce:animate-none"
+                />
               ) : isChecked ? (
-                <Check size={11} strokeWidth={3} className="shrink-0" />
+                <Check
+                  size={11}
+                  strokeWidth={3}
+                  className="shrink-0 motion-safe:animate-scale-in motion-reduce:animate-none"
+                />
               ) : null}
             </span>
           </div>

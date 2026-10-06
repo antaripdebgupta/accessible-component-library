@@ -94,8 +94,8 @@ export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
         data-state={visible ? 'open' : 'closed'}
         style={{ ...style, transformOrigin: 'top' }}
         className={twMerge(
-          'rounded-popover border-border bg-surface z-50 max-h-72 overflow-y-auto border p-1 shadow-md',
-          'duration-fast ease-out-soft transition-[opacity,transform] motion-reduce:transition-none',
+          'popover-surface z-50 max-h-72 overflow-y-auto border p-1',
+          'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
           visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
           className,
         )}

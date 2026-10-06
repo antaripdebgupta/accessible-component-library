@@ -5,10 +5,9 @@ import { twMerge } from 'tailwind-merge';
 
 const switchTrackStyles = cva(
   [
-    'relative inline-flex shrink-0 cursor-pointer items-center rounded-full border border-border transition-colors duration-fast focus-ring-safe outline-none select-none',
-    'bg-border-strong data-[state=checked]:bg-accent-default data-[state=checked]:border-accent-default',
+    'relative inline-flex shrink-0 cursor-pointer items-center rounded-full border border-transparent transition-[background-color,border-color] duration-fast focus-ring-safe outline-none select-none',
+    'bg-border-control data-[state=checked]:bg-accent-default data-[state=checked]:border-accent-default',
     'disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:opacity-50',
-    // 44x44px touch target via a pseudo-element expanding the click area
     "before:absolute before:top-1/2 before:left-1/2 before:h-11 before:w-11 before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
   ],
   {
@@ -27,7 +26,7 @@ const switchTrackStyles = cva(
 
 const switchThumbStyles = cva(
   [
-    'pointer-events-none flex items-center justify-center rounded-full bg-surface shadow-sm transition-transform duration-fast motion-reduce:transition-none',
+    'pointer-events-none flex items-center justify-center rounded-full bg-surface shadow-xs transition-transform duration-fast motion-reduce:transition-none',
     'data-[state=unchecked]:translate-x-0.5',
   ],
   {

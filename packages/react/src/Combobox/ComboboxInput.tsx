@@ -42,15 +42,12 @@ export function ComboboxInput({
   return (
     <div
       className={twMerge(
-        'rounded-control bg-surface flex min-h-9 w-full flex-wrap items-center gap-1.5 border px-2.5 py-1.5 text-sm',
-        'focus-within:ring-accent-default/40 focus-within:ring-2',
-        invalid ? 'border-danger-default' : 'border-border',
-        disabled && 'pointer-events-none opacity-50',
+        'field-surface flex h-ctl-md w-full items-center gap-1.5 px-2.5 text-sm',
         className,
       )}
     >
       {leading && (
-        <span aria-hidden="true" className="text-text-secondary shrink-0">
+        <span aria-hidden="true" className="shrink-0 text-text-secondary">
           {leading}
         </span>
       )}
@@ -63,12 +60,12 @@ export function ComboboxInput({
         onBlur={() => {
           setTimeout(() => close(), 120);
         }}
-        className="text-text-primary placeholder:text-text-secondary min-w-[4rem] flex-1 bg-transparent outline-none"
+        className="min-w-[4rem] flex-1 bg-transparent text-text-primary outline-none placeholder:text-text-secondary"
       />
       {showClear && (
         <button
           {...clearButtonProps}
-          className="rounded-control text-text-secondary hover:bg-surface-raised hover:text-text-primary shrink-0 p-0.5 transition-colors"
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-control text-text-secondary transition-colors hover:bg-surface-raised hover:text-text-primary"
         >
           <X size={14} aria-hidden="true" />
         </button>

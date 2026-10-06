@@ -20,7 +20,7 @@ export const DataTableCheckbox = forwardRef<HTMLInputElement, DataTableCheckboxP
     return (
       <label
         className={twMerge(
-          'relative inline-flex h-4 w-4 shrink-0 cursor-pointer items-center justify-center',
+          "relative inline-flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center before:absolute before:-inset-1 before:content-['']",
           className,
         )}
       >
@@ -32,16 +32,16 @@ export const DataTableCheckbox = forwardRef<HTMLInputElement, DataTableCheckboxP
           }}
           type="checkbox"
           checked={checked}
-          className="peer border-border bg-surface focus-visible:ring-accent-default/40 absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded border outline-none focus-visible:ring-2"
+          className="peer absolute inset-0 m-0 h-4 w-4 cursor-pointer appearance-none rounded-control border border-border-control bg-surface outline-none focus-ring-safe"
           {...props}
         />
         <span
           aria-hidden="true"
           className={twMerge(
-            'duration-fast pointer-events-none absolute inset-0 flex items-center justify-center rounded border transition-colors motion-reduce:transition-none',
+            'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-control border transition-colors duration-fast motion-reduce:transition-none',
             checked || indeterminate
               ? 'border-accent-default bg-accent-default text-text-inverse'
-              : 'border-border bg-surface',
+              : 'border-border-control bg-surface',
           )}
         >
           {indeterminate && !checked ? (

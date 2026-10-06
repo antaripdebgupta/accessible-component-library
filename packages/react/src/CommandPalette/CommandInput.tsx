@@ -18,17 +18,17 @@ export function CommandInput({
   return (
     <div
       className={twMerge(
-        'border-border flex shrink-0 items-center gap-2 border-b px-4 py-3',
+        'relative flex h-12 shrink-0 items-center gap-2 border-b border-border px-4 focus-within:after:absolute focus-within:after:bottom-0 focus-within:after:left-0 focus-within:after:right-0 focus-within:after:h-[2px] focus-within:after:bg-focus-ring',
         className,
       )}
     >
-      <Search size={16} aria-hidden="true" className="text-text-secondary shrink-0" />
+      <Search size={16} aria-hidden="true" className="shrink-0 text-text-secondary" />
       <input
         {...inputProps}
         ref={inputRef}
         placeholder={placeholder}
         onChange={(e: ChangeEvent<HTMLInputElement>) => inputProps.onChange(e)}
-        className="text-text-primary placeholder:text-text-secondary flex-1 bg-transparent text-sm outline-none"
+        className="flex-1 bg-transparent text-base text-text-primary outline-none placeholder:text-text-secondary"
       />
     </div>
   );

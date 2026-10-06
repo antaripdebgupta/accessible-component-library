@@ -6,16 +6,16 @@ import { Eye, EyeOff } from 'lucide-react';
 
 const inputVariants = cva(
   [
-    'w-full h-10 rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
-    'outline-none focus:border-2  focus:border-accent-default transition-colors duration-150',
-    'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-surface-raised',
+    'w-full h-ctl-md field-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
+    'outline-none',
+    'disabled:cursor-not-allowed disabled:opacity-50',
     'autofill:shadow-[0_0_0_30px_var(--color-surface,#fff)_inset] autofill:[-webkit-text-fill-color:var(--color-text-primary,#000)]',
   ],
   {
     variants: {
       variant: {
-        default: 'border-border focus:border-accent-default',
-        invalid: 'border-danger-default text-danger-default focus:border-danger-default',
+        default: '',
+        invalid: 'border-danger-default',
       },
     },
     defaultVariants: {
@@ -109,7 +109,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const renderInputContent = () => (
       <div className="relative flex w-full items-center">
-        {/* Leading Addon / Prefix Icon */}
         {prefix && (
           <div
             className={twMerge(
@@ -121,12 +120,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </div>
         )}
 
-        {/* Inline Decorative Badge (e.g., $ or USD) */}
         {badge && (
           <span
             aria-hidden="true"
             className={twMerge(
-              'pointer-events-none absolute flex select-none items-center rounded border border-border bg-surface-raised px-2 py-0.5 text-xs font-semibold text-text-secondary',
+              'pointer-events-none absolute flex select-none items-center rounded-control border border-border bg-surface-raised px-2 py-0.5 text-xs font-semibold text-text-secondary',
               dir === 'rtl' ? 'right-2' : 'left-2',
             )}
           >
@@ -150,7 +148,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           )}
         />
 
-        {/* Trailing Addon / Suffix Icon */}
         {suffix && !isPasswordType && !actionButton && (
           <div
             className={twMerge(
@@ -162,7 +159,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </div>
         )}
 
-        {/* Password Visibility Toggle */}
         {isPasswordType && (
           <button
             type="button"
@@ -171,8 +167,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             aria-pressed={showPassword}
             onMouseDown={(e) => {
-              // Prevent mouse down from moving focus to the button so
-              // the input keeps focus and the selection/caret is preserved.
               e.preventDefault();
             }}
             onClick={(e) => {
@@ -180,7 +174,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               togglePasswordVisibility();
             }}
             className={twMerge(
-              'absolute flex items-center justify-center rounded p-1 text-text-secondary focus-ring-safe hover:text-text-primary',
+              'absolute flex items-center justify-center rounded-control p-1 text-text-secondary focus-ring-safe hover:text-text-primary',
               dir === 'rtl' ? 'left-2' : 'right-2',
               disabled && 'cursor-not-allowed opacity-50',
             )}
@@ -189,7 +183,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </button>
         )}
 
-        {/* Custom Action Button */}
         {actionButton && !isPasswordType && (
           <div
             className={twMerge('absolute flex items-center', dir === 'rtl' ? 'left-2' : 'right-2')}

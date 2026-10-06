@@ -177,7 +177,7 @@ export function CommandPalette({
             aria-hidden="true"
             onClick={() => command.close()}
             className={twMerge(
-              'fixed inset-0 z-40 bg-black/10 backdrop-blur-[2px]',
+              'fixed inset-0 z-40 bg-overlay',
               'transition-opacity duration-fast ease-out-soft motion-reduce:transition-none',
               visible ? 'opacity-100' : 'opacity-0',
             )}

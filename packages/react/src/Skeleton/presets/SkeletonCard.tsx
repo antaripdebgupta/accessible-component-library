@@ -4,7 +4,7 @@ import { SkeletonText } from './SkeletonText';
 
 export function SkeletonCard() {
   return (
-    <div className="rounded-popover border-border bg-surface w-full max-w-sm border p-4">
+    <div className="shadow-xs w-full max-w-sm rounded-popover border border-border bg-surface p-4">
       <Skeleton shape="rect" className="mb-4 h-40 w-full" />
       <div className="mb-3 flex items-center gap-3">
         <SkeletonAvatar size="sm" />

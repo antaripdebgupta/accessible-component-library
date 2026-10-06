@@ -55,12 +55,9 @@ export const DropdownMenuItem = forwardRef<HTMLDivElement, DropdownMenuItemProps
         {...itemProps}
         data-active={itemProps.tabIndex === 0 || undefined}
         className={twMerge(
-          'rounded-control relative flex cursor-pointer items-center gap-2 px-2 py-1.5 text-sm outline-none select-none',
-          'text-text-primary duration-fast transition-colors motion-reduce:transition-none',
-          'hover:bg-surface-raised focus-visible:bg-surface-raised data-[active=true]:bg-surface-raised',
+          'menu-item relative flex select-none items-center gap-2 text-text-primary outline-none',
           destructive &&
-            'text-danger-default hover:bg-danger-subtle focus-visible:bg-danger-subtle data-[active=true]:bg-danger-subtle',
-          'aria-disabled:pointer-events-none aria-disabled:opacity-50',
+            'text-danger-default hover:bg-danger-subtle data-[active=true]:bg-danger-subtle',
           className,
         )}
         {...props}

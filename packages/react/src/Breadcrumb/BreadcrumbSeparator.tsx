@@ -16,7 +16,7 @@ export const BreadcrumbSeparator = forwardRef<HTMLLIElement, BreadcrumbSeparator
         aria-hidden="true"
         {...props}
         className={twMerge(
-          'text-text-secondary px-0.1 inline-flex items-center text-xs select-none',
+          'inline-flex select-none items-center text-xs text-text-secondary',
           className,
         )}
       >

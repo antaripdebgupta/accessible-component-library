@@ -1,67 +1,77 @@
-// Semantic tokens — never reference raw hex in components, only these names.
-// Values chosen to meet WCAG contrast targets against `surface`/`surface-inverse`.
 module.exports = {
   colors: {
-    // Surfaces
+    canvas: "#fafafb",
     surface: "#ffffff",
-    "surface-raised": "#f8fafc",
-    "surface-inverse": "#0f172a",
-    "surface-dark": "#0f172a",
-    "surface-raised-dark": "#1e293b",
-    "surface-inverse-dark": "#f8fafc",
+    "surface-raised": "#f6f6f8",
+    "surface-sunken": "#eeeff2",
+    "surface-inverse": "#0e1014",
+    "surface-dark": "#111114",
+    "surface-raised-dark": "#16161a",
+    "surface-sunken-dark": "#1c1c21",
+    "surface-inverse-dark": "#f2f2f4",
 
-    // Text — verified 4.5:1+ against `surface`
-    "text-primary": "#0f172a",   // ~16.1:1 on white
-    "text-primary-dark": "#f8fafc",
-    "text-secondary": "#475569", // ~7.5:1 on white
-    "text-secondary-dark": "#cbd5e1",
-    "text-disabled": "#94a3b8",  // decorative only — never sole conveyor of meaning
-    "text-disabled-dark": "#94a3b8",
-    "text-inverse": "#f8fafc",
-    "text-inverse-dark": "#0f172a",
+    "text-primary": "#0e1014",
+    "text-primary-dark": "#f2f2f4",
+    "text-secondary": "#5b5f6a",
+    "text-secondary-dark": "#9b9ca6",
+    "text-disabled": "#8b8e98",
+    "text-disabled-dark": "#8b8e98",
+    "text-inverse": "#ffffff",
+    "text-inverse-dark": "#0e1014",
 
-    // Interactive / brand — blue (previously violet/indigo)
-    "accent-default": "#2563eb",       // ~5.2:1 on white — safe for text + large UI
-    "accent-default-dark": "#60a5fa",
-    "accent-hover": "#1d4ed8",
-    "accent-hover-dark": "#93c5fd",
-    "accent-active": "#1e40af",
-    "accent-active-dark": "#bfdbfe",
-    "accent-subtle": "#eff6ff",
-    "accent-subtle-dark": "#172554",
+    "accent-default": "#0e1014",
+    "accent-default-dark": "#f2f2f4",
+    "accent-hover": "#2a2d36",
+    "accent-hover-dark": "#d2d2d9",
+    "accent-active": "#3b3f4a",
+    "accent-active-dark": "#b9b9c2",
+    "accent-subtle": "#eef0ff",
+    "accent-subtle-dark": "#1a1d3a",
 
-    // Status — always paired with icon/text, never color alone
-    "danger-default": "#dc2626",
+    "focus-ring": "#4338ca",
+    "focus-ring-dark": "#8b93ff",
+
+    "info-default": "#4338ca",
+    "info-default-dark": "#8b93ff",
+    "info-subtle": "#eef0ff",
+    "info-subtle-dark": "#1a1d3a",
+
+    "danger-default": "#b91c1c",
     "danger-default-dark": "#f87171",
-    "danger-subtle": "#fef2f2",
-    "danger-subtle-dark": "#450a0a",
+    "danger-subtle": "#fef3f2",
+    "danger-subtle-dark": "#2a1315",
     "success-default": "#15803d",
     "success-default-dark": "#4ade80",
-    "success-subtle": "#f0fdf4",
-    "success-subtle-dark": "#064e3b",
+    "success-subtle": "#f1faf4",
+    "success-subtle-dark": "#0f2417",
     "warning-default": "#a16207",
-    "warning-default-dark": "#fbbf24",
-    "warning-subtle": "#fefce8",
-    "warning-subtle-dark": "#451a03",
+    "warning-default-dark": "#facc15",
+    "warning-subtle": "#fefaeb",
+    "warning-subtle-dark": "#26210c",
 
-    // Borders / focus
-    border: "#e2e8f0",
-    "border-dark": "#334155",
-    "border-strong": "#cbd5e1",
-    "border-strong-dark": "#475569",
-    "focus-ring": "#2563eb",
-    "focus-ring-dark": "#60a5fa",
+    border: "#e6e7eb",
+    "border-dark": "#26262d",
+    "border-strong": "#d3d5dc",
+    "border-strong-dark": "#35353d",
+    "border-control": "#8a8e99",
+    "border-control-dark": "#6c6e7a",
+
+    overlay: "rgb(10 12 18 / 0.5)",
+    "overlay-dark": "rgb(0 0 0 / 0.6)",
   },
 
   spacing: {
     "control-sm": "0.5rem",
     "control-md": "0.75rem",
     "control-lg": "1rem",
+    "ctl-sm": "1.875rem",
+    "ctl-md": "2.25rem",
+    "ctl-lg": "2.75rem",
   },
 
   borderRadius: {
     control: "0.375rem",
-    popover: "0.5rem",
+    popover: "0.625rem",
   },
 
   fontSize: {
@@ -71,7 +81,6 @@ module.exports = {
     lg: ["1.125rem", { lineHeight: "1.75rem" }],
   },
 
-  // Motion tokens — always consumed via motion-safe:/motion-reduce: variants
   transitionDuration: {
     fast: "120ms",
     base: "200ms",
@@ -81,7 +90,6 @@ module.exports = {
     "out-soft": "cubic-bezier(0.16, 1, 0.3, 1)",
   },
 
-  // Focus ring width — used consistently so forced-colors mode overrides cleanly
   ringWidth: {
     focus: "2px",
   },

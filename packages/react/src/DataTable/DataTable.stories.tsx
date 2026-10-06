@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { CheckCircle2, XCircle, Clock } from 'lucide-react';
 import { DataTable, DataTableHeader, DataTableBody, type DataTableColumn } from './index';
-import { useDataTableContext } from './DataTable';
 import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof DataTable> = { title: 'Components/DataTable', component: DataTable };
@@ -121,7 +120,7 @@ export const Default: Story = {
 export const Sortable: Story = {
   render: () => (
     <div className="space-y-2">
-      <p className="text-text-secondary text-sm">
+      <p className="text-sm text-text-secondary">
         Click a column header to sort — cycles asc → desc → unsorted.
       </p>
       <DataTable
@@ -164,14 +163,8 @@ function RowSelectionInner({ data }: { data: User[] }) {
     >
       <DataTableHeader />
       <DataTableBody />
-      <SelectionCount />
     </DataTable>
   );
-}
-
-function SelectionCount() {
-  const { selectedIds } = useDataTableContext<User>();
-  return <p className="text-text-secondary mt-2 text-sm">Selected: {selectedIds.size}</p>;
 }
 
 export const RowSelection: Story = { render: () => <RowSelectionExample /> };
@@ -193,13 +186,13 @@ export const Pagination: Story = {
 
 export const StickyHeader: Story = {
   render: () => (
-    <div className="rounded-popover border-border max-h-64 overflow-y-auto border">
+    <div className="max-h-64 overflow-y-auto rounded-popover border border-border">
       <DataTable
         data={[...USERS, ...USERS.map((u) => ({ ...u, id: `${u.id}-b` }))]}
         columns={baseColumns}
         getRowId={(row) => row.id}
         caption="Users table with a sticky header"
-        className="[&_thead]:bg-surface [&_thead]:sticky [&_thead]:top-0 [&_thead]:z-10"
+        className="[&_thead]:sticky [&_thead]:top-0 [&_thead]:z-10 [&_thead]:bg-surface"
       >
         <DataTableHeader />
         <DataTableBody />
@@ -220,12 +213,12 @@ export const ExpandableRows: Story = {
       <DataTableHeader />
       <DataTableBody<User>
         renderExpanded={(row) => (
-          <div className="text-text-secondary text-sm">
+          <div className="text-sm text-text-secondary">
             <p>
-              <span className="text-text-primary font-medium">Joined:</span> {row.joined}
+              <span className="font-medium text-text-primary">Joined:</span> {row.joined}
             </p>
             <p>
-              <span className="text-text-primary font-medium">Status:</span> {row.status}
+              <span className="font-medium text-text-primary">Status:</span> {row.status}
             </p>
           </div>
         )}
@@ -260,26 +253,6 @@ export const EmptyState: Story = {
       <DataTableHeader />
       <DataTableBody emptyMessage="No users match your filters." />
     </DataTable>
-  ),
-};
-
-export const Responsive: Story = {
-  render: () => (
-    <div className="space-y-2">
-      <p className="text-text-secondary text-sm">
-        Resize the viewport below the "md" breakpoint — rows collapse into cards with inline labels.
-      </p>
-      <DataTable
-        data={USERS.slice(0, 4)}
-        columns={baseColumns}
-        getRowId={(row) => row.id}
-        caption="Responsive users table"
-        selectable
-      >
-        <DataTableHeader />
-        <DataTableBody />
-      </DataTable>
-    </div>
   ),
 };
 
@@ -319,7 +292,7 @@ export const CustomCells: Story = {
           <button
             type="button"
             onClick={() => alert(`Edit ${row.name}`)}
-            className="rounded-control border-border text-text-primary hover:bg-surface-raised border px-2 py-1 text-xs"
+            className="rounded-control border border-border px-2 py-1 text-xs text-text-primary hover:bg-surface-raised"
           >
             Edit
           </button>

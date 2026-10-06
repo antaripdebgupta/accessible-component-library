@@ -3,15 +3,3 @@
 
 @source "./**/*.{ts,tsx}";
 @source "../../../apps/storybook/src/**/*.{ts,tsx}";
-
-@theme {
-  --color-surface-raised: #f3f4f6;
-
-  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
-
-  @keyframes shimmer {
-    100% {
-      transform: translateX(100%);
-    }
-  }
-}

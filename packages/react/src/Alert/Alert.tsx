@@ -4,35 +4,26 @@ import { twMerge } from 'tailwind-merge';
 import { AlertTriangle, CheckCircle2, Info, X, XCircle } from 'lucide-react';
 import { useAlert } from '@antarip/primitives';
 
-const alertStyles = cva(
-  [
-    'relative flex w-full items-start gap-3',
-    'border p-4 text-sm',
-    'shadow-sm',
-    'transition-all duration-200',
-    'motion-reduce:transition-none',
-  ],
-  {
-    variants: {
-      variant: {
-        success: ['border-success-default/30', 'bg-success-subtle', 'text-text-primary'],
-        info: ['border-accent-default/30', 'bg-accent-subtle', 'text-text-primary'],
-        warning: ['border-warning-default/30', 'bg-warning-subtle', 'text-text-primary'],
-        danger: ['border-danger-default/30', 'bg-danger-subtle', 'text-text-primary'],
-      },
-
-      banner: {
-        true: ['rounded-none', 'border-x-0', 'border-t-0', 'shadow-sm'],
-        false: ['rounded-lg'],
-      },
+const alertStyles = cva(['relative flex w-full items-start gap-3', 'border p-4 text-sm'], {
+  variants: {
+    variant: {
+      success: ['border-success-default/30', 'bg-success-subtle', 'text-text-primary'],
+      info: ['border-info-default/30', 'bg-info-subtle', 'text-text-primary'],
+      warning: ['border-warning-default/30', 'bg-warning-subtle', 'text-text-primary'],
+      danger: ['border-danger-default/30', 'bg-danger-subtle', 'text-text-primary'],
     },
 
-    defaultVariants: {
-      variant: 'info',
-      banner: false,
+    banner: {
+      true: ['rounded-none', 'border-x-0', 'border-t-0'],
+      false: ['rounded-popover'],
     },
   },
-);
+
+  defaultVariants: {
+    variant: 'info',
+    banner: false,
+  },
+});
 
 const ICONS = {
   success: CheckCircle2,
@@ -42,10 +33,10 @@ const ICONS = {
 } as const;
 
 const ICON_STYLES = {
-  success: 'bg-success-default/10 text-success-default',
-  info: 'bg-accent-default/10 text-accent-default',
-  warning: 'bg-warning-default/10 text-warning-default',
-  danger: 'bg-danger-default/10 text-danger-default',
+  success: 'text-success-default',
+  info: 'text-info-default',
+  warning: 'text-warning-default',
+  danger: 'text-danger-default',
 } as const;
 
 export interface AlertProps
@@ -95,18 +86,16 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
         {...alertProps}
         {...props}
       >
-        {/* Icon */}
         <div
           className={twMerge(
-            ['flex size-9 shrink-0 items-center justify-center', 'rounded-md'],
+            'flex shrink-0 items-center justify-center pt-0.5',
             ICON_STYLES[variant ?? 'info'],
           )}
         >
           <Icon aria-hidden="true" size={18} strokeWidth={2} />
         </div>
 
-        {/* Content */}
-        <div className="min-w-0 flex-1 pt-0.5">
+        <div className="min-w-0 flex-1">
           {title && <p className="font-semibold leading-5 tracking-tight">{title}</p>}
 
           {children && (
@@ -116,7 +105,6 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           )}
         </div>
 
-        {/* Close button */}
         {closable && (
           <button
             type="button"
@@ -125,11 +113,11 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             className={[
               'focus-ring-safe',
               'flex size-8 shrink-0 items-center justify-center',
-              'rounded-md',
+              'rounded-control',
               'text-text-secondary',
               'transition-colors',
-              'hover:bg-black/5 hover:text-text-primary dark:hover:bg-white/10',
-              'active:bg-black/10 dark:active:bg-white/15',
+              'hover:bg-surface-raised hover:text-text-primary',
+              'active:bg-surface-sunken',
               'motion-reduce:transition-none',
             ].join(' ')}
           >

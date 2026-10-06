@@ -15,15 +15,18 @@ module.exports = {
         shimmer: {
           "100%": { transform: "translateX(100%)" },
         },
+        "scale-in": {
+          from: { transform: "scale(0)", opacity: "0" },
+          to: { transform: "scale(1)", opacity: "1" },
+        },
       },
       animation: {
         shimmer: "shimmer 1.6s ease-in-out infinite",
+        "scale-in": "scale-in 200ms ease-out",
       },
     },
   },
   plugins: [
-    // Ensures utilities like `outline`, `ring` respect forced-colors mode
-    // rather than being silently stripped — see BUILD_GUIDE §14.
     require("./plugins/forced-colors")(),
   ],
 };

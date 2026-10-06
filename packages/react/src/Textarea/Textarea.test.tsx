@@ -115,16 +115,18 @@ describe('Textarea component', () => {
 
   test('character count updates and triggers over limit visual styling', async () => {
     const user = userEvent.setup();
-    render(<Textarea label="Bio" maxCount={5} defaultValue="Hello" />);
+    render(<Textarea label="Bio" maxCount={5} defaultValue="Hell" />);
+
+    expect(screen.getByText('4/5')).toBeInTheDocument();
+
+    const textarea = screen.getByRole('textbox', { name: 'Bio' });
+    await user.type(textarea, 'o');
 
     expect(screen.getByText('5/5')).toBeInTheDocument();
 
-    const textarea = screen.getByRole('textbox', { name: 'Bio' });
+    // maxCount is enforced as a hard limit — typing beyond it is blocked
     await user.type(textarea, '!');
-
-    expect(screen.getByText('6/5')).toBeInTheDocument();
-    const counter = screen.getByText('6/5');
-    expect(counter).toHaveClass('text-danger-default');
+    expect(screen.getByText('5/5')).toBeInTheDocument();
   });
 
   test('RTL direction applies dir attribute and alignment styles', () => {

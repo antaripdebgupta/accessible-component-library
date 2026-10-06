@@ -19,8 +19,8 @@ export function useAccordionVariant() {
 const accordionStyles = cva('w-full flow-root', {
   variants: {
     variant: {
-      default: 'divide-y divide-border ',
-      border: 'divide-y divide-border rounded-popover border border-border',
+      default: 'divide-y divide-border bg-surface shadow-xs rounded-popover',
+      border: 'divide-y divide-border rounded-popover border border-border bg-surface shadow-xs',
       card: 'flex flex-col gap-2',
     },
   },

@@ -5,14 +5,11 @@ export function DataTableSkeleton({ rows = 5 }: { rows?: number }) {
   const colCount = columns.length + (selectable ? 1 : 0) + (expandable ? 1 : 0);
 
   return (
-    <tbody className="block md:table-row-group" aria-hidden="true">
+    <tbody aria-hidden="true">
       {Array.from({ length: rows }, (_, i) => (
-        <tr
-          key={i}
-          className="rounded-control border-border mb-3 block border p-3 last:mb-0 md:mb-0 md:table-row md:border-0 md:border-b md:p-0 md:last:border-b-0"
-        >
-          <td colSpan={colCount} className="block px-3 py-2 md:table-cell">
-            <div className="bg-surface-raised h-4 w-full animate-pulse rounded motion-reduce:animate-none" />
+        <tr key={i} className="border-b border-border last:border-b-0">
+          <td colSpan={colCount} className="px-3 py-2">
+            <div className="relative h-4 w-full overflow-hidden rounded-control bg-surface-sunken before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-border/60 before:to-transparent motion-reduce:before:animate-none" />
           </td>
         </tr>
       ))}

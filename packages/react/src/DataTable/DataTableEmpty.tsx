@@ -6,12 +6,9 @@ export function DataTableEmpty({ children = 'No results found.' }: { children?: 
   const colSpan = columns.length + (selectable ? 1 : 0) + (expandable ? 1 : 0);
 
   return (
-    <tbody className="block md:table-row-group">
-      <tr className="block md:table-row">
-        <td
-          colSpan={colSpan}
-          className="text-text-secondary block px-3 py-10 text-center text-sm md:table-cell"
-        >
+    <tbody>
+      <tr>
+        <td colSpan={colSpan} className="px-3 py-10 text-center text-sm text-text-secondary">
           {children}
         </td>
       </tr>

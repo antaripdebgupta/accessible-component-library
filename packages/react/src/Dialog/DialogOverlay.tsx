@@ -17,7 +17,7 @@ export const DialogOverlay = forwardRef<HTMLDivElement, DialogOverlayProps>(
         {...overlayProps}
         data-state={visible ? 'open' : 'closed'}
         className={twMerge(
-          'fixed inset-0 z-40 bg-black/10 backdrop-blur-[2px]',
+          'fixed inset-0 z-40 bg-overlay',
           'transition-opacity duration-fast ease-out-soft motion-reduce:transition-none',
           'data-[state=closed]:pointer-events-none data-[state=closed]:opacity-0',
           'data-[state=open]:opacity-100',

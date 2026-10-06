@@ -14,7 +14,7 @@ export function ComboboxTags({ getLabel }: ComboboxTagsProps) {
       {value.map((v) => (
         <span
           key={v}
-          className="rounded-control bg-surface-raised text-text-primary flex shrink-0 items-center gap-1 px-2 py-0.5 text-xs"
+          className="flex shrink-0 items-center gap-1 rounded-control bg-surface-raised px-2 py-0.5 text-xs text-text-primary"
         >
           {getLabel?.(v) ?? v}
           {!disabled && (
@@ -22,7 +22,7 @@ export function ComboboxTags({ getLabel }: ComboboxTagsProps) {
               type="button"
               aria-label={`Remove ${getLabel?.(v) ?? v}`}
               onClick={() => removeValue(v)}
-              className="rounded-control text-text-secondary hover:text-text-primary"
+              className="relative flex h-4 w-4 items-center justify-center rounded-control text-text-secondary before:absolute before:-inset-1 before:content-[''] hover:text-text-primary"
             >
               <X size={12} aria-hidden="true" />
             </button>

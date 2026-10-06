@@ -20,13 +20,13 @@ const EXIT_DURATION_MS = 100;
 export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
   ({ align = 'start', sideOffset = 6, className, children, ...props }, ref) => {
     const { open, triggerRef, contentRef, getContentProps, focusFirst } = useDropdownMenuContext();
-    const [style, setStyle] = useState<CSSProperties>({});
-    const [mounted, setMounted] = useState(open);
+    const [style, setStyle] = useState<CSSProperties>({ position: 'fixed', visibility: 'hidden' });
+    const [mounted, setMounted] = useState(false);
     const [visible, setVisible] = useState(false);
     const hasFocusedRef = useRef(false);
 
     useEffect(() => {
-      if (mounted && !hasFocusedRef.current) {
+      if (open && mounted && !hasFocusedRef.current) {
         hasFocusedRef.current = true;
         const timer = setTimeout(() => focusFirst(), 0);
         return () => clearTimeout(timer);
@@ -34,7 +34,7 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
       if (!mounted) {
         hasFocusedRef.current = false;
       }
-    }, [mounted, focusFirst]);
+    }, [open, mounted, focusFirst]);
 
     useEffect(() => {
       if (open) {
@@ -94,9 +94,9 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
         data-state={visible ? 'open' : 'closed'}
         style={{ ...style, transformOrigin: align === 'end' ? 'top right' : 'top left' }}
         className={twMerge(
-          'rounded-popover border-border bg-surface z-50 min-w-[10rem] overflow-hidden border p-1 shadow-md',
+          'popover-surface z-50 min-w-[10rem] overflow-hidden p-1',
           'focus:outline-none',
-          'duration-fast ease-out-soft transition-[opacity,transform] motion-reduce:transition-none',
+          'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
           visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
           className,
         )}

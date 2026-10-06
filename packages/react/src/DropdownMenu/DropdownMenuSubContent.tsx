@@ -66,7 +66,7 @@ export const DropdownMenuSubContent = forwardRef<HTMLDivElement, DropdownMenuSub
           {...contentProps}
           style={style}
           className={twMerge(
-            'rounded-popover border-border bg-surface z-50 min-w-[10rem] overflow-hidden border p-1 shadow-md',
+            'popover-surface z-50 min-w-[10rem] overflow-hidden p-1',
             'focus:outline-none',
             className,
           )}

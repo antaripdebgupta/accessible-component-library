@@ -5,24 +5,34 @@ import { twMerge } from 'tailwind-merge';
 
 const buttonStyles = cva(
   [
-    'inline-flex items-center justify-center gap-2 rounded-control font-medium',
+    'inline-flex items-center justify-center gap-2 rounded-control font-medium whitespace-nowrap',
     'transition-colors duration-fast motion-reduce:transition-none',
     'focus-ring-safe',
-    'disabled:opacity-50',
+    'disabled:opacity-50 disabled:cursor-not-allowed',
+    'aria-disabled:opacity-50 aria-disabled:cursor-not-allowed',
+    'active:scale-[0.98] disabled:active:scale-100 aria-disabled:active:scale-100',
   ],
   {
     variants: {
       variant: {
-        primary:
-          'bg-accent-default text-text-inverse hover:bg-accent-hover active:bg-accent-active',
-        secondary:
-          'bg-surface-raised text-text-primary border border-border hover:border-border-strong',
-        danger: 'bg-danger-default text-text-inverse hover:opacity-90',
+        primary: [
+          'bg-accent-default text-text-inverse shadow-xs',
+          'hover:bg-accent-hover active:bg-accent-active',
+          'shadow-[inset_0_1px_0_0_rgba(255,255,255,0.12)]',
+        ],
+        secondary: [
+          'bg-surface text-text-primary border border-border-strong shadow-xs',
+          'hover:bg-surface-raised',
+        ],
+        danger: [
+          'bg-danger-default text-text-inverse shadow-xs',
+          'hover:bg-[#991b1b] active:bg-[#7f1d1d]',
+        ],
       },
       size: {
-        sm: 'h-8 px-control-sm text-sm',
-        md: 'h-10 px-control-md text-base',
-        lg: 'h-12 px-control-lg text-lg',
+        sm: 'h-ctl-sm px-control-sm text-sm',
+        md: 'h-ctl-md px-control-md text-sm',
+        lg: 'h-ctl-lg px-control-lg text-base',
       },
     },
     defaultVariants: { variant: 'primary', size: 'md' },
@@ -58,9 +68,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={handleClick}
       >
         {loading && (
-          <span aria-hidden="true" className="animate-spin motion-reduce:animate-none">
-            ⟳
-          </span>
+          <span
+            aria-hidden="true"
+            className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent motion-reduce:animate-none"
+          />
         )}
         {loading && loadingText ? loadingText : children}
       </button>

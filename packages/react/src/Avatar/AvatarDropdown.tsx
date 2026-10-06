@@ -22,7 +22,7 @@ export function AvatarDropdown({ children, triggerLabel, ...avatarProps }: Avata
         <button
           type="button"
           aria-label={triggerLabel}
-          className="focus-ring-safe duration-fast rounded-full transition-transform outline-none hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100"
+          className="rounded-full outline-none focus-ring-safe"
         >
           <Avatar {...avatarProps} aria-hidden="true" role="presentation" />
         </button>

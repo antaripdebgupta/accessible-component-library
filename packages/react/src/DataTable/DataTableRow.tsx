@@ -30,15 +30,13 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
       <tr
         aria-selected={selectable ? selected : undefined}
         className={twMerge(
-          'rounded-control border-border mb-3 block border p-3 last:mb-0',
-          'md:mb-0 md:table-row md:rounded-none md:border-0 md:border-b md:p-0 md:last:border-b-0',
-          'duration-fast transition-colors motion-reduce:transition-none',
-          selected ? 'bg-accent-subtle' : 'md:hover:bg-surface-raised',
+          'border-b border-border last:border-b-0',
+          'transition-colors duration-fast motion-reduce:transition-none',
+          selected ? 'bg-accent-subtle' : 'hover:bg-surface-raised',
         )}
       >
         {selectable && (
-          <td className="border-border flex items-center justify-between border-b py-1.5 md:table-cell md:w-10 md:border-b-0 md:px-3 md:py-2.5">
-            <span className="text-text-secondary text-xs font-medium md:hidden">Select</span>
+          <td className="w-10 px-3 py-2.5">
             <DataTableCheckbox
               checked={selected}
               onChange={() => toggleRowSelection(id)}
@@ -49,8 +47,7 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
           </td>
         )}
         {expandable && (
-          <td className="border-border flex items-center justify-between border-b py-1.5 md:table-cell md:w-10 md:border-b-0 md:px-2 md:py-2.5">
-            <span className="text-text-secondary text-xs font-medium md:hidden">Expand</span>
+          <td className="w-10 px-2 py-2.5">
             <button
               type="button"
               data-dt-row
@@ -58,7 +55,7 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
               onClick={() => toggleExpand(id)}
               aria-expanded={expanded}
               aria-label={expanded ? `Collapse row ${rowIndex + 1}` : `Expand row ${rowIndex + 1}`}
-              className="rounded-control text-text-secondary hover:text-text-primary focus-ring-safe p-0.5 transition-transform outline-none"
+              className="flex h-6 w-6 items-center justify-center rounded-control text-text-secondary outline-none focus-ring-safe hover:text-text-primary"
             >
               <ChevronRight
                 size={16}
@@ -73,25 +70,21 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
             key={column.id}
             data-dt-col={`cell-${column.id}`}
             className={twMerge(
-              'border-border flex items-center justify-between gap-3 border-b py-1.5 text-right',
-              'md:table-cell md:border-b-0 md:px-3 md:py-2.5 md:text-left',
-              column.align === 'center' && 'md:text-center',
-              column.align === 'right' && 'md:text-right',
+              'px-3 py-2.5 text-left',
+              column.align === 'center' && 'text-center',
+              column.align === 'right' && 'text-right',
               column.className,
             )}
           >
-            <span className="text-text-secondary shrink-0 text-xs font-medium md:hidden">
-              {column.header}
-            </span>
-            <span className="text-text-primary min-w-0">{column.cell(row, rowIndex)}</span>
+            <span className="min-w-0 text-text-primary">{column.cell(row, rowIndex)}</span>
           </td>
         ))}
       </tr>
       {expandable && expanded && renderExpanded && (
-        <tr className="block md:table-row">
+        <tr className="">
           <td
             colSpan={columns.length + (selectable ? 1 : 0) + 1}
-            className="bg-surface-raised text-text-secondary block px-3 py-2.5 text-sm md:table-cell"
+            className="bg-surface-raised px-3 py-2.5 text-sm text-text-secondary"
           >
             {renderExpanded(row, rowIndex)}
           </td>
