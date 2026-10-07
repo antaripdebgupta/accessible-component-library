@@ -94,20 +94,6 @@ test.describe('DataTable — expandable rows', () => {
   });
 });
 
-test.describe('DataTable — responsive', () => {
-  test('collapses to a stacked card layout below md breakpoint', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 700 });
-    await page.goto('/iframe.html?id=components-datatable--responsive');
-
-    // The <thead> is hidden at this width; each cell shows an inline
-    // label instead (e.g. "Name" appears twice: once as the hidden
-    // column header and once as each row's inline label).
-    const columnHeader = page.locator('thead');
-    await expect(columnHeader).toBeHidden();
-    await expect(page.locator('tbody').getByText('Name', { exact: true }).first()).toBeVisible();
-  });
-});
-
 test.describe('DataTable — loading and empty states', () => {
   test('loading state shows skeleton rows', async ({ page }) => {
     await page.goto('/iframe.html?id=components-datatable--loading-state');

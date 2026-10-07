@@ -5,12 +5,12 @@ export default defineConfig({
   timeout: 60000,
 
   use: {
-    baseURL: 'http://localhost:6006/',
+    baseURL: 'http://127.0.0.1:6006/',
   },
 
   webServer: {
-    command: 'pnpm --filter @acl/storybook storybook',
-    url: 'http://localhost:6006/',
+    command: 'pnpm --filter @antarip/storybook exec storybook dev -p 6006 --host 127.0.0.1 --ci',
+    url: 'http://127.0.0.1:6006/',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },

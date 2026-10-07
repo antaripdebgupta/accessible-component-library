@@ -30,13 +30,13 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
       <tr
         aria-selected={selectable ? selected : undefined}
         className={twMerge(
-          'border-b border-border last:border-b-0',
+          'block border-b border-border last:border-b-0 md:table-row',
           'transition-colors duration-fast motion-reduce:transition-none',
           selected ? 'bg-accent-subtle' : 'hover:bg-surface-raised',
         )}
       >
         {selectable && (
-          <td className="w-10 px-3 py-2.5">
+          <td className="flex w-full items-center px-3 py-2.5 md:table-cell md:w-10">
             <DataTableCheckbox
               checked={selected}
               onChange={() => toggleRowSelection(id)}
@@ -47,7 +47,7 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
           </td>
         )}
         {expandable && (
-          <td className="w-10 px-2 py-2.5">
+          <td className="flex w-full items-center px-2 py-2.5 md:table-cell md:w-10">
             <button
               type="button"
               data-dt-row
@@ -65,20 +65,25 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
             </button>
           </td>
         )}
-        {columns.map((column) => (
-          <td
-            key={column.id}
-            data-dt-col={`cell-${column.id}`}
-            className={twMerge(
-              'px-3 py-2.5 text-left',
-              column.align === 'center' && 'text-center',
-              column.align === 'right' && 'text-right',
-              column.className,
-            )}
-          >
-            <span className="min-w-0 text-text-primary">{column.cell(row, rowIndex)}</span>
-          </td>
-        ))}
+        {columns.map((column) => {
+          const label = typeof column.header === 'string' ? column.header : String(column.header);
+          return (
+            <td
+              key={column.id}
+              data-dt-col={`cell-${column.id}`}
+              data-label={label}
+              className={twMerge(
+                'flex items-center justify-between gap-3 px-3 py-2.5 text-left md:table-cell',
+                column.align === 'center' && 'text-center',
+                column.align === 'right' && 'text-right',
+                column.className,
+              )}
+            >
+              <span className="text-xs font-medium text-text-secondary md:hidden">{label}</span>
+              <span className="min-w-0 text-text-primary">{column.cell(row, rowIndex)}</span>
+            </td>
+          );
+        })}
       </tr>
       {expandable && expanded && renderExpanded && (
         <tr className="">

@@ -16,7 +16,7 @@ export function DataTableHeader<T>() {
   } = useDataTableContext<T>();
 
   return (
-    <thead>
+    <thead className="hidden md:table-header-group">
       <tr className="border-b border-border bg-surface-raised">
         {selectable && (
           <th scope="col" className="w-10 px-3 py-2.5 text-left">

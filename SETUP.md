@@ -85,7 +85,7 @@ Runs `turbo run storybook`, starting Storybook at `http://localhost:6006`.
 **Manual equivalent:**
 
 ```bash
-pnpm --filter @acl/storybook storybook
+pnpm --filter @antarip/storybook storybook
 ```
 
 If you're actively editing `packages/primitives` or `packages/utils` while
@@ -167,8 +167,8 @@ pnpm --filter @acl/react exec vitest run --coverage
 Requires a built Storybook static output first.
 
 ```bash
-pnpm --filter @acl/storybook build-storybook
-pnpm --filter @acl/storybook test-storybook
+pnpm --filter @antarip/storybook build-storybook
+pnpm --filter @antarip/storybook test-storybook
 ```
 
 This headlessly runs every component's `play` function (keyboard
@@ -248,8 +248,8 @@ pnpm build
 pnpm lint
 pnpm typecheck
 pnpm test
-pnpm --filter @acl/storybook build-storybook
-pnpm --filter @acl/storybook test-storybook
+pnpm --filter @antarip/storybook build-storybook
+pnpm --filter @antarip/storybook test-storybook
 pnpm test:e2e
 ```
 
@@ -298,12 +298,12 @@ happening outside the awaited interaction.
 | --------------------------- | --------------------- | ------------------------------------------------------------------ |
 | Install                     | `pnpm install`        | —                                                                  |
 | Build all                   | `pnpm build`          | `pnpm --filter <pkg> build`                                        |
-| Dev/Storybook               | `pnpm dev`            | `pnpm --filter @acl/storybook storybook`                           |
+| Dev/Storybook               | `pnpm dev`            | `pnpm --filter @antarip/storybook storybook`                       |
 | Lint                        | `pnpm lint`           | `pnpm --filter <pkg> lint`                                         |
 | Typecheck                   | `pnpm typecheck`      | `pnpm --filter <pkg> typecheck`                                    |
 | Unit tests                  | `pnpm test`           | `pnpm --filter <pkg> test`                                         |
 | E2E tests                   | `pnpm test:e2e`       | `pnpm exec playwright test -c e2e/playwright/playwright.config.ts` |
-| Storybook interaction tests | —                     | `pnpm --filter @acl/storybook test-storybook`                      |
+| Storybook interaction tests | —                     | `pnpm --filter @antarip/storybook test-storybook`                  |
 | Changeset                   | `pnpm changeset`      | —                                                                  |
 | Contrast check              | `pnpm check-contrast` | —                                                                  |
 | Bundle size                 | `pnpm size`           | —                                                                  |
