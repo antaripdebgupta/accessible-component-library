@@ -15,10 +15,10 @@ export interface DropdownMenuContentProps extends HTMLAttributes<HTMLDivElement>
   sideOffset?: number;
 }
 
-const EXIT_DURATION_MS = 100;
+const EXIT_DURATION_MS = 160;
 
 export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuContentProps>(
-  ({ align = 'start', sideOffset = 6, className, children, ...props }, ref) => {
+  ({ align = 'start', sideOffset = 4, className, children, ...props }, ref) => {
     const { open, triggerRef, contentRef, getContentProps, focusFirst } = useDropdownMenuContext();
     const [style, setStyle] = useState<CSSProperties>({ position: 'fixed', visibility: 'hidden' });
     const [mounted, setMounted] = useState(false);
@@ -96,8 +96,12 @@ export const DropdownMenuContent = forwardRef<HTMLDivElement, DropdownMenuConten
         className={twMerge(
           'popover-surface z-50 min-w-[10rem] overflow-hidden p-1',
           'focus:outline-none',
-          'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
-          visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+          'transition-[opacity,scale,translate] motion-reduce:transition-none',
+          'data-[state=open]:duration-base data-[state=open]:ease-out-soft',
+          'data-[state=closed]:duration-fast data-[state=closed]:ease-in-quick',
+          'data-[state=closed]:pointer-events-none',
+          'data-[state=open]:motion-safe:animate-drop-in',
+          visible ? 'scale-100 opacity-100' : 'scale-y-[0.9] opacity-0',
           className,
         )}
         {...props}

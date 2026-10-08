@@ -26,7 +26,7 @@ const switchTrackStyles = cva(
 
 const switchThumbStyles = cva(
   [
-    'pointer-events-none flex items-center justify-center rounded-full bg-surface shadow-xs transition-transform duration-fast motion-reduce:transition-none',
+    'pointer-events-none flex items-center justify-center rounded-full bg-surface shadow-xs transition-transform duration-base ease-out-soft motion-reduce:transition-none',
     'data-[state=unchecked]:translate-x-0.5',
   ],
   {
@@ -96,7 +96,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
           {pending && (
             <span
               aria-hidden="true"
-              className="block h-2 w-2 animate-spin rounded-full border border-accent-default border-t-transparent"
+              className="block h-2 w-2 animate-spin rounded-full border border-accent-default border-t-transparent motion-reduce:animate-none"
             />
           )}
         </span>

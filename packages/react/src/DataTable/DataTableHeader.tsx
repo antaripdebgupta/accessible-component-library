@@ -16,7 +16,7 @@ export function DataTableHeader<T>() {
   } = useDataTableContext<T>();
 
   return (
-    <thead className="hidden md:table-header-group">
+    <thead>
       <tr className="border-b border-border bg-surface-raised">
         {selectable && (
           <th scope="col" className="w-10 px-3 py-2.5 text-left">
@@ -55,7 +55,7 @@ export function DataTableHeader<T>() {
                 <button
                   type="button"
                   onClick={() => toggleSort(column.id)}
-                  className="inline-flex items-center gap-1 rounded-control outline-none focus-ring-safe hover:text-text-primary"
+                  className="inline-flex items-center gap-1 rounded-control outline-none transition-colors duration-fast focus-ring-safe hover:text-text-primary motion-reduce:transition-none"
                 >
                   {column.header}
                   {sortState === 'asc' && <ChevronUp size={14} aria-hidden="true" />}

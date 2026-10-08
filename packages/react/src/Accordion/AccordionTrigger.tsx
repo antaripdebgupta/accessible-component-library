@@ -27,7 +27,7 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
           className={twMerge(
             'flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-medium',
             'rounded-control outline-none focus-ring-safe',
-            'text-text-primary transition-colors duration-fast hover:bg-surface-raised motion-reduce:transition-none',
+            'text-text-primary transition-colors duration-fast hover:bg-surface-raised active:bg-surface-sunken motion-reduce:transition-none',
             'disabled:pointer-events-none disabled:opacity-50',
             'aria-disabled:pointer-events-none aria-disabled:opacity-50',
             className,

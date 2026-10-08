@@ -55,17 +55,30 @@
   --duration-base: 200ms;
   --duration-slow: 320ms;
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-quick: cubic-bezier(0.4, 0, 1, 1);
 
   --shadow-xs: 0 1px 2px rgb(16 20 32 / .05);
   --shadow-sm: 0 1px 2px rgb(16 20 32 / .06), 0 1px 1px rgb(16 20 32 / .04);
   --shadow-md: 0 0 0 1px var(--color-border), 0 2px 4px rgb(16 20 32 / .04), 0 12px 32px -6px rgb(16 20 32 / .14);
   --shadow-lg: 0 0 0 1px var(--color-border), 0 4px 8px rgb(16 20 32 / .06), 0 20px 48px -12px rgb(16 20 32 / .22);
 
+  --color-danger-hover: #991b1b;
+  --color-danger-active: #7f1d1d;
+  --color-highlight: rgb(255 255 255 / 0.14);
+
   --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-rise: rise var(--duration-base) var(--ease-out-soft);
+  --animate-fade-in: fade-in var(--duration-base) var(--ease-out-soft);
+  --animate-scale-in: scale-in var(--duration-base) var(--ease-out-soft);
+  --animate-pop-in: pop-in var(--duration-base) var(--ease-out-soft);
+  --animate-fade-scale-in: fade-scale-in var(--duration-fast) var(--ease-out-soft);
+  --animate-tip-in: tip-in var(--duration-fast) var(--ease-out-soft);
+  --animate-drop-in: drop-in var(--duration-base) var(--ease-out-soft);
+  --animate-expand-in: expand-in var(--duration-base) var(--ease-out-soft);
 
   @keyframes shimmer {
     100% {
-      transform: translateX(100%);
+      translate: 100% 0;
     }
   }
 
@@ -75,14 +88,58 @@
     }
   }
 
-  @keyframes scale-in {
+  @keyframes rise {
     from {
-      transform: scale(0);
+      opacity: 0;
+      translate: 0 4px;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
       opacity: 0;
     }
-    to {
-      transform: scale(1);
-      opacity: 1;
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      scale: 0.6;
+    }
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      scale: 0.97;
+    }
+  }
+
+  @keyframes drop-in {
+    from {
+      opacity: 0;
+      scale: 1 0.9;
+    }
+  }
+
+  @keyframes expand-in {
+    from {
+      opacity: 0;
+      grid-template-rows: 0fr;
+    }
+  }
+
+  @keyframes fade-scale-in {
+    from {
+      opacity: 0;
+      scale: 0.97;
+    }
+  }
+
+  @keyframes tip-in {
+    from {
+      opacity: 0;
+      scale: 0.9;
     }
   }
 
@@ -112,7 +169,10 @@
   --color-info-subtle: #1a1d3a;
 
   --color-danger-default: #f87171;
+  --color-danger-hover: #fca5a5;
+  --color-danger-active: #fecaca;
   --color-danger-subtle: #2a1315;
+  --color-highlight: transparent;
   --color-success-default: #4ade80;
   --color-success-subtle: #0f2417;
   --color-warning-default: #facc15;
@@ -127,6 +187,18 @@
   --shadow-sm: 0 1px 2px rgb(0 0 0 / .25), 0 1px 1px rgb(0 0 0 / .15);
   --shadow-md: 0 0 0 1px var(--color-border-strong), 0 2px 4px rgb(0 0 0 / .15), 0 12px 32px -6px rgb(0 0 0 / .4);
   --shadow-lg: 0 0 0 1px var(--color-border-strong), 0 4px 8px rgb(0 0 0 / .2), 0 20px 48px -12px rgb(0 0 0 / .5);
+}
+
+@utility duration-fast {
+  transition-duration: var(--duration-fast);
+}
+
+@utility duration-base {
+  transition-duration: var(--duration-base);
+}
+
+@utility duration-slow {
+  transition-duration: var(--duration-slow);
 }
 
 @utility focus-ring-safe {
@@ -165,6 +237,7 @@
 
   &[aria-invalid="true"] {
     border-color: var(--color-danger-default);
+
     &:focus,
     &:focus-within {
       box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-danger-default) 16%, transparent);

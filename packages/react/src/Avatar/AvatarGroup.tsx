@@ -59,7 +59,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               className={twMerge(
                 'relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full',
                 'bg-surface-raised font-medium text-text-secondary ring-2 ring-surface',
-                'outline-none transition-colors duration-fast focus-ring-safe hover:bg-border motion-reduce:transition-none',
+                'outline-none transition-[color,background-color,border-color,box-shadow,scale] duration-fast ease-out-soft focus-ring-safe hover:bg-border active:scale-[0.98] disabled:active:scale-100 aria-disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100',
                 sizeClass(size),
               )}
             >

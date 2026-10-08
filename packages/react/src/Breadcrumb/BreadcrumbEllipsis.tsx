@@ -34,7 +34,7 @@ export const BreadcrumbEllipsis = forwardRef<HTMLLIElement, BreadcrumbEllipsisPr
             <button
               type="button"
               aria-label={ariaLabel}
-              className="inline-flex items-center justify-center rounded p-1 text-text-secondary transition-colors focus-ring-safe hover:bg-surface-raised hover:text-text-primary"
+              className="inline-flex items-center justify-center rounded p-1 text-text-secondary transition-colors duration-fast focus-ring-safe hover:bg-surface-raised hover:text-text-primary motion-reduce:transition-none"
             >
               <MoreHorizontal size={16} />
             </button>

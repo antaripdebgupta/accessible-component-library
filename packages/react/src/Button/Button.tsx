@@ -6,19 +6,19 @@ import { twMerge } from 'tailwind-merge';
 const buttonStyles = cva(
   [
     'inline-flex items-center justify-center gap-2 rounded-control font-medium whitespace-nowrap',
-    'transition-colors duration-fast motion-reduce:transition-none',
+    'transition-[color,background-color,border-color,box-shadow,scale] duration-fast ease-out-soft',
     'focus-ring-safe',
     'disabled:opacity-50 disabled:cursor-not-allowed',
     'aria-disabled:opacity-50 aria-disabled:cursor-not-allowed',
     'active:scale-[0.98] disabled:active:scale-100 aria-disabled:active:scale-100',
+    'motion-reduce:transition-none motion-reduce:active:scale-100',
   ],
   {
     variants: {
       variant: {
         primary: [
-          'bg-accent-default text-text-inverse shadow-xs',
+          'bg-accent-default text-text-inverse shadow-[var(--shadow-xs),inset_0_1px_0_0_var(--color-highlight)]',
           'hover:bg-accent-hover active:bg-accent-active',
-          'shadow-[inset_0_1px_0_0_rgba(255,255,255,0.12)]',
         ],
         secondary: [
           'bg-surface text-text-primary border border-border-strong shadow-xs',
@@ -26,7 +26,7 @@ const buttonStyles = cva(
         ],
         danger: [
           'bg-danger-default text-text-inverse shadow-xs',
-          'hover:bg-[#991b1b] active:bg-[#7f1d1d]',
+          'hover:bg-danger-hover active:bg-danger-active',
         ],
       },
       size: {

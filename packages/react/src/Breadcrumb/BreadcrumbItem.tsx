@@ -36,7 +36,7 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
           <Component
             href={href}
             className={twMerge(
-              'max-w-[200px] truncate rounded-control px-1 py-0.5 text-text-secondary transition-colors focus-ring-safe hover:text-text-primary hover:underline',
+              'max-w-[200px] truncate rounded-control px-1 py-0.5 text-text-secondary underline-offset-2 transition-colors duration-fast focus-ring-safe hover:text-text-primary hover:underline motion-reduce:transition-none',
               linkClassName,
             )}
             title={typeof children === 'string' ? children : undefined}

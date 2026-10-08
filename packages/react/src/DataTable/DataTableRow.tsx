@@ -30,13 +30,13 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
       <tr
         aria-selected={selectable ? selected : undefined}
         className={twMerge(
-          'block border-b border-border last:border-b-0 md:table-row',
+          'border-b border-border last:border-b-0',
           'transition-colors duration-fast motion-reduce:transition-none',
           selected ? 'bg-accent-subtle' : 'hover:bg-surface-raised',
         )}
       >
         {selectable && (
-          <td className="flex w-full items-center px-3 py-2.5 md:table-cell md:w-10">
+          <td className="w-10 px-3 py-2.5 align-middle">
             <DataTableCheckbox
               checked={selected}
               onChange={() => toggleRowSelection(id)}
@@ -47,7 +47,7 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
           </td>
         )}
         {expandable && (
-          <td className="flex w-full items-center px-2 py-2.5 md:table-cell md:w-10">
+          <td className="w-10 px-2 py-2.5 align-middle">
             <button
               type="button"
               data-dt-row
@@ -55,31 +55,31 @@ export function DataTableRow<T>({ row, rowIndex, renderExpanded }: DataTableRowP
               onClick={() => toggleExpand(id)}
               aria-expanded={expanded}
               aria-label={expanded ? `Collapse row ${rowIndex + 1}` : `Expand row ${rowIndex + 1}`}
-              className="flex h-6 w-6 items-center justify-center rounded-control text-text-secondary outline-none focus-ring-safe hover:text-text-primary"
+              className="flex h-6 w-6 items-center justify-center rounded-control text-text-secondary outline-none transition-colors duration-fast focus-ring-safe hover:text-text-primary motion-reduce:transition-none"
             >
               <ChevronRight
                 size={16}
                 aria-hidden="true"
-                className={twMerge('transition-transform', expanded && 'rotate-90')}
+                className={twMerge(
+                  'shrink-0 transition-transform duration-fast ease-out-soft motion-reduce:transition-none',
+                  expanded && 'rotate-90',
+                )}
               />
             </button>
           </td>
         )}
         {columns.map((column) => {
-          const label = typeof column.header === 'string' ? column.header : String(column.header);
           return (
             <td
               key={column.id}
               data-dt-col={`cell-${column.id}`}
-              data-label={label}
               className={twMerge(
-                'flex items-center justify-between gap-3 px-3 py-2.5 text-left md:table-cell',
+                'whitespace-nowrap px-3 py-2.5 text-left align-middle',
                 column.align === 'center' && 'text-center',
                 column.align === 'right' && 'text-right',
                 column.className,
               )}
             >
-              <span className="text-xs font-medium text-text-secondary md:hidden">{label}</span>
               <span className="min-w-0 text-text-primary">{column.cell(row, rowIndex)}</span>
             </td>
           );

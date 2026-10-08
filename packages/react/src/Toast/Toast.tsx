@@ -6,7 +6,7 @@ import type { ToastItem } from '@antarip/primitives';
 
 const toastStyles = cva([
   'flex items-start gap-3 rounded-popover border border-border bg-surface p-4 shadow-md w-full',
-  'animate-in fade-in slide-in-from-bottom-2 motion-reduce:animate-none motion-reduce:transition-none',
+  'motion-safe:animate-rise motion-reduce:animate-none',
 ]);
 
 const ICONS = {
@@ -64,7 +64,7 @@ export function Toast({ toast, onDismiss, onScheduleDismiss, onPause }: ToastPro
         type="button"
         aria-label="Dismiss notification"
         onClick={onDismiss}
-        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-control text-text-secondary transition-colors focus-ring-safe hover:bg-surface-raised hover:text-text-primary"
+        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-control text-text-secondary outline-none transition-[color,background-color,border-color,box-shadow,scale] duration-fast ease-out-soft focus-ring-safe hover:bg-surface-raised hover:text-text-primary active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100"
       >
         <X aria-hidden="true" size={16} />
       </button>

@@ -135,7 +135,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             }
           }}
           className={twMerge(
-            'relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors duration-150',
+            'relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors duration-fast motion-reduce:transition-none',
             'bg-surface hover:bg-surface-raised',
             isDragging
               ? 'border-accent-default bg-accent-subtle/20'

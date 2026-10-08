@@ -68,6 +68,7 @@ export const DropdownMenuSubContent = forwardRef<HTMLDivElement, DropdownMenuSub
           className={twMerge(
             'popover-surface z-50 min-w-[10rem] overflow-hidden p-1',
             'focus:outline-none',
+            'motion-safe:animate-fade-in motion-reduce:animate-none',
             className,
           )}
           onKeyDown={(e: KeyboardEvent) => {

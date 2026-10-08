@@ -22,12 +22,14 @@ export function AvatarDropdown({ children, triggerLabel, ...avatarProps }: Avata
         <button
           type="button"
           aria-label={triggerLabel}
-          className="rounded-full outline-none focus-ring-safe"
+          className="inline-flex rounded-full outline-none transition-[box-shadow,scale] duration-fast ease-out-soft focus-ring-safe hover:ring-2 hover:ring-border-strong active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100"
         >
           <Avatar {...avatarProps} aria-hidden="true" role="presentation" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">{children}</DropdownMenuContent>
+      <DropdownMenuContent align="end" sideOffset={4}>
+        {children}
+      </DropdownMenuContent>
     </DropdownMenu>
   );
 }

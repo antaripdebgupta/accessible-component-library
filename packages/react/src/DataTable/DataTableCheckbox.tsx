@@ -45,9 +45,17 @@ export const DataTableCheckbox = forwardRef<HTMLInputElement, DataTableCheckboxP
           )}
         >
           {indeterminate && !checked ? (
-            <Minus size={11} strokeWidth={3} />
+            <Minus
+              size={11}
+              strokeWidth={3}
+              className="shrink-0 motion-safe:animate-scale-in motion-reduce:animate-none"
+            />
           ) : checked ? (
-            <Check size={11} strokeWidth={3} />
+            <Check
+              size={11}
+              strokeWidth={3}
+              className="shrink-0 motion-safe:animate-scale-in motion-reduce:animate-none"
+            />
           ) : null}
         </span>
       </label>

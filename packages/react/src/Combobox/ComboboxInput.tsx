@@ -41,6 +41,7 @@ export function ComboboxInput({
 
   return (
     <div
+      data-combobox-anchor=""
       className={twMerge(
         'field-surface flex h-ctl-md w-full items-center gap-1.5 px-2.5 text-sm',
         className,
@@ -65,7 +66,7 @@ export function ComboboxInput({
       {showClear && (
         <button
           {...clearButtonProps}
-          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-control text-text-secondary transition-colors hover:bg-surface-raised hover:text-text-primary"
+          className="flex h-6 w-6 shrink-0 items-center justify-center rounded-control text-text-secondary transition-colors duration-fast hover:bg-surface-raised hover:text-text-primary motion-reduce:transition-none"
         >
           <X size={14} aria-hidden="true" />
         </button>

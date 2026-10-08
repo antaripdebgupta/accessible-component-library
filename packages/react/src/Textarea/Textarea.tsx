@@ -16,7 +16,7 @@ import { twMerge } from 'tailwind-merge';
 const textareaVariants = cva(
   [
     'w-full min-h-[88px] field-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
-    'outline-none',
+    'outline-none forced-colors:focus:outline-2 forced-colors:focus:outline-solid forced-colors:focus:outline-[color:Highlight]',
     'disabled:cursor-not-allowed disabled:opacity-50',
   ],
   {
@@ -240,7 +240,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={twMerge(
               textareaVariants({ variant: computedVariant, resize: computedResize }),
               actionButton && 'pb-10',
-              autoResize && !isTyping && 'transition-[height] duration-150',
               dir === 'rtl' && 'text-right',
               className,
             )}

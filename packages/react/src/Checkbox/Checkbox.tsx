@@ -103,7 +103,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             <span
               aria-hidden="true"
               className={twMerge(
-                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-control border transition-colors duration-fast motion-reduce:transition-none',
+                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-control border transition-[background-color,border-color] duration-fast motion-reduce:transition-none',
+                disabled && 'transition-none',
                 isChecked || isIndeterminate
                   ? error
                     ? 'border-danger-default bg-danger-default text-text-inverse'
@@ -117,13 +118,19 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 <Minus
                   size={11}
                   strokeWidth={3}
-                  className="shrink-0 motion-safe:animate-scale-in motion-reduce:animate-none"
+                  className={twMerge(
+                    'shrink-0',
+                    !disabled && 'motion-safe:animate-scale-in motion-reduce:animate-none',
+                  )}
                 />
               ) : isChecked ? (
                 <Check
                   size={11}
                   strokeWidth={3}
-                  className="shrink-0 motion-safe:animate-scale-in motion-reduce:animate-none"
+                  className={twMerge(
+                    'shrink-0',
+                    !disabled && 'motion-safe:animate-scale-in motion-reduce:animate-none',
+                  )}
                 />
               ) : null}
             </span>

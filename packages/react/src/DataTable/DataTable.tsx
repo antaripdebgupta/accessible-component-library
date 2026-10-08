@@ -55,9 +55,9 @@ export function DataTable<T>({
           role="region"
           aria-label={caption}
           tabIndex={0}
-          className="shadow-xs w-full overflow-x-auto rounded-popover border border-border bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-inset"
+          className="shadow-xs w-full overflow-auto rounded-popover border border-border bg-surface focus-ring-safe"
         >
-          <table className="w-full min-w-[36rem] border-collapse text-sm">
+          <table className="w-full min-w-max border-collapse text-sm">
             <caption className="sr-only">{caption}</caption>
             {children}
           </table>

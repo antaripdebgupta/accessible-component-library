@@ -57,7 +57,7 @@ export const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>(
           style={{ paddingInlineStart: `${(level - 1) * 1.25 + 0.5}rem` }}
           className={twMerge(
             'flex cursor-pointer items-center gap-1.5 rounded-control py-1.5 pr-2',
-            'outline-none focus-ring-safe',
+            'outline-none focus-ring-safe focus-visible:outline-offset-[-2px]',
             'transition-colors duration-fast hover:bg-surface-raised motion-reduce:transition-none',
             'aria-selected:bg-accent-subtle aria-selected:font-medium aria-selected:text-text-primary',
             'aria-disabled:pointer-events-none aria-disabled:opacity-50',
@@ -91,9 +91,17 @@ export const TreeItem = forwardRef<HTMLDivElement, TreeItemProps>(
           <div
             {...getGroupProps(value)}
             inert={!expanded || undefined}
-            className={twMerge('grid', expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}
+            className={twMerge(
+              'grid transition-[grid-template-rows] duration-base ease-out-soft motion-reduce:transition-none',
+              expanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+            )}
           >
-            <div className="min-h-0 overflow-hidden">
+            <div
+              className={twMerge(
+                'min-h-0 overflow-hidden transition-opacity duration-base motion-reduce:transition-none',
+                expanded ? 'opacity-100' : 'opacity-0',
+              )}
+            >
               <ParentContext.Provider value={{ parentValue: value, level: level + 1 }}>
                 {children}
               </ParentContext.Provider>

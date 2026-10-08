@@ -21,7 +21,7 @@ export const Default: Story = {
     const [page, setPage] = useState(1);
     return (
       <div className="space-y-4">
-        <p className="text-text-secondary text-sm">Active Page: {page}</p>
+        <p className="text-sm text-text-secondary">Active Page: {page}</p>
         <Pagination currentPage={page} pageCount={5} onPageChange={setPage} />
       </div>
     );
@@ -46,7 +46,7 @@ export const WithEllipsis: Story = {
     const [page, setPage] = useState(5);
     return (
       <div className="space-y-4">
-        <p className="text-text-secondary text-sm">Active Page: {page} / 10</p>
+        <p className="text-sm text-text-secondary">Active Page: {page} / 10</p>
         <Pagination
           currentPage={page}
           pageCount={10}
@@ -64,7 +64,7 @@ export const CustomBoundaries: Story = {
     const [page, setPage] = useState(8);
     return (
       <div className="space-y-4">
-        <p className="text-text-secondary text-sm">
+        <p className="text-sm text-text-secondary">
           Active Page: {page} (2 boundaries, 2 siblings)
         </p>
         <Pagination
@@ -165,25 +165,25 @@ export const PaginatedContent: Story = {
     return (
       <div className="max-w-md space-y-6">
         <div
-          className={`duration-fast ease-out-soft space-y-3 transition-all motion-reduce:transition-none ${
-            visible ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-2 scale-98 opacity-0'
+          className={`space-y-3 transition-[opacity,scale,translate] duration-fast ease-out-soft motion-reduce:transition-none ${
+            visible ? 'translate-y-0 scale-100 opacity-100' : 'scale-98 translate-y-2 opacity-0'
           }`}
         >
           {currentItems.map((item) => (
             <div
               key={item.id}
-              className="rounded-popover border-border bg-surface border p-4 shadow-sm transition-shadow hover:shadow-md"
+              className="rounded-popover border border-border bg-surface p-4 shadow-sm transition-shadow hover:shadow-md"
             >
-              <span className="bg-accent-subtle text-accent-default rounded px-2 py-0.5 text-xs font-semibold">
+              <span className="rounded bg-accent-subtle px-2 py-0.5 text-xs font-semibold text-accent-default">
                 {item.category}
               </span>
-              <h4 className="text-text-primary mt-2 text-sm font-medium">{item.title}</h4>
-              <p className="text-text-secondary mt-1 text-xs">{item.desc}</p>
+              <h4 className="mt-2 text-sm font-medium text-text-primary">{item.title}</h4>
+              <p className="mt-1 text-xs text-text-secondary">{item.desc}</p>
             </div>
           ))}
         </div>
-        <div className="border-border flex items-center justify-between border-t pt-4">
-          <p className="text-text-secondary text-xs">
+        <div className="flex items-center justify-between border-t border-border pt-4">
+          <p className="text-xs text-text-secondary">
             Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, MOCK_ITEMS.length)} of{' '}
             {MOCK_ITEMS.length}
           </p>

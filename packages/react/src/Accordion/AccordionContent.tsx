@@ -20,15 +20,20 @@ export const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps
         // and content stays in the DOM (readable by AT) while collapsed —
         // rather than unmounting, which would break aria-controls targeting.
         className={twMerge(
-          'duration-base ease-out-soft grid transition-[grid-template-rows] motion-reduce:transition-none',
+          'grid transition-[grid-template-rows] duration-base ease-out-soft motion-reduce:transition-none',
           open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
           className,
         )}
         hidden={false}
         {...props}
       >
-        <div className="overflow-hidden">
-          <div className="px-control-md pb-control-md text-text-secondary text-sm">{children}</div>
+        <div
+          className={twMerge(
+            'overflow-hidden transition-opacity duration-base motion-reduce:transition-none',
+            open ? 'opacity-100' : 'opacity-0',
+          )}
+        >
+          <div className="px-control-md pb-control-md text-sm text-text-secondary">{children}</div>
         </div>
       </div>
     );

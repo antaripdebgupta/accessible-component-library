@@ -87,13 +87,22 @@ export const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
             <span
               aria-hidden="true"
               className={twMerge(
-                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-full border transition-colors duration-fast motion-reduce:transition-none',
+                'pointer-events-none absolute inset-0 flex h-4 w-4 items-center justify-center rounded-full border transition-[background-color,border-color] duration-fast motion-reduce:transition-none',
+                isItemDisabled && 'transition-none',
                 isChecked
                   ? 'border-accent-default bg-accent-default'
                   : 'border-border-control bg-surface',
               )}
             >
-              {isChecked && <span className="h-1.5 w-1.5 rounded-full bg-text-inverse" />}
+              <span
+                aria-hidden="true"
+                className={twMerge(
+                  'h-1.5 w-1.5 rounded-full bg-text-inverse transition-[scale,opacity] motion-reduce:transition-none',
+                  isChecked
+                    ? 'scale-100 opacity-100 duration-base ease-out-soft'
+                    : 'scale-0 opacity-0 duration-fast ease-in-quick',
+                )}
+              />
             </span>
           </div>
 

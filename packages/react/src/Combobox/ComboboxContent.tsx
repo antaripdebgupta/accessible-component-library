@@ -2,6 +2,7 @@ import {
   forwardRef,
   useEffect,
   useLayoutEffect,
+  useRef,
   useState,
   type CSSProperties,
   type HTMLAttributes,
@@ -12,7 +13,7 @@ import { useComboboxContext } from './Combobox';
 
 export interface ComboboxContentProps extends HTMLAttributes<HTMLDivElement> {}
 
-const EXIT_DURATION_MS = 100;
+const EXIT_DURATION_MS = 160;
 
 export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
   ({ className, children, ...props }, ref) => {
@@ -20,6 +21,7 @@ export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
     const [style, setStyle] = useState<CSSProperties>({});
     const [mounted, setMounted] = useState(open);
     const [visible, setVisible] = useState(false);
+    const lastHeight = useRef(0);
 
     if (open && !mounted) {
       setMounted(true);
@@ -42,12 +44,17 @@ export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
     }, [mounted, open]);
 
     useLayoutEffect(() => {
+      if (open && contentRef.current) lastHeight.current = contentRef.current.offsetHeight;
+    });
+
+    useLayoutEffect(() => {
       if (!mounted) return;
       const input = inputRef.current;
       if (!input) return;
 
       const updatePosition = () => {
-        const rect = input.getBoundingClientRect();
+        const anchor = (input.closest('[data-combobox-anchor]') as HTMLElement | null) ?? input;
+        const rect = anchor.getBoundingClientRect();
         const viewportWidth = document.documentElement.clientWidth;
         const margin = 8;
 
@@ -64,7 +71,7 @@ export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
           width = maxWidth;
         }
 
-        setStyle({ position: 'fixed', top: rect.bottom + 12, left, width });
+        setStyle({ position: 'fixed', top: rect.bottom + 6, left, width });
       };
 
       updatePosition();
@@ -82,6 +89,7 @@ export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
     if (!mounted) return null;
 
     const listboxProps = getListboxProps();
+    const exiting = mounted && !open;
 
     return createPortal(
       <div
@@ -92,11 +100,19 @@ export const ComboboxContent = forwardRef<HTMLDivElement, ComboboxContentProps>(
         }}
         {...listboxProps}
         data-state={visible ? 'open' : 'closed'}
-        style={{ ...style, transformOrigin: 'top' }}
+        style={{
+          ...style,
+          transformOrigin: 'top',
+          ...(exiting && lastHeight.current ? { minHeight: lastHeight.current } : null),
+        }}
         className={twMerge(
-          'popover-surface z-50 max-h-72 overflow-y-auto border p-1',
-          'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
-          visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+          'popover-surface z-50 max-h-72 overflow-y-auto p-1',
+          'transition-[opacity,scale,translate] motion-reduce:transition-none',
+          'data-[state=open]:duration-base data-[state=open]:ease-out-soft',
+          'data-[state=closed]:duration-fast data-[state=closed]:ease-in-quick',
+          'data-[state=closed]:pointer-events-none',
+          'data-[state=open]:motion-safe:animate-drop-in',
+          visible ? 'scale-100 opacity-100' : 'scale-y-[0.9] opacity-0',
           className,
         )}
         onMouseDown={(e) => e.preventDefault()}

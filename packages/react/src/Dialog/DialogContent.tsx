@@ -189,8 +189,10 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
             className={twMerge(
               'relative flex max-h-[85vh] w-full flex-col overflow-hidden rounded-popover bg-surface shadow-lg',
               'outline-none',
-              'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
-              visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+              'transition-[opacity,scale,translate] motion-reduce:transition-none',
+              'data-[state=open]:duration-base data-[state=open]:ease-out-soft data-[state=open]:motion-safe:animate-pop-in',
+              'data-[state=closed]:pointer-events-none data-[state=closed]:duration-fast data-[state=closed]:ease-in-quick',
+              visible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0',
               sizeClasses[size],
               className,
             )}
@@ -199,7 +201,7 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
             {showCloseButton && (
               <button
                 {...closeButtonProps}
-                className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-control text-text-secondary outline-none transition-colors focus-ring-safe hover:bg-surface-raised hover:text-text-primary"
+                className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-control text-text-secondary outline-none transition-[color,background-color,border-color,box-shadow,scale] duration-fast ease-out-soft focus-ring-safe hover:bg-surface-raised hover:text-text-primary active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100"
               >
                 <CloseIcon />
               </button>

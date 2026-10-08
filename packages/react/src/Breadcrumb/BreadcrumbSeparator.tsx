@@ -21,10 +21,7 @@ export const BreadcrumbSeparator = forwardRef<HTMLLIElement, BreadcrumbSeparator
         )}
       >
         {children ?? (
-          <ChevronRight
-            size={14}
-            className={twMerge('shrink-0 transition-transform', dir === 'rtl' && 'rotate-180')}
-          />
+          <ChevronRight size={14} className={twMerge('shrink-0', dir === 'rtl' && 'rotate-180')} />
         )}
       </li>
     );

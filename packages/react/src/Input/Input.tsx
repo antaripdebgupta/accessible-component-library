@@ -7,7 +7,7 @@ import { Eye, EyeOff } from 'lucide-react';
 const inputVariants = cva(
   [
     'w-full h-ctl-md field-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
-    'outline-none',
+    'outline-none forced-colors:focus:outline-2 forced-colors:focus:outline-solid forced-colors:focus:outline-[color:Highlight]',
     'disabled:cursor-not-allowed disabled:opacity-50',
     'autofill:shadow-[0_0_0_30px_var(--color-surface,#fff)_inset] autofill:[-webkit-text-fill-color:var(--color-text-primary,#000)]',
   ],
@@ -174,7 +174,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               togglePasswordVisibility();
             }}
             className={twMerge(
-              'absolute flex items-center justify-center rounded-control p-1 text-text-secondary focus-ring-safe hover:text-text-primary',
+              'absolute flex items-center justify-center rounded-control p-1 text-text-secondary transition-colors duration-fast focus-ring-safe hover:text-text-primary motion-reduce:transition-none',
               dir === 'rtl' ? 'left-2' : 'right-2',
               disabled && 'cursor-not-allowed opacity-50',
             )}

@@ -11,7 +11,7 @@ export function CarouselPrevButton({ className }: { className?: string }) {
       {...getPrevButtonProps()}
       className={twMerge(
         'shadow-xs flex h-ctl-md w-ctl-md items-center justify-center rounded-full border border-border-strong bg-surface text-text-primary',
-        'outline-none transition-colors duration-fast focus-ring-safe hover:bg-surface-raised motion-reduce:transition-none',
+        'outline-none transition-[color,background-color,border-color,box-shadow,scale] duration-fast ease-out-soft focus-ring-safe hover:bg-surface-raised active:scale-[0.96] disabled:active:scale-100 aria-disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100',
         'disabled:pointer-events-none disabled:opacity-40',
         className,
       )}
@@ -30,7 +30,7 @@ export function CarouselNextButton({ className }: { className?: string }) {
       {...getNextButtonProps()}
       className={twMerge(
         'shadow-xs flex h-ctl-md w-ctl-md items-center justify-center rounded-full border border-border-strong bg-surface text-text-primary',
-        'outline-none transition-colors duration-fast focus-ring-safe hover:bg-surface-raised motion-reduce:transition-none',
+        'outline-none transition-[color,background-color,border-color,box-shadow,scale] duration-fast ease-out-soft focus-ring-safe hover:bg-surface-raised active:scale-[0.96] disabled:active:scale-100 aria-disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100',
         'disabled:pointer-events-none disabled:opacity-40',
         className,
       )}
@@ -63,7 +63,7 @@ export function CarouselDots({
         >
           <span
             className={twMerge(
-              'block h-2 rounded-full transition-all duration-fast motion-reduce:transition-none',
+              'block h-2 rounded-full transition-[width,background-color] duration-fast ease-out-soft motion-reduce:transition-none',
               i === activeIndex
                 ? 'w-5 bg-accent-default'
                 : 'w-2 bg-border-control hover:bg-text-secondary',
@@ -87,7 +87,7 @@ export function CarouselPlayPauseButton({ className }: { className?: string }) {
       {...getPlayPauseButtonProps()}
       className={twMerge(
         'shadow-xs flex h-ctl-md w-ctl-md items-center justify-center rounded-full border border-border-strong bg-surface text-text-primary',
-        'outline-none transition-colors duration-fast focus-ring-safe hover:bg-surface-raised motion-reduce:transition-none',
+        'outline-none transition-[color,background-color,border-color,box-shadow,scale] duration-fast ease-out-soft focus-ring-safe hover:bg-surface-raised active:scale-[0.96] disabled:active:scale-100 aria-disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100',
         className,
       )}
     >

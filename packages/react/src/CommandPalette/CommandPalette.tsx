@@ -106,6 +106,7 @@ export function CommandPalette({
   const panelRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
   const openRef = useRef(command.open);
+  const lastHeight = useRef(0);
   const [mounted, setMounted] = useState(command.open);
   const [visible, setVisible] = useState(false);
 
@@ -153,6 +154,10 @@ export function CommandPalette({
   }, [mounted, command.open]);
 
   useLayoutEffect(() => {
+    if (command.open && panelRef.current) lastHeight.current = panelRef.current.offsetHeight;
+  });
+
+  useLayoutEffect(() => {
     if (!mounted) return;
     lockBodyScroll();
     return () => unlockBodyScroll();
@@ -169,6 +174,8 @@ export function CommandPalette({
 
   if (!mounted) return null;
 
+  const exiting = mounted && !command.open;
+
   return (
     <CommandPaletteContext.Provider value={contextValue}>
       {createPortal(
@@ -176,10 +183,12 @@ export function CommandPalette({
           <div
             aria-hidden="true"
             onClick={() => command.close()}
+            data-state={visible ? 'open' : 'closed'}
             className={twMerge(
               'fixed inset-0 z-40 bg-overlay',
-              'transition-opacity duration-fast ease-out-soft motion-reduce:transition-none',
-              visible ? 'opacity-100' : 'opacity-0',
+              'transition-opacity motion-reduce:transition-none',
+              'data-[state=open]:opacity-100 data-[state=open]:duration-base data-[state=open]:ease-out-soft data-[state=open]:motion-safe:animate-fade-in',
+              'data-[state=closed]:pointer-events-none data-[state=closed]:opacity-0 data-[state=closed]:duration-fast data-[state=closed]:ease-in-quick',
             )}
           />
           <div
@@ -194,10 +203,13 @@ export function CommandPalette({
               aria-modal="true"
               aria-label="Command palette"
               data-state={visible ? 'open' : 'closed'}
+              style={exiting && lastHeight.current ? { minHeight: lastHeight.current } : undefined}
               className={twMerge(
-                'flex max-h-[70vh] w-full max-w-lg flex-col overflow-hidden rounded-popover bg-surface shadow-lg',
-                'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
-                visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+                'flex max-h-[70vh] w-full max-w-lg origin-top flex-col overflow-hidden rounded-popover bg-surface shadow-lg',
+                'transition-[opacity,scale,translate] motion-reduce:transition-none',
+                'data-[state=open]:duration-base data-[state=open]:ease-out-soft data-[state=open]:motion-safe:animate-pop-in',
+                'data-[state=closed]:pointer-events-none data-[state=closed]:duration-fast data-[state=closed]:ease-in-quick',
+                visible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0',
                 className,
               )}
             >

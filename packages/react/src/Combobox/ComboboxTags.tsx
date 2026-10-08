@@ -22,7 +22,7 @@ export function ComboboxTags({ getLabel }: ComboboxTagsProps) {
               type="button"
               aria-label={`Remove ${getLabel?.(v) ?? v}`}
               onClick={() => removeValue(v)}
-              className="relative flex h-4 w-4 items-center justify-center rounded-control text-text-secondary before:absolute before:-inset-1 before:content-[''] hover:text-text-primary"
+              className="relative flex h-4 w-4 items-center justify-center rounded-control text-text-secondary transition-colors duration-fast before:absolute before:-inset-1 before:content-[''] hover:text-text-primary motion-reduce:transition-none"
             >
               <X size={12} aria-hidden="true" />
             </button>

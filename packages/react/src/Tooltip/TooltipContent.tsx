@@ -125,8 +125,10 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
         style={{ ...style, transformOrigin: TRANSFORM_ORIGIN[placement] }}
         className={twMerge(
           'pointer-events-auto z-50 max-w-xs rounded-control bg-surface-inverse px-2.5 py-1.5 text-xs font-medium text-text-inverse shadow-sm',
-          'transition-[opacity,transform] duration-fast ease-out-soft motion-reduce:transition-none',
-          visible ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+          'transition-[opacity,scale] motion-reduce:transition-none',
+          'data-[state=open]:duration-fast data-[state=open]:ease-out-soft data-[state=open]:motion-safe:animate-tip-in',
+          'data-[state=closed]:pointer-events-none data-[state=closed]:duration-fast data-[state=closed]:ease-in-quick',
+          visible ? 'scale-100 opacity-100' : 'scale-90 opacity-0',
           translate,
           className,
         )}

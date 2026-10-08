@@ -38,8 +38,14 @@ module.exports = {
 
     "danger-default": "#b91c1c",
     "danger-default-dark": "#f87171",
+    "danger-hover": "#991b1b",
+    "danger-hover-dark": "#fca5a5",
+    "danger-active": "#7f1d1d",
+    "danger-active-dark": "#fecaca",
     "danger-subtle": "#fef3f2",
     "danger-subtle-dark": "#2a1315",
+    highlight: "rgb(255 255 255 / 0.14)",
+    "highlight-dark": "transparent",
     "success-default": "#15803d",
     "success-default-dark": "#4ade80",
     "success-subtle": "#f1faf4",
@@ -88,6 +94,7 @@ module.exports = {
   },
   transitionTimingFunction: {
     "out-soft": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "in-quick": "cubic-bezier(0.4, 0, 1, 1)",
   },
 
   ringWidth: {
