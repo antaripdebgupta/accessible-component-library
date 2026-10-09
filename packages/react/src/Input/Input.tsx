@@ -9,7 +9,7 @@ const inputVariants = cva(
     'w-full h-ctl-md field-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary',
     'outline-none forced-colors:focus:outline-2 forced-colors:focus:outline-solid forced-colors:focus:outline-[color:Highlight]',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    'autofill:shadow-[0_0_0_30px_var(--color-surface,#fff)_inset] autofill:[-webkit-text-fill-color:var(--color-text-primary,#000)]',
+    'autofill:shadow-[0_0_0_30px_var(--color-surface)_inset] autofill:[-webkit-text-fill-color:var(--color-text-primary)]',
   ],
   {
     variants: {
