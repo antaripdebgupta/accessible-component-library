@@ -101,12 +101,18 @@ test.describe('TreeView — layout stability on expand/collapse', () => {
     const pkgBoxBefore = await pkg.boundingBox();
 
     await src.click(); // collapse src
+    await expect(src).toHaveAttribute('aria-expanded', 'false');
+
+    // Wait for CSS grid-template-rows collapse transition to finish and pkg to move up
+    await expect
+      .poll(async () => {
+        const box = await pkg.boundingBox();
+        return box?.y;
+      })
+      .toBeLessThan(pkgBoxBefore!.y);
 
     const srcBoxAfter = await src.boundingBox();
-    const pkgBoxAfter = await pkg.boundingBox();
-
     expect(srcBoxAfter!.y).toBeCloseTo(srcBoxBefore!.y, 0); // src unmoved
-    expect(pkgBoxAfter!.y).toBeLessThan(pkgBoxBefore!.y); // pkg moved up to fill the gap
   });
 });
 

@@ -1,4 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const storybookStatic = path.resolve(__dirname, '../../apps/storybook/storybook-static');
 
 export default defineConfig({
   testDir: './tests',
@@ -11,7 +16,9 @@ export default defineConfig({
   },
 
   webServer: {
-    command: 'pnpm --filter @antarip/storybook exec storybook dev -p 6006 --host 127.0.0.1 --ci',
+    command: process.env.CI
+      ? `npx http-server ${storybookStatic} -p 6006 --silent`
+      : 'pnpm --filter @antarip/storybook exec storybook dev -p 6006 --host 127.0.0.1 --ci',
     url: 'http://127.0.0.1:6006/',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
