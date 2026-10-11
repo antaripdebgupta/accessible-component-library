@@ -118,12 +118,20 @@ export const ButtonGroupVariant: Story = {
         <Input label="Account Password" type="password" defaultValue="SuperSecretP@ss" />
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-text-primary text-sm font-medium">Referral Link</label>
+          <label htmlFor="referral-link" className="text-sm font-medium text-text-primary">
+            Referral Link
+          </label>
           <InputGroup>
-            <Input value="https://acl.design/ref/12345" readOnly className="rounded-e-none" />
+            <Input
+              id="referral-link"
+              aria-label="Referral Link"
+              value="https://acl.design/ref/12345"
+              readOnly
+              className="rounded-e-none"
+            />
             <button
               type="button"
-              className="bg-accent-default text-text-inverse hover:bg-accent-hover focus-ring-safe shrink-0 rounded-e-md px-4 py-2 text-xs font-medium"
+              className="shrink-0 rounded-e-md bg-accent-default px-4 py-2 text-xs font-medium text-text-inverse focus-ring-safe hover:bg-accent-hover"
               onClick={() => alert('Copied to clipboard!')}
             >
               <Copy size={14} className="me-1 inline" />
@@ -152,9 +160,9 @@ export const FormComposition: Story = {
           e.preventDefault();
           setSubmitted(true);
         }}
-        className="border-border bg-surface flex w-full max-w-md flex-col gap-4 rounded-xl border p-6 shadow-xs"
+        className="shadow-xs flex w-full max-w-md flex-col gap-4 rounded-xl border border-border bg-surface p-6"
       >
-        <h2 className="text-text-primary text-lg font-bold">Create Account</h2>
+        <h2 className="text-lg font-bold text-text-primary">Create Account</h2>
 
         <Input label="Full Name" required showRequiredIndicator placeholder="Alex Morgan" />
         <Input
@@ -171,13 +179,13 @@ export const FormComposition: Story = {
 
         <button
           type="submit"
-          className="bg-accent-default text-text-inverse hover:bg-accent-hover focus-ring-safe mt-2 w-full rounded-md py-2.5 font-medium"
+          className="mt-2 w-full rounded-md bg-accent-default py-2.5 font-medium text-text-inverse focus-ring-safe hover:bg-accent-hover"
         >
           Register
         </button>
 
         {submitted && (
-          <p className="text-accent-default text-center text-xs font-semibold">
+          <p className="text-center text-xs font-semibold text-accent-default">
             Form submitted successfully!
           </p>
         )}

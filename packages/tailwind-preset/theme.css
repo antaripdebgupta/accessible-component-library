@@ -12,7 +12,7 @@
   --color-surface-inverse: #0e1014;
 
   --color-text-primary: #0e1014;
-  --color-text-secondary: #5b5f6a;
+  --color-text-secondary: #464a53;
   --color-text-disabled: #8b8e98;
   --color-text-inverse: #ffffff;
 
@@ -84,6 +84,7 @@
 
   @keyframes shimmer {
     100% {
+      transform: translateX(100%);
       translate: 100% 0;
     }
   }
@@ -162,7 +163,7 @@
     --color-surface-inverse: #f2f2f4;
 
     --color-text-primary: #f2f2f4;
-    --color-text-secondary: #9b9ca6;
+    --color-text-secondary: #abacb4;
     --color-text-disabled: #8b8e98;
     --color-text-inverse: #0e1014;
 

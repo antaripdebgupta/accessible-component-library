@@ -47,7 +47,7 @@ const TriggerButton = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLBut
     <button
       ref={ref}
       type="button"
-      className="rounded-control border-border px-control-md py-control-sm border text-sm"
+      className="rounded-control border border-border px-control-md py-control-sm text-sm"
       {...props}
     >
       {children}
@@ -58,7 +58,7 @@ TriggerButton.displayName = 'TriggerButton';
 
 function Avatar({ initials }: { initials: string }) {
   return (
-    <span className="bg-accent-default flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold text-white">
+    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-default text-xs font-semibold text-white">
       {initials}
     </span>
   );
@@ -273,7 +273,7 @@ export const Destructive: Story = {
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <TriggerButton>
+        <TriggerButton aria-label="More options">
           <MoreHorizontal size={16} />
         </TriggerButton>
       </DropdownMenuTrigger>
@@ -294,15 +294,15 @@ export const AvatarStory: Story = {
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <button type="button" className="focus-ring-safe rounded-full" aria-label="Open user menu">
+        <button type="button" className="rounded-full focus-ring-safe" aria-label="Open user menu">
           <Avatar initials="JD" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>
           <div className="flex flex-col">
-            <span className="text-text-primary text-sm font-medium">Jane Doe</span>
-            <span className="text-text-secondary text-xs font-normal">jane@example.com</span>
+            <span className="text-sm font-medium text-text-primary">Jane Doe</span>
+            <span className="text-xs font-normal text-text-secondary">jane@example.com</span>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

@@ -38,5 +38,13 @@ const config: StorybookConfig = {
     },
   },
   framework: getAbsolutePath('@storybook/react-vite'),
+  async viteFinal(config) {
+    const { mergeConfig } = await import('vite');
+    return mergeConfig(config, {
+      server: {
+        allowedHosts: true,
+      },
+    });
+  },
 };
 export default config;

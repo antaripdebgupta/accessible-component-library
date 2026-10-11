@@ -4,6 +4,10 @@ import AxeBuilder from '@axe-core/playwright';
 test.describe('Tabs — accessibility', () => {
   test('has no axe violations', async ({ page }) => {
     await page.goto('/iframe.html?id=components-tabs--default');
+    await expect(page.getByRole('tabpanel')).toBeVisible();
+    await page
+      .locator('#storybook-root')
+      .evaluate((el) => Promise.all(el.getAnimations({ subtree: true }).map((a) => a.finished)));
     const results = await new AxeBuilder({ page })
       .include('#storybook-root')
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])

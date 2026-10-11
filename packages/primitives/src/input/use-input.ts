@@ -22,7 +22,8 @@ export function useInput({
   type = 'text',
   id,
 }: UseInputOptions = {}) {
-  const stableId = useStableId(id ?? 'input');
+  const generatedId = useStableId('input');
+  const stableId = id ?? generatedId;
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [value, setValue] = useControllableState<string>({

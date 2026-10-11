@@ -12,8 +12,8 @@ module.exports = {
 
     "text-primary": "#0e1014",
     "text-primary-dark": "#f2f2f4",
-    "text-secondary": "#5b5f6a",
-    "text-secondary-dark": "#9b9ca6",
+    "text-secondary": "#464a53",
+    "text-secondary-dark": "#abacb4",
     "text-disabled": "#8b8e98",
     "text-disabled-dark": "#8b8e98",
     "text-inverse": "#ffffff",

@@ -51,7 +51,7 @@ export function CarouselDots({
   return (
     <div
       className={twMerge('flex items-center justify-center gap-1', className)}
-      role="tablist"
+      role="group"
       aria-label="Slide navigation"
     >
       {Array.from({ length: slideCount }, (_, i) => (

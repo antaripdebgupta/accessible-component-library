@@ -13,7 +13,7 @@ module.exports = {
       ringWidth: tokens.ringWidth,
       keyframes: {
         shimmer: {
-          "100%": { translate: "100% 0" },
+          "100%": { transform: "translateX(100%)", translate: "100% 0" },
         },
         rise: {
           from: { opacity: "0", translate: "0 4px" },

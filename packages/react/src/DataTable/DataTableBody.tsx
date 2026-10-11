@@ -17,8 +17,14 @@ export function DataTableBody<T>({ renderExpanded, emptyMessage }: DataTableBody
   const [displayData, setDisplayData] = useState<T[]>(pagedData);
   const [visible, setVisible] = useState(true);
 
+  const isFirstRender = useRef(true);
+
   // Smooth pagination/sort transition: fade out, swap data, fade in.
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     setVisible(false);
     const timer = setTimeout(() => {
       setDisplayData(pagedData);

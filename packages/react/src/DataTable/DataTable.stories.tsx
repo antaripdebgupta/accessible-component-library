@@ -315,7 +315,7 @@ export const CustomCells: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <div className="pointer-events-none opacity-50">
+    <div aria-disabled="true" className="pointer-events-none opacity-50">
       <DataTable
         data={USERS.slice(0, 3)}
         columns={baseColumns}
