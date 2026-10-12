@@ -18,7 +18,7 @@ export default defineConfig({
   webServer: {
     command: process.env.CI
       ? `npx http-server ${storybookStatic} -p 6006 --silent`
-      : 'pnpm --filter @antarip/storybook exec storybook dev -p 6006 --host 127.0.0.1 --ci',
+      : 'pnpm --filter @accessly-ui/storybook exec storybook dev -p 6006 --host 127.0.0.1 --ci',
     url: 'http://127.0.0.1:6006/',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,

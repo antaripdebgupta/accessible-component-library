@@ -9,7 +9,8 @@ export default defineConfig({
   },
 
   webServer: {
-    command: 'pnpm --filter @antarip/storybook exec storybook dev -p 6006 --host 127.0.0.1 --ci',
+    command:
+      'pnpm --filter @accessly-ui/storybook exec storybook dev -p 6006 --host 127.0.0.1 --ci',
     url: 'http://127.0.0.1:6006/',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,

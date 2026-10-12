@@ -4,7 +4,7 @@ import {
   useDataTable,
   type UseDataTableOptions,
   type UseDataTableReturn,
-} from '@antarip/primitives';
+} from '@accessly-ui/primitives';
 import { Pagination } from '../Pagination';
 
 const DataTableContext = createContext<UseDataTableReturn<any> | null>(null);

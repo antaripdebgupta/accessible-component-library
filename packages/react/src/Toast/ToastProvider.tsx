@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { useToastQueue, type ToastItem, type ToastPlacement } from '@antarip/primitives';
+import { useToastQueue, type ToastItem, type ToastPlacement } from '@accessly-ui/primitives';
 import { Toast } from './Toast';
 import { twMerge } from 'tailwind-merge';
 

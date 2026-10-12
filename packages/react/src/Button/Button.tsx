@@ -1,6 +1,6 @@
 import { forwardRef, type ButtonHTMLAttributes, type MouseEvent } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useButton } from '@antarip/primitives';
+import { useButton } from '@accessly-ui/primitives';
 import { twMerge } from 'tailwind-merge';
 
 const buttonStyles = cva(

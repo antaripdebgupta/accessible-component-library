@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useState, type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 import { AlertTriangle, CheckCircle2, Info, X, XCircle } from 'lucide-react';
-import { useAlert } from '@antarip/primitives';
+import { useAlert } from '@accessly-ui/primitives';
 
 const ALERT_EXIT_MS = 160;
 

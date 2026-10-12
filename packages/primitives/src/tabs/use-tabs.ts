@@ -7,7 +7,7 @@ import {
   type KeyboardEvent,
   type RefObject,
 } from 'react';
-import { useControllableState, useStableId, useDirection } from '@antarip/utils';
+import { useControllableState, useStableId, useDirection } from '@accessly-ui/utils';
 
 export type TabsOrientation = 'horizontal' | 'vertical';
 export type TabsActivationMode = 'automatic' | 'manual';

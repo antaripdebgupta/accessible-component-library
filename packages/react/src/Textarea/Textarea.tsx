@@ -10,7 +10,7 @@ import {
   type KeyboardEvent,
 } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useTextarea, type UseTextareaOptions } from '@antarip/primitives';
+import { useTextarea, type UseTextareaOptions } from '@accessly-ui/primitives';
 import { twMerge } from 'tailwind-merge';
 
 const textareaVariants = cva(

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, type ChangeEvent } from 'react';
-import { useControllableState, useStableId } from '@antarip/utils';
+import { useControllableState, useStableId } from '@accessly-ui/utils';
 
 export interface UseCheckboxOptions {
   checked?: boolean | 'indeterminate';

@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useAvatarGroup } from '@antarip/primitives';
+import { useAvatarGroup } from '@accessly-ui/primitives';
 import { Avatar, type AvatarProps } from './Avatar';
 
 export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {

@@ -9,7 +9,7 @@ export interface ThemeScriptOptions {
 
 /** Returns JS source to inline in <head>. It must run before the page paints. */
 export function getThemeScript({
-  storageKey = 'antarip-theme',
+  storageKey = 'accessly-theme',
   defaultMode,
   enableSystem = true,
   forcedTheme,

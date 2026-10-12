@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useControllableState, useStableId, useReducedMotion, useDirection } from '@antarip/utils';
+import {
+  useControllableState,
+  useStableId,
+  useReducedMotion,
+  useDirection,
+} from '@accessly-ui/utils';
 
 export type CarouselOrientation = 'horizontal' | 'vertical';
 

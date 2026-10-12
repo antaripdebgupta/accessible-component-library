@@ -25,7 +25,7 @@ function TestConsumer() {
 describe('getThemeScript', () => {
   test('returns script string with default options', () => {
     const script = getThemeScript();
-    expect(script).toContain('antarip-theme');
+    expect(script).toContain('accessly-theme');
     expect(script).toContain('document.documentElement');
   });
 
@@ -104,7 +104,7 @@ describe('ThemeProvider', () => {
     expect(screen.getByTestId('mode').textContent).toBe('light');
     expect(screen.getByTestId('resolved').textContent).toBe('light');
     expect(document.documentElement.classList.contains('light')).toBe(true);
-    expect(localStorage.getItem('antarip-theme')).toBe('light');
+    expect(localStorage.getItem('accessly-theme')).toBe('light');
   });
 
   test('3. mode === "system": dispatching a change event on matchMedia flips the class', () => {
@@ -142,7 +142,7 @@ describe('ThemeProvider', () => {
   });
 
   test('5. forcedTheme="light" ignores stored dark and OS dark; forced is true', () => {
-    localStorage.setItem('antarip-theme', 'dark');
+    localStorage.setItem('accessly-theme', 'dark');
     mediaMatches = true;
 
     render(
@@ -157,7 +157,7 @@ describe('ThemeProvider', () => {
   });
 
   test('6. enableSystem={false} with stored system normalizes to default', () => {
-    localStorage.setItem('antarip-theme', 'system');
+    localStorage.setItem('accessly-theme', 'system');
     render(
       <ThemeProvider enableSystem={false} defaultMode="light">
         <TestConsumer />
@@ -169,7 +169,7 @@ describe('ThemeProvider', () => {
   });
 
   test('7. Stored garbage and throwing localStorage do not crash; default is used', () => {
-    localStorage.setItem('antarip-theme', 'invalid-garbage');
+    localStorage.setItem('accessly-theme', 'invalid-garbage');
     const getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
       throw new Error('Access denied');
     });
@@ -186,7 +186,7 @@ describe('ThemeProvider', () => {
 
   test('8. Storage event from another tab updates mode', () => {
     render(
-      <ThemeProvider storageKey="antarip-theme">
+      <ThemeProvider storageKey="accessly-theme">
         <TestConsumer />
       </ThemeProvider>,
     );
@@ -194,7 +194,7 @@ describe('ThemeProvider', () => {
     act(() => {
       window.dispatchEvent(
         new StorageEvent('storage', {
-          key: 'antarip-theme',
+          key: 'accessly-theme',
           newValue: 'dark',
         }),
       );
@@ -220,11 +220,11 @@ describe('ThemeProvider', () => {
 
     await user.click(darkRadio);
     expect(darkRadio).toBeChecked();
-    expect(localStorage.getItem('antarip-theme')).toBe('dark');
+    expect(localStorage.getItem('accessly-theme')).toBe('dark');
 
     await user.click(lightRadio);
     expect(lightRadio).toBeChecked();
-    expect(localStorage.getItem('antarip-theme')).toBe('light');
+    expect(localStorage.getItem('accessly-theme')).toBe('light');
   });
 
   test('ThemeToggle returns null when theme is forced', () => {

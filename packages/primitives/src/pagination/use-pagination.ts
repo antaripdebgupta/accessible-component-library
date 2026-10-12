@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useControllableState } from '@antarip/utils';
+import { useControllableState } from '@accessly-ui/utils';
 
 export interface UsePaginationOptions {
   pageCount: number;

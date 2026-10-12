@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useInput, type UseInputOptions } from '@antarip/primitives';
+import { useInput, type UseInputOptions } from '@accessly-ui/primitives';
 import { twMerge } from 'tailwind-merge';
 import { Eye, EyeOff } from 'lucide-react';
 

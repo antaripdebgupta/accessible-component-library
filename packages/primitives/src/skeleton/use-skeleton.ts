@@ -1,4 +1,4 @@
-import { useReducedMotion } from '@antarip/utils';
+import { useReducedMotion } from '@accessly-ui/utils';
 
 export interface UseSkeletonOptions {
   loading?: boolean;

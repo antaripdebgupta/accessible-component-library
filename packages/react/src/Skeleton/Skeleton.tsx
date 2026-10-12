@@ -1,7 +1,7 @@
 import { forwardRef, type HTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
-import { useSkeleton } from '@antarip/primitives';
+import { useSkeleton } from '@accessly-ui/primitives';
 
 const skeletonStyles = cva(
   [

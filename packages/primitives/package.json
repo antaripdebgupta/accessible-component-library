@@ -1,5 +1,5 @@
 {
-  "name": "@antarip/primitives",
+  "name": "@accessly-ui/primitives",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -23,7 +23,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@antarip/utils": "workspace:*"
+    "@accessly-ui/utils": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

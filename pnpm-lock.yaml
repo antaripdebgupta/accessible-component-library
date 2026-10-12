@@ -364,7 +364,7 @@ importers:
 
   packages/primitives:
     dependencies:
-      '@antarip/utils':
+      '@accessly-ui/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:
@@ -398,10 +398,10 @@ importers:
 
   packages/react:
     dependencies:
-      '@antarip/primitives':
+      '@accessly-ui/primitives':
         specifier: workspace:*
         version: link:../primitives
-      '@antarip/utils':
+      '@accessly-ui/utils':
         specifier: workspace:*
         version: link:../utils
       class-variance-authority:
@@ -414,7 +414,7 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
     devDependencies:
-      '@antarip/tailwind-preset':
+      '@accessly-ui/tailwind-preset':
         specifier: workspace:*
         version: link:../tailwind-preset
       '@storybook/react':

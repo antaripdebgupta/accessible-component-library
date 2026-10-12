@@ -11,7 +11,7 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { twMerge } from 'tailwind-merge';
-import { useCommandPalette, type UseCommandPaletteReturn } from '@antarip/primitives';
+import { useCommandPalette, type UseCommandPaletteReturn } from '@accessly-ui/primitives';
 
 interface CommandPaletteContextValue extends UseCommandPaletteReturn {
   inputRef: RefObject<HTMLInputElement | null>;

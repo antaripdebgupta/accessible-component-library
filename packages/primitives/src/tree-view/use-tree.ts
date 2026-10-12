@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, type KeyboardEvent, type RefObject } from 'react';
-import { useControllableState, useStableId } from '@antarip/utils';
+import { useControllableState, useStableId } from '@accessly-ui/utils';
 
 export type TreeSelectionMode = 'none' | 'single' | 'multiple';
 

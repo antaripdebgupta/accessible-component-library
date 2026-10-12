@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@antarip/tailwind-preset/theme.css";
+@import "@accessly-ui/tailwind-preset/theme.css";
 
 @source "./**/*.{ts,tsx}";
 @source "../../../apps/storybook/src/**/*.{ts,tsx}";

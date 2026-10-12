@@ -1,6 +1,6 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useSwitch } from '@antarip/primitives';
+import { useSwitch } from '@accessly-ui/primitives';
 import { twMerge } from 'tailwind-merge';
 
 const switchTrackStyles = cva(

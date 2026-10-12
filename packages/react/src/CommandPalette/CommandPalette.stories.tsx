@@ -11,7 +11,7 @@ import {
   CommandLoading,
   CommandShortcut,
 } from './index';
-import { useAsyncSearch } from '@antarip/primitives';
+import { useAsyncSearch } from '@accessly-ui/primitives';
 import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof CommandPalette> = {

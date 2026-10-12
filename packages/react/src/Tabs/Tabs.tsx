@@ -4,7 +4,7 @@ import {
   type UseTabsReturn,
   type TabsOrientation,
   type TabsActivationMode,
-} from '@antarip/primitives';
+} from '@accessly-ui/primitives';
 import { twMerge } from 'tailwind-merge';
 
 const TabsContext = createContext<UseTabsReturn | null>(null);

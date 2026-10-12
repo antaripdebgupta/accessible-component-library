@@ -5,7 +5,7 @@ import {
   type FieldsetHTMLAttributes,
   type ReactNode,
 } from 'react';
-import { useRadioGroup, type UseRadioGroupReturn } from '@antarip/primitives';
+import { useRadioGroup, type UseRadioGroupReturn } from '@accessly-ui/primitives';
 import { twMerge } from 'tailwind-merge';
 
 interface RadioGroupContextValue extends UseRadioGroupReturn {}

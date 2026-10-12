@@ -1,6 +1,6 @@
 import { createContext, forwardRef, useContext, useMemo, type HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useTree, type UseTreeReturn, type TreeSelectionMode } from '@antarip/primitives';
+import { useTree, type UseTreeReturn, type TreeSelectionMode } from '@accessly-ui/primitives';
 
 const TreeContext = createContext<UseTreeReturn | null>(null);
 export function useTreeContext(): UseTreeReturn {

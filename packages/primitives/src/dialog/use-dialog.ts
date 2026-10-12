@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useControllableState, useStableId, useEscapeKey } from '@antarip/utils';
+import { useControllableState, useStableId, useEscapeKey } from '@accessly-ui/utils';
 
 export interface UseDialogOptions {
   open?: boolean;

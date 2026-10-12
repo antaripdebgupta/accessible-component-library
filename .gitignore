@@ -47,3 +47,8 @@ Thumbs.db
 # Misc
 *.local
 .cache/
+
+# local build/pack artifacts
+*.tgz
+bundle-out.js
+meta.json

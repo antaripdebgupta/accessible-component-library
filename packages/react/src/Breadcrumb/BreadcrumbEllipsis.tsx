@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from '../DropdownMenu';
-import type { BreadcrumbItemData } from '@antarip/primitives';
+import type { BreadcrumbItemData } from '@accessly-ui/primitives';
 
 export interface BreadcrumbEllipsisProps extends HTMLAttributes<HTMLLIElement> {
   items?: BreadcrumbItemData[];

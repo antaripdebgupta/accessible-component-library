@@ -23,6 +23,46 @@ Every component ships with headless primitives, styled React bindings,
 Storybook stories with executable keyboard `play` tests, unit + Playwright
 e2e coverage, and a colocated `.a11y.md` accessibility contract.
 
+## Architecture
+
+The library is split into four independently-versioned packages, layered
+so each one has exactly one job:
+
+```mermaid
+flowchart BT
+    utils["utils<br/><sub>shared hooks</sub>"]
+    primitives["primitives<br/><sub>headless, unstyled, ARIA-correct</sub>"]
+    react["react<br/><sub>styled, composable components</sub>"]
+    tailwind["tailwind-preset<br/><sub>design tokens (CSS + JS)</sub>"]
+
+    primitives --> react
+    utils --> primitives
+    utils --> react
+    tailwind -- styling only --> react
+```
+
+- **`primitives`** owns all behavior: focus management, keyboard
+  navigation, roving tabindex, ARIA state and relationships. It renders no
+  styles and makes no markup assumptions — consumers can skin it with any
+  CSS approach.
+- **`react`** wraps `primitives` with styled, composable components
+  (e.g. `Dialog` → `DialogHeader` / `DialogBody` / `DialogFooter`) rather
+  than single do-everything props, and pulls its visual styling from
+  `tailwind-preset`.
+- **`tailwind-preset`** holds design tokens as a Tailwind v4 CSS preset
+  plus a plain JS export, so non-Tailwind consumers can still use the
+  tokens directly. Light/dark/system theming is handled via class-based
+  selectors, synced to the OS by default and overridable per-app.
+- **`utils`** holds the small cross-cutting hooks (`use-focus-trap`,
+  `use-controllable-state`, `use-escape-key`, …) that both `primitives`
+  and `react` depend on, kept separate so they're independently testable
+  and reusable outside this library.
+
+Dependency direction is strictly one-way — `utils → primitives → react`,
+with `tailwind-preset` consumed only by `react` for styling — so
+`primitives` never depends on anything styled, and can be adopted on its
+own by teams building a fully custom design system on top of it.
+
 ## Packages
 
 - `packages/utils` — shared hooks (focus trap, roving tabindex, controllable state)

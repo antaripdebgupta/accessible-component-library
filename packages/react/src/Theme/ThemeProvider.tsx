@@ -79,7 +79,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({
   children,
   defaultMode,
-  storageKey = 'antarip-theme',
+  storageKey = 'accessly-theme',
   enableSystem = true,
   forcedTheme,
   disableTransitionOnChange = true,

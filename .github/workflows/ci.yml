@@ -106,7 +106,7 @@ jobs:
       # Full build (not filtered) — e2e needs every package built regardless
       # of which one triggered this run, since Storybook bundles them all.
       - run: pnpm turbo run build
-      - run: pnpm --filter @antarip/storybook build-storybook
+      - run: pnpm --filter @accessly-ui/storybook build-storybook
       - name: Upload Storybook static build
         uses: actions/upload-artifact@v4
         with:

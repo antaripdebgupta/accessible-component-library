@@ -1,6 +1,6 @@
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { useCheckbox } from '@antarip/primitives';
+import { useCheckbox } from '@accessly-ui/primitives';
 import { twMerge } from 'tailwind-merge';
 import { Check, Minus } from 'lucide-react';
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { cva } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 import { CheckCircle2, Info, AlertTriangle, XCircle, X } from 'lucide-react';
-import type { ToastItem } from '@antarip/primitives';
+import type { ToastItem } from '@accessly-ui/primitives';
 
 const toastStyles = cva([
   'flex items-start gap-3 rounded-popover border border-border bg-surface p-4 shadow-md w-full',

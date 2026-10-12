@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useRef, type ReactNode, type RefObject } from 'react';
-import { useDialog, type UseDialogReturn } from '@antarip/primitives';
+import { useDialog, type UseDialogReturn } from '@accessly-ui/primitives';
 
 interface DialogContextValue extends UseDialogReturn {
   triggerRef: RefObject<HTMLElement | null>;

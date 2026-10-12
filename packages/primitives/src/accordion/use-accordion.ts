@@ -1,5 +1,5 @@
 import { useCallback, useRef, type KeyboardEvent } from 'react';
-import { useControllableState, useStableId } from '@antarip/utils';
+import { useControllableState, useStableId } from '@accessly-ui/utils';
 
 export type AccordionType = 'single' | 'multiple';
 

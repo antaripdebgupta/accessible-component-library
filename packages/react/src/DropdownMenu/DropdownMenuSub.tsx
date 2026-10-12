@@ -7,7 +7,7 @@ import {
   type ReactNode,
   type RefObject,
 } from 'react';
-import { useDropdownMenu, type UseDropdownMenuReturn } from '@antarip/primitives';
+import { useDropdownMenu, type UseDropdownMenuReturn } from '@accessly-ui/primitives';
 
 interface DropdownMenuSubContextValue extends UseDropdownMenuReturn {
   triggerRef: RefObject<HTMLElement | null>;

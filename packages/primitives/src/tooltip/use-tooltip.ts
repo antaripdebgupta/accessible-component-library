@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, type FocusEvent, type MouseEvent } from 'react';
-import { useControllableState, useStableId, useEscapeKey } from '@antarip/utils';
+import { useControllableState, useStableId, useEscapeKey } from '@accessly-ui/utils';
 
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 

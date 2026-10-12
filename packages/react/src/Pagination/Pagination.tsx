@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
-import { usePagination } from '@antarip/primitives';
+import { usePagination } from '@accessly-ui/primitives';
 
 export interface PaginationProps {
   currentPage?: number;

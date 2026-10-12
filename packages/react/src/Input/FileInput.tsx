@@ -8,7 +8,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
 } from 'react';
-import { useStableId } from '@antarip/utils';
+import { useStableId } from '@accessly-ui/utils';
 import { twMerge } from 'tailwind-merge';
 import { UploadCloud, File, X } from 'lucide-react';
 

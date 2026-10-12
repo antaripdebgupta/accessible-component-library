@@ -1,58 +1,39 @@
-# Local Testing Guide — accessible-component-library
+# Create a Fresh Test App — Full Steps (tarball method, `@accessly-ui` scope)
 
-This guide walks through creating a standalone test app to verify `@antarip/primitives`,
-`@antarip/react`, and `@antarip/tailwind-preset` before publishing a release. Use this
-instead of testing only inside Storybook — Storybook tests components in isolation,
-this tests them the way a real consumer will actually install and use them.
-
-## Why a separate test app
-
-Storybook stories run against your source code directly. They don't catch:
-
-- Packaging bugs (wrong `exports` field, missing files in the npm package, broken `main`/`types` paths)
-- Peer dependency issues
-- Real install/import behavior as a consumer would experience it
-- Tailwind config issues (content scanning, preset wiring, dark mode)
-
-A separate app, installing your library the same way an npm package would be installed,
-catches all of this.
+```bash
+rm -rf ~/workspace/acl-release-test
+```
 
 ---
 
-## 1. Build and pack the library
-
-From the library repo root:
+## 1. Build and pack all 4 packages
 
 ```bash
 cd ~/workspace/accessible-component-library
 
-pnpm --filter @antarip/primitives build
-pnpm --filter @antarip/react build
+pnpm --filter @accessly-ui/utils build
+pnpm --filter @accessly-ui/primitives build
+pnpm --filter @accessly-ui/react build
 
+cd packages/utils && pnpm pack && cd ../..
 cd packages/primitives && pnpm pack && cd ../..
 cd packages/react && pnpm pack && cd ../..
 cd packages/tailwind-preset && pnpm pack && cd ../..
 ```
 
-> `@antarip/tailwind-preset` has no build step — it ships `theme.css` and `tokens.js`
-> directly — but it still needs to be **packed** every time you change it. This is easy
-> to forget since it's not grouped with the build step mentally.
+> `tailwind-preset` has no build step but still needs `pnpm pack`.
+> Confirm all 4 tarballs now exist:
 
-Each `pnpm pack` creates a `.tgz` in that package's folder, e.g.:
-
-```
-packages/primitives/antarip-primitives-1.0.0.tgz
-packages/react/antarip-react-2.0.0.tgz
-packages/tailwind-preset/antarip-tailwind-preset-1.0.0.tgz
+```bash
+ls packages/*/accessly-ui-*.tgz
 ```
 
-Note the exact filenames — each package can be on a different version.
+You should see 4 files, e.g. `accessly-ui-react-1.0.0.tgz`, `accessly-ui-primitives-1.0.0.tgz`,
+`accessly-ui-utils-1.0.0.tgz`, `accessly-ui-tailwind-preset-1.0.0.tgz`.
 
 ---
 
-## 2. Scaffold the test app
-
-Create it **outside** the monorepo, as a sibling folder:
+## 2. Scaffold the new app
 
 ```bash
 cd ~/workspace
@@ -64,37 +45,63 @@ pnpm add -D @tailwindcss/vite
 
 ---
 
-## 3. Install the library from the tarballs
+## 3. Pin workspace overrides (prevents the 404-against-real-npm bug)
 
-Don't use `file:` links — a `file:` reference from outside the monorepo can't resolve
-your packages' internal `workspace:*` dependencies. Install from the packed tarballs
-instead, which is also closer to the real publish experience:
+`react`'s packed `package.json` lists `@accessly-ui/utils` / `@accessly-ui/primitives`
+as real semver ranges (not `file:` paths), because `pnpm pack` converts
+`workspace:*` on export. Without an override, pnpm tries to fetch those from the
+real npm registry and 404s, since the scope was never published there.
+
+Create `~/workspace/acl-release-test/pnpm-workspace.yaml`:
+
+```yaml
+overrides:
+  '@accessly-ui/utils': 'file:../accessible-component-library/packages/utils/accessly-ui-utils-1.0.0.tgz'
+  '@accessly-ui/primitives': 'file:../accessible-component-library/packages/primitives/accessly-ui-primitives-1.0.0.tgz'
+  '@accessly-ui/react': 'file:../accessible-component-library/packages/react/accessly-ui-react-1.0.0.tgz'
+  '@accessly-ui/tailwind-preset': 'file:../accessible-component-library/packages/tailwind-preset/accessly-ui-tailwind-preset-1.0.0.tgz'
+```
+
+(Match the exact filenames from `ls packages/*/accessly-ui-*.tgz` above — the
+version numbers must line up exactly or the override silently fails to match.)
+
+Do **not** put `overrides` under a `"pnpm"` key in `package.json` — pnpm 10+
+ignores that location and only reads `pnpm-workspace.yaml`.
+
+---
+
+## 4. Install all 4 packages from the tarballs
 
 ```bash
 cd ~/workspace/acl-release-test
 
-pnpm add ~/workspace/accessible-component-library/packages/primitives/antarip-primitives-1.0.0.tgz
-pnpm add ~/workspace/accessible-component-library/packages/react/antarip-react-2.0.0.tgz
-pnpm add ~/workspace/accessible-component-library/packages/tailwind-preset/antarip-tailwind-preset-1.0.0.tgz
+pnpm add ~/workspace/accessible-component-library/packages/utils/accessly-ui-utils-1.0.0.tgz
+pnpm add ~/workspace/accessible-component-library/packages/primitives/accessly-ui-primitives-1.0.0.tgz
+pnpm add ~/workspace/accessible-component-library/packages/react/accessly-ui-react-1.0.0.tgz
+pnpm add ~/workspace/accessible-component-library/packages/tailwind-preset/accessly-ui-tailwind-preset-1.0.0.tgz
 ```
 
-(Or use a glob to skip typing exact filenames: `pnpm add ../accessible-component-library/packages/react/*.tgz`)
+Install all 4 explicitly — `react` alone won't pull `utils`/`primitives` correctly
+from tarballs the way it would from the real registry.
+
+Verify:
+
+```bash
+ls node_modules/@accessly-ui/
+# expect: primitives  react  tailwind-preset  utils
+```
 
 ---
 
-## 4. Wire up Tailwind v4
+## 5. Wire up Tailwind v4
 
 **`src/index.css`:**
 
 ```css
 @import 'tailwindcss';
-@import '@antarip/tailwind-preset/theme.css';
-@source '../node_modules/@antarip/react/dist/**/*.js';
+@import '@accessly-ui/tailwind-preset/theme.css';
+@source '../node_modules/@accessly-ui/react/dist/**/*.js';
 ```
-
-`@source` is Tailwind v4's replacement for the old `content: [...]` array — it tells
-Tailwind to also scan your library's compiled JS for class names, otherwise none of
-your component styles will generate.
 
 **`vite.config.ts`:**
 
@@ -108,15 +115,12 @@ export default defineConfig({
 });
 ```
 
-A `tailwind.config.js` with `content`/`presets` is **v3 syntax** and is silently ignored
-by `@import "tailwindcss"` (v4) unless referenced with `@config`. Don't mix the two —
-use the CSS-first `@import`/`@source` approach above.
+Don't add a `tailwind.config.js` with `content`/`presets` — v4's `@import` ignores
+v3-style config files unless referenced with `@config`.
 
 ---
 
-## 5. Add a typecheck script
-
-Vite's scaffold doesn't include one by default.
+## 6. Add a typecheck script
 
 **`package.json`:**
 
@@ -128,48 +132,33 @@ Vite's scaffold doesn't include one by default.
 
 ---
 
-## 6. Add a theme toggle
+## 7. Build the test page
 
-Tests that dark/light/system mode actually works end-to-end, not just in isolated CSS.
+Wrap the app in the library's own providers and use real composed sub-components
+(not raw `<h3>`/`<p>` tags). Minimal skeleton:
 
 ```tsx
-import { useState, useEffect } from 'react';
+import { ThemeProvider, ThemeToggle, ToastProvider } from '@accessly-ui/react';
 
-function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
-
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove('light', 'dark');
-    if (theme !== 'system') root.classList.add(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
+export default function App() {
   return (
-    <select value={theme} onChange={(e) => setTheme(e.target.value as any)}>
-      <option value="system">System</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
+    <ThemeProvider defaultMode="system">
+      <ToastProvider>
+        <ThemeToggle />
+        {/* one section per component below */}
+      </ToastProvider>
+    </ThemeProvider>
   );
 }
 ```
 
-If the library exports its own `ThemeProvider`/`ThemeToggle`, use those instead and wrap
-the app in `<ThemeProvider defaultMode="system">`.
+For any component whose props don't typecheck, check the real `.d.ts` first:
 
----
+```bash
+cat node_modules/@accessly-ui/react/dist/<Component>/<Component>.d.ts
+```
 
-## 7. Build the test page
-
-One page, one section per component, each using the component the same way a real
-consumer would — including its proper composed sub-components (e.g. `Dialog` uses
-`DialogHeader`/`DialogTitle`/`DialogBody`/`DialogFooter`, not raw `<h3>`/`<p>` tags).
-Reference the component's real `.d.ts` files under `node_modules/@antarip/react/dist/`
-if a prop doesn't typecheck — don't guess twice.
-
-Wrap the whole app in `<ToastProvider>` (and `<ThemeProvider>` if used) since several
-components depend on that context.
+Don't guess the prop shape twice — read it once.
 
 ---
 
@@ -179,8 +168,6 @@ components depend on that context.
 pnpm typecheck
 pnpm dev
 ```
-
-Fix any type errors against the real `.d.ts` files before moving to manual testing.
 
 ---
 
@@ -196,56 +183,24 @@ Fix any type errors against the real `.d.ts` files before moving to manual testi
 | Screen reader   | NVDA + Firefox pass                                    |
 | RTL             | Add `dir="rtl"` to `<html>`, re-check layout           |
 
-Repeat for all components before treating a release as ready.
-
 ---
 
-## 10. Updating the test app after a library change
+## 10. Re-running after a library change
 
-Every time you change library source, repeat this loop — pnpm does **not** auto-detect
-tarball content changes if the version number stays the same.
+Every loop below is a **fresh pack + reinstall**, not a patch — simplest to reason
+about even though it repeats step 1/4.
 
 ```bash
-# In the library repo
+# In the library
 cd ~/workspace/accessible-component-library
-pnpm --filter @antarip/primitives build && cd packages/primitives && pnpm pack && cd ../..
-pnpm --filter @antarip/react build && cd packages/react && pnpm pack && cd ../..
+pnpm --filter @accessly-ui/utils build && cd packages/utils && pnpm pack && cd ../..
+pnpm --filter @accessly-ui/primitives build && cd packages/primitives && pnpm pack && cd ../..
+pnpm --filter @accessly-ui/react build && cd packages/react && pnpm pack && cd ../..
 cd packages/tailwind-preset && pnpm pack && cd ../..
 
 # In the test app
 cd ~/workspace/acl-release-test
-pnpm add ../accessible-component-library/packages/primitives/*.tgz --force
-pnpm add ../accessible-component-library/packages/react/*.tgz --force
-pnpm add ../accessible-component-library/packages/tailwind-preset/*.tgz --force
-
-rm -rf node_modules/.vite
-pnpm dev
-```
-
-**If changes still don't show up** (same package version reused, pnpm skips re-reading
-the tarball):
-
-```bash
-pnpm remove @antarip/tailwind-preset  # or whichever package is stale
-pnpm store prune
-pnpm add ../accessible-component-library/packages/tailwind-preset/*.tgz
-```
-
-**To avoid this entirely:** bump the patch version (`1.0.0` → `1.0.1`) in the changed
-package's `package.json` before every pack — pnpm then always treats it as new content
-and `--force` is never needed.
-
----
-
-## Quick reference — full update + verify loop
-
-```bash
-cd ~/workspace/accessible-component-library
-pnpm --filter @antarip/primitives build && cd packages/primitives && pnpm pack && cd ../..
-pnpm --filter @antarip/react build && cd packages/react && pnpm pack && cd ../..
-cd packages/tailwind-preset && pnpm pack && cd ../..
-
-cd ~/workspace/acl-release-test
+pnpm add ../accessible-component-library/packages/utils/*.tgz --force
 pnpm add ../accessible-component-library/packages/primitives/*.tgz --force
 pnpm add ../accessible-component-library/packages/react/*.tgz --force
 pnpm add ../accessible-component-library/packages/tailwind-preset/*.tgz --force
@@ -254,3 +209,16 @@ rm -rf node_modules/.vite
 pnpm typecheck
 pnpm dev
 ```
+
+**If changes still don't show up** (pnpm skipped re-reading a same-version tarball):
+
+```bash
+pnpm remove @accessly-ui/react   # or whichever package is stale
+pnpm store prune
+pnpm add ../accessible-component-library/packages/react/*.tgz
+```
+
+**Better long-term fix:** bump the patch version (`1.0.0` → `1.0.1`) in the
+changed package's `package.json` before every pack, and update the matching
+line in `pnpm-workspace.yaml`. Then pnpm always treats it as new content and
+`--force`/`remove`/`store prune` are never needed.
