@@ -20,5 +20,8 @@
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^4.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
