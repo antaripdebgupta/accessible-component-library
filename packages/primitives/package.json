@@ -1,7 +1,7 @@
 {
   "name": "@accessly-ui/primitives",
   "version": "1.0.0",
-  "description": "",
+  "description": "Headless, unstyled, WCAG 2.2 AA accessible component logic for React",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,9 +19,20 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "headless-ui",
+    "unstyled",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "aria",
+    "react-hooks",
+    "keyboard-navigation",
+    "focus-management"
+  ],
+  "author": "Antarip Debgupta",
+  "license": "MIT",
   "dependencies": {
     "@accessly-ui/utils": "workspace:*"
   },
@@ -42,5 +53,14 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antaripdebgupta/accessible-component-library.git",
+    "directory": "packages/primitives"
+  },
+  "homepage": "https://github.com/antaripdebgupta/accessible-component-library#readme",
+  "bugs": {
+    "url": "https://github.com/antaripdebgupta/accessible-component-library/issues"
   }
 }

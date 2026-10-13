@@ -1,7 +1,7 @@
 {
   "name": "@accessly-ui/tailwind-preset",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tailwind CSS v4 design tokens for Accessly UI",
   "main": "./index.js",
   "files": [
     "index.js",
@@ -15,13 +15,29 @@
   "scripts": {
     "test": "echo 'No tests for tailwind-preset'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "tailwindcss",
+    "tailwind-preset",
+    "design-tokens",
+    "theme",
+    "dark-mode",
+    "css"
+  ],
+  "author": "Antarip Debgupta",
+  "license": "MIT",
   "devDependencies": {
     "tailwindcss": "^4.3.3"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antaripdebgupta/accessible-component-library.git",
+    "directory": "packages/tailwind-preset"
+  },
+  "homepage": "https://github.com/antaripdebgupta/accessible-component-library#readme",
+  "bugs": {
+    "url": "https://github.com/antaripdebgupta/accessible-component-library/issues"
   }
 }

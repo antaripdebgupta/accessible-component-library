@@ -9,8 +9,11 @@ Need unstyled behavior only, to skin yourself? See `@accessly-ui/primitives`.
 ## Install
 
 ```bash
-npm install @accessly-ui/react @accessly-ui/primitives @accessly-ui/tailwind-preset
+npm install @accessly-ui/react @accessly-ui/tailwind-preset
 ```
+
+`@accessly-ui/primitives` comes along automatically — only install it directly
+if you want its unstyled hooks on their own.
 
 Wire up the preset in your CSS:
 
