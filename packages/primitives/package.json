@@ -1,6 +1,6 @@
 {
   "name": "@accessly-ui/primitives",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Headless, unstyled, WCAG 2.2 AA accessible component logic for React",
   "type": "module",
   "main": "./dist/index.js",

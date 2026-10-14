@@ -1,6 +1,6 @@
 {
   "name": "@accessly-ui/react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Styled, composable, WCAG 2.2 AA accessible React components built on @accessly-ui/primitives",
   "type": "module",
   "main": "./dist/index.js",

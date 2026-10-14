@@ -1,6 +1,6 @@
 {
   "name": "@accessly-ui/utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shared accessibility hooks (focus trap, roving tabindex, controllable state) for React",
   "main": "./dist/index.js",
   "scripts": {
